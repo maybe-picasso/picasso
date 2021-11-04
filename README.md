@@ -6,6 +6,8 @@
 
 > yarn install
 
-## 기술 스택
+## 프론트 기술 스택
 
 - React Router v6 (https://reactrouter.com/docs/en/v6/getting-started/overview)
+
+## 백앤드 기술 스택
