@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import {
+  Container,
   Heading,
   Stack,
   Box,
@@ -65,7 +66,8 @@ const Setting = () => {
 
   return (
     <PageTemplate id="setting">
-      <Box>
+      <Container p={15} centerContent>
+      <Box  maxW="3xl">
         <Stack spacing={5} mt={50}>
           <Heading as="h1" size="2xl">
             프로필 설정
@@ -143,7 +145,8 @@ const Setting = () => {
             입장하기
           </Button>
         </Stack>
-      </Box>
+</Box>
+      </Container>
     </PageTemplate>
   );
 };
