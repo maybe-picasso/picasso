@@ -1,0 +1,14 @@
+@import '~styles/modules/mixin.scss';
+
+#practice-room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+  font-size: 50px;
+
+  canvas {
+    background-color: white;
+  }
+}
