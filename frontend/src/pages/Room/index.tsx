@@ -1,7 +1,7 @@
+
 import { Container, Heading, Grid, GridItem, Text } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
-
-import PageTemplate from '../../components/PageTemplate';
+import PageTemplate from 'components/PageTemplate';
 
 import './index.scss';
 
