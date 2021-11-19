@@ -4,7 +4,17 @@
 
 ## 설치
 
-> yarn install
+```
+npm install // fe, be 동시 설치되며, 모듈은 yarn으로 설치됩니다
+```
+
+## 실행
+```
+npm run start // FE, BE 전체 실행
+npm run start:fe 
+npm run start:be
+```
+
 
 ## 프론트 기술 스택
 
