@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import PageTemplate from '../../components/PageTemplate';
-import { Pen, Tool } from '../../core/tools';
+import PageTemplate from 'components/PageTemplate';
+import { Pen, Tool } from 'core/tools';
 import ColorPicker from './components/ColorPicker';
 import ToolSizeSelector from './components/ToolSizeSelector';
 
