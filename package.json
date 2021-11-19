@@ -1,0 +1,16 @@
+{
+  "name": "picasso",
+  "version": "0.1.0",
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  },
+  "engines": {
+    "node": "^14.18.1"
+  },
+  "scripts": {
+    "install": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\"",
+    "start": "concurrently \"npm run start:be\" \"npm run start:fe\"",
+    "start:be": "cd backend && npm start",
+    "start:fe": "cd frontend && npm start"
+  }
+}

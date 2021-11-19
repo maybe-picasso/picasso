@@ -1,0 +1,17 @@
+@import '~styles/modules/mixin.scss';
+
+.color-picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 11px;
+
+  & > input {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e6e6e6;
+    background-color: white;
+  }
+}

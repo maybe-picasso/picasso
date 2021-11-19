@@ -8,6 +8,11 @@
 
 ## 프론트 기술 스택
 
-- React Router v6 (https://reactrouter.com/docs/en/v6/getting-started/overview)
+- [React](https://ko.reactjs.org)
+- [React Router](https://reactrouter.com/docs/en/v6/getting-started/)
+- [Redux Rematch](https://github.com/rematch/rematch)
+- [Chakra UI](https://chakra-ui.com/)
 
 ## 백앤드 기술 스택
+
+- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
