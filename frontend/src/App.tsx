@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { store } from './store';
 import Home from 'pages/Home';
 import Room from 'pages/Room';
+import Setting from 'pages/Setting';
 import PracticeRoom from 'pages/PracticeRoom';
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/room/:roomId" element={<Room />} />
+          <Route path="/setting" element={<Setting />} />
           <Route path="/practice-room" element={<PracticeRoom />} />
         </Routes>
       </ChakraProvider>

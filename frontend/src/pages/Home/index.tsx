@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
   const enterRoom = useCallback(() => {
     navigate(`/room/${roomId}`);
-  }, []);
+  }, [navigate]);
 
   return (
     <Center h="80vh" color="white">

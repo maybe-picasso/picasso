@@ -1,7 +1,9 @@
 @import '~styles/modules/mixin.scss';
 
-#room {
+#setting {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  font-size: 50px;
 }
