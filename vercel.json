@@ -7,7 +7,7 @@
         },
         {
             "src": "/room/(.*)",
-            "dest": "/room/",
+            "dest": "/",
             "status": 200
         }
     ]
