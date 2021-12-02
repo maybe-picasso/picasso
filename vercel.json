@@ -1,13 +1,13 @@
 {
     "routes": [
         {
-            "src": "/[^.]+",
-            "dest": "/",
+            "src": "/room/(.*)",
+            "dest": "/room",
             "status": 200
         },
         {
-            "src": "/room/(?<id>[^/]+)",
-            "dest": "/room?id=$id",
+            "src": "/[^.]+",
+            "dest": "/",
             "status": 200
         }
     ]
