@@ -1,12 +1,12 @@
 {
     "routes": [
         {
-            "src": "/room/(.*)",
-            "dest": "/room/",
+            "src": "/room/[^.]+",
+            "dest": "/room",
             "status": 200
         },
         {
-            "src": "/(.*)",
+            "src": "/[^.]+",
             "dest": "/",
             "status": 200
         }
