@@ -6,8 +6,8 @@
             "status": 200
         },
         {
-            "src": "/room/(<id>)",
-            "dest": "/room/$id",
+            "src": "/room/(.*)",
+            "dest": "/room/",
             "status": 200
         }
     ]
