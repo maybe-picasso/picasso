@@ -2,7 +2,7 @@
     "routes": [
         {
             "src": "/room/[^.]+",
-            "dest": "/room",
+            "dest": "/room/",
             "status": 200
         },
         {
