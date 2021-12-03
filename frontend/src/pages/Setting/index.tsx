@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Heading,
@@ -22,13 +23,16 @@ import PageTemplate from '../../components/PageTemplate';
 
 import './index.scss';
 
-/**
- * @TODO
- * - 입장하기 버튼 활성화 조건 체크
- */
 const PROFILE_CHARACTERS = ['🐶', '🐱', '🐰', '🦊', '🐨', '🐼', '🐯', '🐥', '🐷'];
 
+const roomId = 'abc';
+
 const Setting = () => {
+  const navigate = useNavigate();
+  const enterRoom = useCallback(() => {
+    navigate(`/room/${roomId}`);
+  }, [navigate]);
+
   const [drawTime, setDrawTime] = useState('60');
   const [round, setRound] = useState('10');
   const [myProfileIdx, setMyProfileIdx] = useState(1);
@@ -64,15 +68,31 @@ const Setting = () => {
   const isPrevDisabled = useMemo(() => myProfileIdx === 0, [myProfileIdx]);
   const isNextDisabled = useMemo(() => myProfileIdx === PROFILE_CHARACTERS.length - 1, [myProfileIdx]);
 
+  /**
+   * @TODO
+   * 닉네임 입력
+   * - 입장하기 버튼 활성화 조건 체크
+   * - 중복여부
+   */
+  const [userName, setUserName] = useState('');
+  const handleUserName = useCallback(
+    (e) => {
+      setUserName(e.target.value);
+    },
+    [setUserName]
+  );
+
+  const isUserName = useMemo(() => userName !== '', [userName]);
+
   return (
     <PageTemplate id="setting">
-      <Container p={15} centerContent>
+      <Container p="25px" centerContent>
         <Box maxW="3xl">
-          <Stack spacing={5} mt={50}>
-            <Heading as="h1" size="2xl">
+          <Stack spacing={5}>
+            <Heading as="h1" size="xl">
               프로필 설정
             </Heading>
-            <Input variant="outline" placeholder="닉네임" />
+            <Input onInput={handleUserName} value={userName} variant="outline" placeholder="닉네임" />
 
             <Grid templateColumns="repeat(5, 1fr)" alignItems="center" gap={6}>
               <IconButton
@@ -108,7 +128,7 @@ const Setting = () => {
           </Stack>
 
           <Stack spacing={5} mt={50}>
-            <Heading as="h2" size="xl">
+            <Heading as="h2" size="md">
               게임 설정
             </Heading>
 
@@ -141,7 +161,14 @@ const Setting = () => {
               </RadioGroup>
             </Grid>
 
-            <Button rightIcon={<BsArrowRightCircleFill />} colorScheme="teal" size="lg" variant="solid">
+            <Button
+              rightIcon={<BsArrowRightCircleFill />}
+              colorScheme="teal"
+              size="lg"
+              variant="solid"
+              onClick={enterRoom}
+              disabled={!isUserName}
+            >
               입장하기
             </Button>
           </Stack>

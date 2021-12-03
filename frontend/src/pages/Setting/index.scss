@@ -6,4 +6,8 @@
   align-items: center;
   height: 100vh;
   font-size: 50px;
+
+  @include mobileDevice {
+    justify-content: flex-start;
+  }
 }
