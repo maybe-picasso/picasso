@@ -5,10 +5,10 @@
     "concurrently": "^6.4.0"
   },
   "engines": {
-    "node": "^14.18.1"
+    "yarn": "^1.12.17",
+    "node": "^14.18.2"
   },
   "scripts": {
-    "install": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\"",
     "start": "concurrently \"npm run start:be\" \"npm run start:fe\"",
     "start:be": "cd backend && npm start",
     "start:fe": "cd frontend && npm start"
