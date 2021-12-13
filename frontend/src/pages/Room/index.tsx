@@ -1,27 +1,11 @@
-import { useEffect } from 'react';
-import { io } from 'socket.io-client';
 import { Container, Heading, Grid, GridItem, Text } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import PageTemplate from 'components/PageTemplate';
+import SocketContainer from './containers/SocketContainer';
 
 import './index.scss';
 
 const Room = () => {
-  useEffect(() => {
-    const socket = io('ws://localhost:3001/picasso', {
-      transports: ['websocket'],
-      jsonp: false,
-    });
-
-    socket.on('connect', () => {
-      console.log('socket connect :>> ');
-    });
-
-    socket.on('disconnect', () => {
-      console.log('socket disconnect :>> ');
-      socket.connect();
-    });
-  });
   createBreakpoints({
     sm: '480px',
     md: '768px',
@@ -54,6 +38,7 @@ const Room = () => {
           </GridItem>
         </Grid>
       </Container>
+      <SocketContainer roomId="abc1" />
     </PageTemplate>
   );
 };

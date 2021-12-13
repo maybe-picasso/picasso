@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start:be\" \"npm run start:fe\"",
-    "start:be": "cd backend && npm start",
-    "start:fe": "cd frontend && npm start"
+    "start:be": "cd backend && npm run start:dev",
+    "start:fe": "cd frontend && npm run start"
   }
 }
