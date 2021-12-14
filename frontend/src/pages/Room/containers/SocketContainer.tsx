@@ -1,25 +1,68 @@
-import { useEffect } from 'react';
-import socket from 'modules/socket';
+import { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dispatch, select } from 'store';
 
-interface Props {
-  roomId: string;
-}
+import socket, { setupBaseInfo } from 'modules/socket';
+import event from 'modules/event';
 
-const SocketContainer = ({ roomId }: Props) => {
+const SocketContainer = ({ roomId }: { roomId: string }) => {
+  const { userInfo } = useSelector(select.room.state);
+  const dispatch = useDispatch<Dispatch>();
+
+  const onGateIn = useCallback(
+    ({ participants }) => {
+      console.log('onGateIn', participants);
+      dispatch.room.setSocketState(true);
+      dispatch.room.updateParticipants(participants);
+    },
+    [dispatch]
+  );
+
+  const onJoinUser = useCallback(
+    (data) => {
+      console.log('onJoinUser', data);
+      dispatch.room.updateParticipants(data.participants);
+      event.emit('join', data);
+    },
+    [dispatch]
+  );
+
+  const onLeaveUser = useCallback(
+    (data) => {
+      console.log('onLeaveUser', data);
+      dispatch.room.updateParticipants(data.participants);
+      event.emit('leave', data);
+    },
+    [dispatch]
+  );
+
+  const onMessage = useCallback((message: { type: string }) => {
+    console.log('onMessage', message);
+    event.emit(message.type, message);
+  }, []);
+
+  const bindSocket = useCallback(() => {
+    socket.emit('gate', roomId);
+    socket.on('gate', onGateIn);
+    socket.on('join', onJoinUser);
+    socket.on('leave', onLeaveUser);
+    socket.on('message', onMessage);
+  }, [roomId, onGateIn, onJoinUser, onLeaveUser, onMessage]);
+
   useEffect(() => {
-    console.log('SocketContainer :>> ', socket);
+    if (!userInfo) {
+      return;
+    }
 
-    socket.on('connect', () => {
-      console.log('connected', socket.connected);
-      console.log('disconnected', socket.disconnected);
+    setupBaseInfo({
+      roomId,
+      userId: userInfo.userId,
     });
+  }, [roomId, userInfo]);
 
-    socket.emit('lobby', { roomId, userId: 'user1' });
-
-    socket.on('lobby', (data: any) => {
-      console.log('lobby :>> ', data);
-    });
-  }, [roomId]);
+  useEffect(() => {
+    bindSocket();
+  }, [bindSocket]);
 
   return null;
 };
