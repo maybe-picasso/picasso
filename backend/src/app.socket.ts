@@ -79,6 +79,11 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     }
   }
 
+  private message(data) {
+    console.log('message :>> ', data);
+    this.server.to(data.roomId).emit('message', data);
+  }
+
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('SocketGateway');
 
@@ -118,8 +123,8 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   @SubscribeMessage('message')
-  handleMessage(@MessageBody() data: string): string {
+  handleMessage(@MessageBody() data) {
     this.logger.log('handleMessage', data);
-    return data;
+    this.message(data);
   }
 }

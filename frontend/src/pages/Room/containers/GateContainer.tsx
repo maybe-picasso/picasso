@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Flex, Box, Input, Button } from '@chakra-ui/react';
+import { Flex, Box, Input, Button, Text } from '@chakra-ui/react';
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
@@ -49,6 +49,9 @@ const GateContainer = ({ roomId }: Props) => {
     <Box flex="1" className="gate-container">
       <Flex h="90%" color="white" direction="column" justifyContent="center" alignItems="center">
         <Box w="260px" textAlign="center" color="facebook.900">
+          <Text fontSize="xl" mb="5">
+            프로필 설정
+          </Text>
           <Input
             placeholder="닉네임을 입력해주세요!"
             maxLength={15}

@@ -14,14 +14,15 @@ export const getUuid = () => {
   return uuidv4();
 };
 
+/**
+ * 룸ID에 사용할 랜덤한 단어를 반환합니다.
+ */
 export const getRandomRoomId = (count: number = 1) => {
   return randomWord(count).join('-');
 };
 
 /**
  * 이벤트 쓰로틀이 적용된 함수를 반환합니다.
- * @param func
- * @returns
  */
 export const getThrottledFunc = (func: any) => {
   return throttle(func, REPEAT_HOLD_TIME, THROTTLE_OPTIONS);

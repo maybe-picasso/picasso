@@ -1,12 +1,11 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
-import { values } from 'lodash-es';
 
 interface RoomState {
   isConnectedSocket: boolean;
   isJoined: boolean;
-  userInfo: any | null;
-  participants: any[];
+  userInfo: Record<string, any> | null;
+  participants: Record<string, any>[];
 }
 
 const initialState: RoomState = {
