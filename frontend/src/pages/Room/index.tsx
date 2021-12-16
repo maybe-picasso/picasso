@@ -6,13 +6,13 @@ import { useSelector } from 'react-redux';
 import { select } from 'store';
 
 import PageTemplate from 'components/PageTemplate';
-import { SocketContainer, GateContainer, ChatContainer } from './containers';
+import { SocketContainer, GateContainer, ChatContainer, UserListContainer } from './containers';
 
 import './index.scss';
 
 const Room = () => {
   const { roomId = '' } = useParams();
-  const { isJoined, participants } = useSelector(select.room.state);
+  const { isJoined } = useSelector(select.room.state);
 
   createBreakpoints({
     sm: '480px',
@@ -35,7 +35,7 @@ const Room = () => {
             </GridItem>
 
             <GridItem rowSpan={{ base: 1, xl: 7 }} colSpan={{ base: 8, xl: 2 }} bg="gray.600">
-              참가자 목록 ({participants.length})
+              <UserListContainer />
             </GridItem>
 
             <GridItem rowSpan={{ base: 4, md: 7 }} colSpan={{ base: 8, md: 5, xl: 4 }} bg="white">
