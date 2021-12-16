@@ -15,14 +15,25 @@ interface SocketInitData {
   userId: string;
 }
 
+export enum SocketMessageType {
+  Chat = 'Chat',
+  Draw = 'Draw',
+}
+
 export const setupBaseInfo = ({ roomId: id, userId }: SocketInitData) => {
   roomId = id;
   senderId = userId;
 };
 
-type SocketMessageTarget = 'all' | string;
-
-export const sendMessage = ({ type, body, to = 'all' }: { type: string; body: any; to?: SocketMessageTarget }) => {
+export const sendMessage = ({
+  type,
+  body,
+  to = 'all',
+}: {
+  type: SocketMessageType;
+  to?: 'all' | string;
+  body: any;
+}) => {
   const data = {
     roomId,
     senderId,

@@ -54,10 +54,8 @@ const SocketContainer = ({ roomId }: { roomId: string }) => {
       return;
     }
 
-    setupBaseInfo({
-      roomId,
-      userId: userInfo.userId,
-    });
+    const { userId } = userInfo;
+    setupBaseInfo({ roomId, userId });
   }, [roomId, userInfo]);
 
   useEffect(() => {

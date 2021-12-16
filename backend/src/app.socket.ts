@@ -7,7 +7,6 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   SubscribeMessage,
-  MessageBody,
 } from '@nestjs/websockets';
 
 @WebSocketGateway(3001, {
@@ -15,10 +14,15 @@ import {
   namespace: 'picasso',
 })
 export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  private rooms: Record<string, any[]>;
   constructor() {
     this.rooms = {};
   }
+
+  @WebSocketServer()
+  server: Server;
+
+  private logger: Logger = new Logger('SocketGateway');
+  private rooms: Record<string, any[]>;
 
   /**
    * socket clientId로 방을 탐색 합니다.
@@ -79,13 +83,9 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     }
   }
 
-  private message(data) {
-    console.log('message :>> ', data);
-    this.server.to(data.roomId).emit('message', data);
+  private message(client: Socket, data) {
+    client.broadcast.to(data.roomId).emit('message', data);
   }
-
-  @WebSocketServer() server: Server;
-  private logger: Logger = new Logger('SocketGateway');
 
   afterInit(server: Server) {
     this.logger.log('Init', server);
@@ -123,8 +123,8 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   @SubscribeMessage('message')
-  handleMessage(@MessageBody() data) {
+  handleMessage(client: Socket, data) {
     this.logger.log('handleMessage', data);
-    this.message(data);
+    this.message(client, data);
   }
 }

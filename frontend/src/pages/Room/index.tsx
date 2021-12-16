@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { select } from 'store';
 
 import PageTemplate from 'components/PageTemplate';
-import { SocketContainer, GateContainer } from './containers';
+import { SocketContainer, GateContainer, ChatContainer } from './containers';
 
 import './index.scss';
 
@@ -29,8 +29,8 @@ const Room = () => {
         <Container p={0} maxW="100%">
           <Grid h="100vh" templateRows="repeat(8, 1fr)" templateColumns="repeat(8, 1fr)" gap={2}>
             <GridItem rowSpan={1} colSpan={8} bg="tomato">
-              <Heading mt={10} mb={10} textAlign="center" fontSize={40} color="#000">
-                ROOM
+              <Heading mt={1} mb={1} textAlign="center" fontSize={20} color="#000">
+                room/{roomId}
               </Heading>
             </GridItem>
 
@@ -45,7 +45,7 @@ const Room = () => {
             </GridItem>
 
             <GridItem rowSpan={{ base: 2, md: 7 }} colSpan={{ base: 8, md: 3, xl: 2 }} bg="teal">
-              채팅
+              <ChatContainer />
             </GridItem>
           </Grid>
         </Container>
