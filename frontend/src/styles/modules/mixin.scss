@@ -15,3 +15,9 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+@mixin mobileDevice() {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
