@@ -13,6 +13,7 @@ const ChatContainer = () => {
 
   const handleSendMessage = useCallback(() => {
     const message = textRef.current?.value;
+    const timestamp = new Date().getTime();
 
     if (!textRef.current || !message) {
       return;
@@ -22,11 +23,15 @@ const ChatContainer = () => {
       isMine: true,
       nickName: userInfo?.nickName,
       message,
+      timestamp,
     });
 
     sendMessage({
       type: SocketMessageType.Chat,
-      body: message,
+      body: {
+        message,
+        timestamp,
+      },
     });
 
     textRef.current.value = '';
@@ -66,11 +71,14 @@ const ChatContainer = () => {
 
   const onChat = useCallback(
     ({ senderId, body }) => {
+      const { timestamp, message } = body;
       const nickName = findParticipantInfo(senderId)?.nickName ?? null;
+
       if (nickName) {
         dispatch.chat.addChat({
           nickName,
-          message: body,
+          timestamp,
+          message,
         });
       }
     },

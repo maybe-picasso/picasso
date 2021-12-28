@@ -4,6 +4,7 @@ import { RootModel } from './';
 interface ChatMessage {
   nickName: string;
   message: string;
+  timestamp: number;
   isMine?: boolean;
 }
 
