@@ -14,7 +14,7 @@ const UserListContainer = ({ position = 'left' }: Props) => {
 
   return (
     <ul className={`user-list ${position}`}>
-      {participants.map(({ nickName }) => {
+      {participants.map(({ userId, nickName }) => {
         // TODO: userId 처리 및 노출 제어 예정.
         let chatInfo;
         if (chatList.length) {
@@ -22,7 +22,7 @@ const UserListContainer = ({ position = 'left' }: Props) => {
         }
 
         return (
-          <li>
+          <li key={userId}>
             <Flex bg="white" margin={1} padding={2}>
               <Avatar src="https://bit.ly/sage-adebayo" />
               <Box ml="3">

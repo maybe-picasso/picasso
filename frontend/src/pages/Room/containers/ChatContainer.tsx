@@ -15,13 +15,15 @@ const ChatContainer = () => {
     const message = textRef.current?.value;
     const timestamp = new Date().getTime();
 
-    if (!textRef.current || !message) {
+    if (!textRef.current || !message || !userInfo) {
       return;
     }
 
+    const { userId, nickName } = userInfo;
     dispatch.chat.addChat({
       isMine: true,
-      nickName: userInfo?.nickName,
+      userId,
+      nickName,
       message,
       timestamp,
     });
@@ -76,6 +78,7 @@ const ChatContainer = () => {
 
       if (nickName) {
         dispatch.chat.addChat({
+          userId: senderId,
           nickName,
           timestamp,
           message,
