@@ -2,24 +2,67 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Box, Textarea, Button } from '@chakra-ui/react';
+import { sendMessage, SocketMessageType } from 'modules/socket';
 import event from 'modules/event';
-import cn from 'classnames';
 
 const ChatContainer = () => {
-  const { participants } = useSelector(select.room.state);
-  const { chatList } = useSelector(select.chat.state);
+  const { userInfo, participants } = useSelector(select.room.state);
   const dispatch = useDispatch<Dispatch>();
-  const listWrapRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleScrollToBottom = useCallback(() => {
-    const $listWrap = listWrapRef.current;
-    if (!$listWrap) {
+  const handleSendMessage = useCallback(() => {
+    const message = textRef.current?.value;
+    const timestamp = new Date().getTime();
+
+    if (!textRef.current || !message || !userInfo) {
       return;
     }
 
-    $listWrap.scrollTop = $listWrap.scrollHeight;
-  }, [listWrapRef]);
+    const { userId, nickName } = userInfo;
+    dispatch.chat.addChat({
+      isMine: true,
+      userId,
+      nickName,
+      message,
+      timestamp,
+    });
+
+    sendMessage({
+      type: SocketMessageType.Chat,
+      body: {
+        message,
+        timestamp,
+      },
+    });
+
+    textRef.current.value = '';
+  }, [dispatch, userInfo]);
+
+  const handleKeyUp = useCallback(
+    (e) => {
+      if (e.shiftKey) {
+        return;
+      }
+
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    },
+    [handleSendMessage]
+  );
+
+  // NOTE: 한글 마지막 글자 두번 처리되는이슈로 keydown에서도 이벤트 핸들링 필요
+  const handleKeyDown = useCallback((e) => {
+    if (e.shiftKey) {
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  }, []);
 
   const findParticipantInfo = useCallback(
     (userId: string) => {
@@ -30,37 +73,41 @@ const ChatContainer = () => {
 
   const onChat = useCallback(
     ({ senderId, body }) => {
+      const { timestamp, message } = body;
       const nickName = findParticipantInfo(senderId)?.nickName ?? null;
+
       if (nickName) {
         dispatch.chat.addChat({
+          userId: senderId,
           nickName,
-          message: body,
+          timestamp,
+          message,
         });
-
-        setTimeout(() => handleScrollToBottom(), 0);
       }
     },
-    [dispatch, findParticipantInfo, handleScrollToBottom]
+    [dispatch, findParticipantInfo]
   );
 
   useEffect(() => {
-    event.removeAllListeners('chat');
-    event.on('chat', onChat);
+    event.removeAllListeners(SocketMessageType.Chat);
+    event.on(SocketMessageType.Chat, onChat);
   }, [onChat]);
 
   return (
-    <Box margin="5px" bg="rgba(255,255,255,0.92)" color="#000" borderRadius="5px" boxShadow="10px">
-      <Flex direction="column">
-        <Box className="chat-list-wrap" padding="15px 12px 0 12px" ref={listWrapRef}>
-          <ul>
-            {chatList.map(({ isMine, nickName, message }, i) => (
-              <li className={cn({ mine: isMine })} key={i}>
-                <p className="nickname">{nickName}</p>
-                <p className="body">{message}</p>
-              </li>
-            ))}
-          </ul>
-        </Box>
+    <Box className="chat-input-wrap" padding="5px">
+      <Flex h="100%" justifyContent="space-between">
+        <Textarea
+          placeholder="정답을 입력해주세요!"
+          background="#fff"
+          resize="none"
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          ref={textRef}
+          maxLength={60}
+        />
+        <Button w="80px" h="100%" colorScheme="yellow" variant="solid" color="#fff" onClick={handleSendMessage}>
+          Enter
+        </Button>
       </Flex>
     </Box>
   );

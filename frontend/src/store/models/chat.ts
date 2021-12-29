@@ -2,8 +2,10 @@ import { createModel } from '@rematch/core';
 import { RootModel } from './';
 
 interface ChatMessage {
+  userId: string;
   nickName: string;
   message: string;
+  timestamp: number;
   isMine?: boolean;
 }
 

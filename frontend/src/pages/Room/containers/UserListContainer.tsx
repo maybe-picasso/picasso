@@ -1,9 +1,7 @@
-import { useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Dispatch, select } from 'store';
-
+import { useSelector } from 'react-redux';
+import { select } from 'store';
 import { Flex, Box, Avatar, Badge, Text } from '@chakra-ui/react';
-import event from 'modules/event';
+import { clone } from 'lodash-es';
 
 interface Props {
   position: 'left' | 'right';
@@ -11,38 +9,20 @@ interface Props {
 
 const UserListContainer = ({ position = 'left' }: Props) => {
   const { participants } = useSelector(select.room.state);
-  const dispatch = useDispatch<Dispatch>();
-
-  const findParticipantInfo = useCallback(
-    (userId: string) => {
-      return participants.find((data) => data.userId === userId);
-    },
-    [participants]
-  );
-
-  const onChat = useCallback(
-    ({ senderId, body }) => {
-      const nickName = findParticipantInfo(senderId)?.nickName ?? null;
-      if (nickName) {
-        dispatch.chat.addChat({
-          nickName,
-          message: body,
-        });
-      }
-    },
-    [dispatch, findParticipantInfo]
-  );
-
-  useEffect(() => {
-    event.removeAllListeners('chat');
-    event.on('chat', onChat);
-  }, [onChat]);
+  const { chatList } = useSelector(select.chat.state);
+  const clonedChatList = clone(chatList).reverse();
 
   return (
     <ul className={`user-list ${position}`}>
-      {participants.map(({ nickName }) => {
+      {participants.map(({ userId, nickName }) => {
+        // TODO: userId 처리 및 노출 제어 예정.
+        let chatInfo;
+        if (chatList.length) {
+          chatInfo = clonedChatList.find((data) => data.nickName === nickName) ?? null;
+        }
+
         return (
-          <li>
+          <li key={userId}>
             <Flex bg="white" margin={1} padding={2}>
               <Avatar src="https://bit.ly/sage-adebayo" />
               <Box ml="3">
@@ -51,6 +31,8 @@ const UserListContainer = ({ position = 'left' }: Props) => {
                   점수: 0
                 </Badge>
               </Box>
+
+              {chatInfo && <div className="chat-balloon">{chatInfo.message}</div>}
             </Flex>
           </li>
         );

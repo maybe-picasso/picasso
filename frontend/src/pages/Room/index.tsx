@@ -6,14 +6,7 @@ import { useSelector } from 'react-redux';
 import { select } from 'store';
 
 import PageTemplate from 'components/PageTemplate';
-import {
-  SocketContainer,
-  GateContainer,
-  CanvasContainer,
-  ChatContainer,
-  ChatInputContainer,
-  UserListContainer,
-} from './containers';
+import { SocketContainer, GateContainer, CanvasContainer, ChatContainer, UserListContainer } from './containers';
 
 import './index.scss';
 
@@ -59,7 +52,7 @@ const Room = () => {
                       timer
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={1} bg="#D4DCDC">
-                      <ChatInputContainer />
+                      <ChatContainer />
                     </GridItem>
                   </Grid>
                 </GridItem>
@@ -68,7 +61,6 @@ const Room = () => {
 
             <GridItem rowSpan={{ base: 1, xl: 7 }} colSpan={{ base: 8, xl: 2 }} bg="gray.600">
               <UserListContainer position="right" />
-              <ChatContainer />
             </GridItem>
           </Grid>
         </Container>
