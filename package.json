@@ -11,6 +11,7 @@
   "scripts": {
     "start": "concurrently \"npm run start:be\" \"npm run start:fe\"",
     "start:be": "cd backend && npm run start:dev",
-    "start:fe": "cd frontend && npm run start"
+    "start:fe": "cd frontend && npm run start",
+    "install": "scripts/install.sh"
   }
 }
