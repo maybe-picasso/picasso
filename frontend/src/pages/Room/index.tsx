@@ -34,33 +34,26 @@ const Room = () => {
               </Heading>
             </GridItem>
 
-            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 2 }} bg="gray.600">
-              <UserListContainer position="left" />
-            </GridItem>
-
-            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 6 }} bg="white">
-              <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(2, 1fr)" gap={2}>
-                <GridItem rowSpan={8} colSpan={2} bg="#2DC0D4">
+            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 7 }} bg="white">
+              <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(2, 1fr)">
+                <GridItem rowSpan={9} colSpan={2} padding={2} bg="gray.100">
                   <CanvasContainer />
                 </GridItem>
                 <GridItem rowSpan={1} colSpan={2} bg="orange">
                   drawing tools
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={2}>
-                  <Grid h="100%" templateRows="repeat(1, 1fr)" templateColumns="repeat(2, 1fr)" gap={2}>
-                    <GridItem rowSpan={1} colSpan={1} bg="#A5333C">
-                      timer
-                    </GridItem>
-                    <GridItem rowSpan={1} colSpan={1} bg="#D4DCDC">
-                      <ChatContainer />
-                    </GridItem>
-                  </Grid>
-                </GridItem>
               </Grid>
             </GridItem>
 
-            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 2 }} bg="gray.600">
-              <UserListContainer position="right" />
+            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 3 }} bg="gray.600">
+              <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
+                <GridItem rowSpan={11} colSpan={2}>
+                  <ChatContainer />
+                </GridItem>
+                <GridItem rowSpan={11} colSpan={1} bg="#2DC0D4">
+                  <UserListContainer position="left" />
+                </GridItem>
+              </Grid>
             </GridItem>
           </Grid>
         </Container>

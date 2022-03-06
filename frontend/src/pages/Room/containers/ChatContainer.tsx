@@ -2,14 +2,26 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
-import { Flex, Box, Textarea, Button } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, Textarea, Button } from '@chakra-ui/react';
 import { sendMessage, SocketMessageType } from 'modules/socket';
 import event from 'modules/event';
+import cn from 'classnames';
 
 const ChatContainer = () => {
   const { userInfo, participants } = useSelector(select.room.state);
+  const { chatList } = useSelector(select.chat.state);
   const dispatch = useDispatch<Dispatch>();
+  const listWrapRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleScrollToBottom = useCallback(() => {
+    const $listWrap = listWrapRef.current;
+    if (!$listWrap) {
+      return;
+    }
+
+    $listWrap.scrollTop = $listWrap.scrollHeight;
+  }, [listWrapRef]);
 
   const handleSendMessage = useCallback(() => {
     const message = textRef.current?.value;
@@ -30,14 +42,12 @@ const ChatContainer = () => {
 
     sendMessage({
       type: SocketMessageType.Chat,
-      body: {
-        message,
-        timestamp,
-      },
+      body: message,
     });
 
     textRef.current.value = '';
-  }, [dispatch, userInfo]);
+    setTimeout(() => handleScrollToBottom(), 0);
+  }, [dispatch, userInfo, handleScrollToBottom]);
 
   const handleKeyUp = useCallback(
     (e) => {
@@ -83,33 +93,56 @@ const ChatContainer = () => {
           timestamp,
           message,
         });
+
+        setTimeout(() => handleScrollToBottom(), 0);
       }
     },
-    [dispatch, findParticipantInfo]
+    [dispatch, findParticipantInfo, handleScrollToBottom]
   );
 
   useEffect(() => {
-    event.removeAllListeners(SocketMessageType.Chat);
-    event.on(SocketMessageType.Chat, onChat);
+    event.removeAllListeners('chat');
+    event.on('chat', onChat);
   }, [onChat]);
 
   return (
-    <Box className="chat-input-wrap" padding="5px">
-      <Flex h="100%" justifyContent="space-between">
-        <Textarea
-          placeholder="정답을 입력해주세요!"
-          background="#fff"
-          resize="none"
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          ref={textRef}
-          maxLength={60}
-        />
-        <Button w="80px" h="100%" colorScheme="yellow" variant="solid" color="#fff" onClick={handleSendMessage}>
-          Enter
-        </Button>
-      </Flex>
-    </Box>
+    <Grid h="100%" templateRows="repeat(11, 1fr)">
+      <GridItem rowSpan={10} bg="gray.100" className="chat-list-wrap" ref={listWrapRef}>
+        <ul>
+          {chatList.map(({ isMine, nickName, message }, i) => (
+            <li className={cn({ mine: isMine })} key={i}>
+              <p className="nickname">{nickName}</p>
+              <p className="body">{message}</p>
+            </li>
+          ))}
+        </ul>
+      </GridItem>
+      <GridItem rowSpan={1} className="chat-input-wrap" bg="gray.500">
+        <Flex h="100%" justifyContent="space-between">
+          <Textarea
+            placeholder="메시지를 입력해주세요!"
+            background="#fff"
+            resize="none"
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            ref={textRef}
+            maxLength={50}
+            borderRadius={0}
+          />
+          <Button
+            w="80px"
+            h="100%"
+            borderRadius={0}
+            colorScheme="yellow"
+            variant="solid"
+            color="#fff"
+            onClick={handleSendMessage}
+          >
+            Send
+          </Button>
+        </Flex>
+      </GridItem>
+    </Grid>
   );
 };
 
