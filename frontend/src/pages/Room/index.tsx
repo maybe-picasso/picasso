@@ -27,18 +27,18 @@ const Room = () => {
 
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
-          <Grid h="100vh" templateRows="repeat(8, 1fr)" templateColumns="repeat(8, 1fr)" gap={2}>
-            <GridItem rowSpan={1} colSpan={8} bg="tomato">
+          <Grid h="100vh" templateRows="repeat(12, 1fr)" templateColumns="repeat(10, 1fr)" gap={2}>
+            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 10 }} bg="tomato">
               <Heading mt={1} mb={1} textAlign="center" fontSize={20} color="#000">
                 room/{roomId}
               </Heading>
             </GridItem>
 
-            <GridItem rowSpan={{ base: 1, xl: 7 }} colSpan={{ base: 8, xl: 2 }} bg="gray.600">
+            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 2 }} bg="gray.600">
               <UserListContainer position="left" />
             </GridItem>
 
-            <GridItem rowSpan={{ base: 4, md: 7 }} colSpan={{ base: 8, md: 5, xl: 4 }} bg="white">
+            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 6 }} bg="white">
               <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(2, 1fr)" gap={2}>
                 <GridItem rowSpan={8} colSpan={2} bg="#2DC0D4">
                   <CanvasContainer />
@@ -59,7 +59,7 @@ const Room = () => {
               </Grid>
             </GridItem>
 
-            <GridItem rowSpan={{ base: 1, xl: 7 }} colSpan={{ base: 8, xl: 2 }} bg="gray.600">
+            <GridItem rowSpan={{ base: 11 }} colSpan={{ base: 2 }} bg="gray.600">
               <UserListContainer position="right" />
             </GridItem>
           </Grid>
