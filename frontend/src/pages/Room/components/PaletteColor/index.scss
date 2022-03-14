@@ -1,0 +1,15 @@
+$size: 20px;
+
+.palette-card {
+  display: inline-block;
+  margin: 2px 2px 0 2px;
+  width: $size;
+  height: $size;
+  border-radius: 3px;
+  cursor: pointer;
+  border: solid 2px rgba(255, 255, 255, 0);
+
+  &.selected {
+    border-color: rgb(81, 92, 255);
+  }
+}
