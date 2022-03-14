@@ -6,6 +6,7 @@ import { Flex, Grid, GridItem, Textarea, Button } from '@chakra-ui/react';
 import { sendMessage, SocketMessageType } from 'modules/socket';
 import event from 'modules/event';
 import cn from 'classnames';
+import './index.scss';
 
 const ChatContainer = () => {
   const { userInfo, participants } = useSelector(select.room.state);
@@ -106,8 +107,8 @@ const ChatContainer = () => {
   }, [onChat]);
 
   return (
-    <Grid h="100%" templateRows="repeat(11, 1fr)">
-      <GridItem rowSpan={10} bg="gray.100" className="chat-list-wrap" ref={listWrapRef}>
+    <Grid h="100%" templateRows="repeat(10, 1fr)" borderRadius={6} overflow={'hidden'}>
+      <GridItem rowSpan={9} bg="gray.100" className="chat-list-wrap" ref={listWrapRef}>
         <ul>
           {chatList.map(({ isMine, nickName, message }, i) => (
             <li className={cn({ mine: isMine })} key={i}>

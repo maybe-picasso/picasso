@@ -15,79 +15,10 @@
   }
 }
 
-canvas {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-}
-
-.user-list {
-  list-style: none;
-
-  li {
-    position: relative;
-  }
-}
-
-// 채팅
-.chat-list-wrap {
-  padding: 10px;
-  height: 100%;
-  overflow-y: auto;
-
-  ul {
-    margin-bottom: 20px;
-    list-style: none;
-
-    li {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-  }
-
-  .nickname {
-    width: 80%;
-    margin-bottom: 2px;
-    font-size: 12px;
-    @include ellipsis();
-  }
-
-  .mine {
-    &:after {
-      clear: both !important;
-      display: block;
-      content: '';
-    }
-
-    .nickname {
-      display: none;
-    }
-
-    .body {
-      float: right;
-      background: var(--chakra-colors-yellow-400);
-      white-space: pre-line;
-      word-break: break-all;
-    }
-  }
-
-  .body {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #fff;
-    border-radius: 5px;
-  }
-}
-
-.chat-input-wrap {
-  $height: 100%;
-
-  textarea {
-    min-height: $height;
-    font-size: 16px;
-  }
-
-  button {
-    height: $height;
+.head-section {
+  h2 {
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
