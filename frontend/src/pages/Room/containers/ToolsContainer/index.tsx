@@ -33,6 +33,7 @@ const ToolsContainer = () => {
         <Stack direction="row" spacing={2} align="center">
           {Object.keys(DrawingTools).map((name) => (
             <Button
+              key={name}
               isActive={name === selectedTool}
               colorScheme="teal"
               variant="outline"
@@ -52,7 +53,7 @@ const ToolsContainer = () => {
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
         {COLORS.map((color) => (
-          <PaletteColor color={color} selected={color === selectedColor} onClick={handleColor} />
+          <PaletteColor key={color} color={color} selected={color === selectedColor} onClick={handleColor} />
         ))}
       </GridItem>
     </Grid>
