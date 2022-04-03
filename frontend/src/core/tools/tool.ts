@@ -14,7 +14,8 @@ type ToolConstructorParams = {
 export type DoItParams = {
   context: CanvasRenderingContext2D;
   config?: Config;
-  cursor: Cursor;
+  startPoint: Cursor;
+  currentPoint: Cursor;
 };
 
 type MouseEventHandler = (e: MouseEvent) => void;
@@ -24,9 +25,13 @@ export class Tool {
   private canvas: HTMLCanvasElement;
   private config: Config | undefined;
   private isDragging = false;
-  private cursor: Cursor = {
-    x: -1,
-    y: -1,
+  private startPoint: Cursor = {
+    x: 0,
+    y: 0,
+  };
+  private currentPoint: Cursor = {
+    x: 0,
+    y: 0,
   };
   private enabled = false;
   private mouseDownHandler: MouseEventHandler | null = null;
@@ -60,9 +65,9 @@ export class Tool {
     this.doIt({
       context: this.context,
       config: this.config,
-      cursor: this.cursor,
+      startPoint: this.startPoint,
+      currentPoint: this.currentPoint,
     });
-    this.afterDo();
   }
 
   afterDo() {
@@ -74,7 +79,7 @@ export class Tool {
     this.context.closePath();
   }
 
-  doIt({ context, config, cursor }: DoItParams) {
+  doIt({ context, config, startPoint, currentPoint }: DoItParams) {
     console.warn('It must be implemented!');
   }
 
@@ -129,13 +134,10 @@ export class Tool {
     console.log(e);
     const { offsetX: x, offsetY: y } = e;
     this.isDragging = true;
-
-    this.cursor = {
+    this.startPoint = {
       x,
       y,
     };
-
-    this.do();
   }
 
   onMousemove(e: MouseEvent) {
@@ -145,12 +147,13 @@ export class Tool {
 
     const { offsetX: x, offsetY: y } = e;
 
-    this.cursor = {
+    this.currentPoint = {
       x,
       y,
     };
 
     this.do();
+    this.startPoint = this.currentPoint;
   }
 
   onMouseup(e: MouseEvent) {

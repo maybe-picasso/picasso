@@ -1,21 +1,19 @@
 import { Tool, DoItParams } from './tool';
 
-const PEN_SIZE_FACTOR = 1;
-const DEFAULT_FILL_COLOR = 'black';
+const DEFAULT_COLOR = 'black';
+const LINE_CAP = 'round';
 
 export class Pen extends Tool {
-  doIt({ context, cursor, config }: DoItParams) {
+  doIt({ context, config, startPoint, currentPoint }: DoItParams) {
     const size = config?.['size'];
-    const fillStyle = config?.['color'] || DEFAULT_FILL_COLOR;
+    const color = config?.['color'] || DEFAULT_COLOR;
 
-    const penSize = size * PEN_SIZE_FACTOR;
-    const { x, y } = cursor;
-
-    const centerX = x - penSize / 2;
-    const centerY = y - penSize / 2;
-
-    context.fillStyle = fillStyle;
-    context.ellipse(centerX, centerY, penSize, penSize, 0, 0, 2 * Math.PI);
-    context.fill();
+    context.strokeStyle = color;
+    context.lineWidth = size;
+    context.lineJoin = LINE_CAP;
+    context.lineCap = LINE_CAP;
+    context.moveTo(startPoint.x, startPoint.y); // 시작점
+    context.lineTo(currentPoint.x, currentPoint.y); // 현재점
+    context.stroke();
   }
 }
