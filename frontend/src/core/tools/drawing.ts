@@ -3,15 +3,15 @@ type Cursor = {
   y: number;
 };
 
-export type Config = Record<string, any>;
+type Config = Record<string, any>;
 
-type ToolConstructorParams = {
+type DrawingConstructorParams = {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   config?: Config;
 };
 
-export type DoItParams = {
+export type DrawParams = {
   context: CanvasRenderingContext2D;
   config?: Config;
   startPoint: Cursor;
@@ -20,25 +20,19 @@ export type DoItParams = {
 
 type MouseEventHandler = (e: MouseEvent) => void;
 
-export class Tool {
+export class Drawing {
   private context: CanvasRenderingContext2D;
   private canvas: HTMLCanvasElement;
   private config: Config | undefined;
   private isDragging = false;
-  private startPoint: Cursor = {
-    x: 0,
-    y: 0,
-  };
-  private currentPoint: Cursor = {
-    x: 0,
-    y: 0,
-  };
   private enabled = false;
   private mouseDownHandler: MouseEventHandler | null = null;
   private mouseMoveHandler: MouseEventHandler | null = null;
   private mouseUpHandler: MouseEventHandler | null = null;
+  private startPoint: Cursor = { x: 0, y: 0 };
+  private currentPoint: Cursor = { x: 0, y: 0 };
 
-  constructor({ canvas, context, config }: ToolConstructorParams) {
+  constructor({ canvas, context, config }: DrawingConstructorParams) {
     this.canvas = canvas;
     this.context = context;
     this.config = config;
@@ -46,12 +40,12 @@ export class Tool {
   }
 
   init() {
-    this.mouseDownHandler = this.onMousedown.bind(this);
-    this.mouseMoveHandler = this.onMousemove.bind(this);
-    this.mouseUpHandler = this.onMouseup.bind(this);
+    this.mouseDownHandler = this.onMouseDown.bind(this);
+    this.mouseMoveHandler = this.onMouseMove.bind(this);
+    this.mouseUpHandler = this.onMouseUp.bind(this);
   }
 
-  beforeDo() {
+  start() {
     if (!this.context) {
       console.error('컨텍스트를 찾을 수 없습니다.');
       return;
@@ -60,36 +54,17 @@ export class Tool {
     this.context.beginPath();
   }
 
-  do() {
-    this.beforeDo();
-    this.doIt({
-      context: this.context,
-      config: this.config,
-      startPoint: this.startPoint,
-      currentPoint: this.currentPoint,
-    });
+  draw(params: DrawParams) {
+    console.warn('It must be implemented!', params);
   }
 
-  afterDo() {
+  end() {
     if (!this.context) {
       console.error('컨텍스트를 찾을 수 없습니다.');
       return;
     }
 
     this.context.closePath();
-  }
-
-  doIt({ context, config, startPoint, currentPoint }: DoItParams) {
-    console.warn('It must be implemented!');
-  }
-
-  enable() {
-    if (this.enabled) {
-      return;
-    }
-
-    this.enabled = true;
-    this.registerEventHander();
   }
 
   setConfig(config: Config) {
@@ -101,16 +76,25 @@ export class Tool {
     this.config = newConf;
   }
 
+  enable() {
+    if (this.enabled) {
+      return;
+    }
+
+    this.enabled = true;
+    this.registEventHander();
+  }
+
   disable() {
     if (!this.enabled) {
       return;
     }
 
     this.enabled = false;
-    this.unregisterEventHandler();
+    this.unregistEventHandler();
   }
 
-  registerEventHander() {
+  registEventHander() {
     if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
       return;
     }
@@ -120,7 +104,7 @@ export class Tool {
     this.canvas.addEventListener('mouseup', this.mouseUpHandler);
   }
 
-  unregisterEventHandler() {
+  unregistEventHandler() {
     if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
       return;
     }
@@ -130,38 +114,42 @@ export class Tool {
     this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
   }
 
-  onMousedown(e: MouseEvent) {
-    console.log(e);
-    const { offsetX: x, offsetY: y } = e;
+  onMouseDown(e: MouseEvent) {
+    console.log('onMouseDown :>> ', e);
     this.isDragging = true;
     this.startPoint = {
-      x,
-      y,
+      x: e.offsetX,
+      y: e.offsetY,
     };
+    this.start();
   }
 
-  onMousemove(e: MouseEvent) {
+  onMouseMove(e: MouseEvent) {
     if (!this.isDragging) {
       return;
     }
 
-    const { offsetX: x, offsetY: y } = e;
-
     this.currentPoint = {
-      x,
-      y,
+      x: e.offsetX,
+      y: e.offsetY,
     };
-
-    this.do();
+    this.draw({
+      context: this.context,
+      config: this.config,
+      startPoint: this.startPoint,
+      currentPoint: this.currentPoint,
+    });
     this.startPoint = this.currentPoint;
   }
 
-  onMouseup(e: MouseEvent) {
+  onMouseUp(e: MouseEvent) {
+    console.log('onMouseUp :>> ', e);
     this.isDragging = false;
+    this.end();
   }
 
   dispose() {
-    this.unregisterEventHandler();
+    this.unregistEventHandler();
     this.mouseDownHandler = null;
     this.mouseMoveHandler = null;
     this.mouseUpHandler = null;

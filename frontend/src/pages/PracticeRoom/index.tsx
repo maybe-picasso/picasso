@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PageTemplate from 'components/PageTemplate';
-import { Pen, Tool } from 'core/tools';
+import { Pen, Drawing } from 'core/tools';
 import ColorPicker from './components/ColorPicker';
 import ToolSizeSelector from './components/ToolSizeSelector';
 
@@ -8,7 +8,7 @@ import './index.scss';
 
 const PracticeRoom = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentTool, setCurrentTool] = useState<Tool | undefined>();
+  const [currentTool, setCurrentTool] = useState<Drawing | undefined>();
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -23,7 +23,7 @@ const PracticeRoom = () => {
       return;
     }
 
-    setCurrentTool((lastTool: Tool | undefined) => {
+    setCurrentTool((lastTool: Drawing | undefined) => {
       lastTool?.disable();
 
       return new Pen({

@@ -1,2 +1,2 @@
-export * from './tool';
+export * from './drawing';
 export * from './pen';
