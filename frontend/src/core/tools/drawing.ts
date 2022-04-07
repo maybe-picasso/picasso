@@ -5,18 +5,18 @@ type Cursor = {
 
 type Config = Record<string, any>;
 
-type DrawingConstructorParams = {
+interface DrawingConstructorParams {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   config?: Config;
-};
+}
 
-export type DrawParams = {
+export interface DrawParams {
   context: CanvasRenderingContext2D;
   config?: Config;
   startPoint: Cursor;
   currentPoint: Cursor;
-};
+}
 
 type MouseEventHandler = (e: MouseEvent) => void;
 
