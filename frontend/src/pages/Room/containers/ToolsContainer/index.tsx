@@ -10,7 +10,7 @@ import { Dispatch, select } from 'store';
 import './index.scss';
 
 const ToolsContainer = () => {
-  const { selectedColor, selectedTool } = useSelector(select.tools.state);
+  const { currentColor, currentTool } = useSelector(select.tools.state);
   const dispatch = useDispatch<Dispatch>();
 
   const handleDrawTool = useCallback(
@@ -27,6 +27,13 @@ const ToolsContainer = () => {
     [dispatch]
   );
 
+  const handleSlider = useCallback(
+    (val: number) => {
+      dispatch.tools.setSize(val);
+    },
+    [dispatch]
+  );
+
   return (
     <Grid h="100%" padding={1} templateRows="repeat(3, 1fr)" templateColumns="repeat(1, 1fr)">
       <GridItem w="100%" mb={1} rowSpan={1} colSpan={1}>
@@ -34,13 +41,10 @@ const ToolsContainer = () => {
           {Object.keys(DrawingTools).map((name) => (
             <Button
               key={name}
-              isActive={name === selectedTool}
+              isActive={name === currentTool}
               colorScheme="teal"
               variant="outline"
-              _active={{
-                bg: '#7fdbff',
-                borderColor: '#bec3c9',
-              }}
+              _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
               onClick={() => handleDrawTool(name)}
             >
               {name}
@@ -49,11 +53,11 @@ const ToolsContainer = () => {
         </Stack>
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
-        <PaletteSlider />
+        <PaletteSlider onSliderChange={handleSlider} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
         {COLORS.map((color) => (
-          <PaletteColor key={color} color={color} selected={color === selectedColor} onClick={handleColor} />
+          <PaletteColor key={color} color={color} selected={color === currentColor} onClick={handleColor} />
         ))}
       </GridItem>
     </Grid>

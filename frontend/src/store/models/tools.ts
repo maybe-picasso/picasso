@@ -1,16 +1,18 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
-import { COLORS } from 'constants/index';
+import { COLORS, DEFAULT_LINE_SIZE } from 'constants/index';
 import { DrawingTools } from 'types/enums';
 
 interface ToolsState {
-  selectedTool: DrawingTools;
-  selectedColor: string;
+  currentTool: DrawingTools;
+  currentColor: string;
+  currentSize: number;
 }
 
 const initialState: ToolsState = {
-  selectedTool: DrawingTools.PEN,
-  selectedColor: COLORS[0],
+  currentTool: DrawingTools.PEN,
+  currentColor: COLORS[0],
+  currentSize: DEFAULT_LINE_SIZE,
 };
 
 export const tools = createModel<RootModel>()({
@@ -20,12 +22,15 @@ export const tools = createModel<RootModel>()({
   }),
   reducers: {
     setTool(state, payload: DrawingTools) {
-      console.log('setColor :>> ', payload);
-      state.selectedTool = payload;
+      state.currentTool = payload;
       return state;
     },
     setColor(state, payload: string) {
-      state.selectedColor = payload;
+      state.currentColor = payload;
+      return state;
+    },
+    setSize(state, payload: number) {
+      state.currentSize = payload;
       return state;
     },
   },

@@ -9,7 +9,7 @@ export let pen: Pen;
 const CanvasContainer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
-  const { selectedColor, selectedTool } = useSelector(select.tools.state);
+  const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -44,13 +44,19 @@ const CanvasContainer = () => {
 
   useEffect(() => {
     pen.setConfig({
-      color: selectedColor,
+      color: currentColor,
     });
-  }, [selectedColor]);
+  }, [currentColor]);
+
+  useEffect(() => {
+    pen.setConfig({
+      size: currentSize,
+    });
+  }, [currentSize]);
 
   useEffect(() => {
     //
-  }, [selectedTool]);
+  }, [currentTool]);
 
   return <canvas ref={canvasRef} width={size.width} height={size.height} />;
 };
