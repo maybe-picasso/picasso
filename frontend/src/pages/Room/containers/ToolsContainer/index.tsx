@@ -14,7 +14,7 @@ const ToolsContainer = () => {
   const dispatch = useDispatch<Dispatch>();
 
   const handleDrawTool = useCallback(
-    (name: any) => {
+    (name: DrawingTools) => {
       dispatch.tools.setTool(name);
     },
     [dispatch]
@@ -45,7 +45,7 @@ const ToolsContainer = () => {
               colorScheme="teal"
               variant="outline"
               _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
-              onClick={() => handleDrawTool(name)}
+              onClick={() => handleDrawTool(name as DrawingTools)}
             >
               {name}
             </Button>

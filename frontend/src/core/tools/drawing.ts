@@ -67,6 +67,11 @@ export class Drawing {
     this.context.closePath();
   }
 
+  clearAll() {
+    const { width, height } = this.context.canvas;
+    this.context.clearRect(0, 0, width, height);
+  }
+
   setConfig(config: Config) {
     const newConf = {
       ...this.config,

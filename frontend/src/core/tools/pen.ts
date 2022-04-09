@@ -1,5 +1,6 @@
 import { Drawing, DrawParams } from './drawing';
 
+const DEFAULT_MODE = 'pen';
 const DEFAULT_COLOR = 'black';
 const LINE_CAP = 'round';
 
@@ -7,6 +8,7 @@ export class Pen extends Drawing {
   draw({ context, config, startPoint, currentPoint }: DrawParams) {
     const size = config?.['size'];
     const color = config?.['color'] || DEFAULT_COLOR;
+    const mode = config?.['mode'] || DEFAULT_MODE;
 
     context.strokeStyle = color;
     context.lineWidth = size;
