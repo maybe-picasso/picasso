@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Pen } from 'core/tools';
-import { DrawingTools } from 'types/enums';
 import './index.scss';
 
 export let pen: Pen;
@@ -56,13 +55,9 @@ const CanvasContainer = () => {
   }, [currentSize]);
 
   useEffect(() => {
-    if (currentTool === DrawingTools.CLEAR) {
-      pen.clearAll();
-    } else {
-      pen.setConfig({
-        mode: currentTool,
-      });
-    }
+    pen.setConfig({
+      mode: currentTool,
+    });
   }, [currentTool]);
 
   return <canvas ref={canvasRef} width={size.width} height={size.height} />;

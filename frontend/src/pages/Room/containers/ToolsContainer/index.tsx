@@ -6,6 +6,7 @@ import { DrawingTools } from 'types/enums';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
+import { pen } from '../CanvasContainer';
 
 import './index.scss';
 
@@ -13,9 +14,13 @@ const ToolsContainer = () => {
   const { currentColor, currentTool } = useSelector(select.tools.state);
   const dispatch = useDispatch<Dispatch>();
 
-  const handleDrawTool = useCallback(
+  const handleDrawingTool = useCallback(
     (name: DrawingTools) => {
-      dispatch.tools.setTool(name);
+      if (name === DrawingTools.CLEAR_ALL) {
+        pen.clearAll();
+      } else {
+        dispatch.tools.setTool(name);
+      }
     },
     [dispatch]
   );
@@ -45,7 +50,7 @@ const ToolsContainer = () => {
               colorScheme="teal"
               variant="outline"
               _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
-              onClick={() => handleDrawTool(name as DrawingTools)}
+              onClick={() => handleDrawingTool(name as DrawingTools)}
             >
               {name}
             </Button>
