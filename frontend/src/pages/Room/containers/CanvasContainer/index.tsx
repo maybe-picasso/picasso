@@ -33,9 +33,6 @@ const CanvasContainer = () => {
       drawing = new Drawing({
         canvas,
         context,
-        config: {
-          size: 2,
-        },
       });
     }
 

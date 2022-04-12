@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { isNodeProdcution } from 'modules/env';
+import { isNodeProdcution } from 'helpers/env';
 
 const SOCKET_SERVER = isNodeProdcution ? 'ws://localhost:3001/picasso' : 'ws://localhost:3001/picasso';
 

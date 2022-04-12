@@ -2,8 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
-import socket, { setupBaseInfo } from 'modules/socket';
-import event from 'modules/event';
+import socket, { setupBaseInfo } from 'core/socket';
+import event from 'core/event';
 
 const SocketContainer = ({ roomId }: { roomId: string }) => {
   const { userInfo } = useSelector(select.room.state);

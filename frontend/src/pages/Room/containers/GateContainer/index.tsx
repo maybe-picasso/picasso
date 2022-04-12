@@ -3,8 +3,8 @@ import { Flex, Box, Input, Button, Text } from '@chakra-ui/react';
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
-import { getUuid } from 'modules/utils';
-import socket from 'modules/socket';
+import { getUuid } from 'helpers/utils';
+import socket from 'core/socket';
 
 interface Props {
   roomId: string;

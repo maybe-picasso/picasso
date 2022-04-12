@@ -6,7 +6,7 @@ import { DrawingTools } from 'types/enums';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
-import { pen } from '../CanvasContainer';
+import { drawing } from '../CanvasContainer';
 
 import './index.scss';
 
@@ -17,7 +17,7 @@ const ToolsContainer = () => {
   const handleDrawingTool = useCallback(
     (name: DrawingTools) => {
       if (name === DrawingTools.CLEAR_ALL) {
-        pen.clearAll();
+        drawing.clearAll();
       } else {
         dispatch.tools.setTool(name);
       }
@@ -49,6 +49,7 @@ const ToolsContainer = () => {
               isActive={name === currentTool}
               colorScheme="teal"
               variant="outline"
+              size="sm"
               _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
               onClick={() => handleDrawingTool(name as DrawingTools)}
             >
