@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { select } from 'store';
-import { Pen } from 'core/tools';
+import { Drawing } from 'core/drawing';
 import './index.scss';
 
-export let pen: Pen;
+export let drawing: Drawing;
 
 const CanvasContainer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,8 +29,8 @@ const CanvasContainer = () => {
       height: canvas.clientHeight,
     });
 
-    if (!pen) {
-      pen = new Pen({
+    if (!drawing) {
+      drawing = new Drawing({
         canvas,
         context,
         config: {
@@ -39,23 +39,23 @@ const CanvasContainer = () => {
       });
     }
 
-    pen.enable();
+    drawing.enable();
   }, []);
 
   useEffect(() => {
-    pen.setConfig({
+    drawing.setConfig({
       color: currentColor,
     });
   }, [currentColor]);
 
   useEffect(() => {
-    pen.setConfig({
+    drawing.setConfig({
       size: currentSize,
     });
   }, [currentSize]);
 
   useEffect(() => {
-    pen.setConfig({
+    drawing.setConfig({
       mode: currentTool,
     });
   }, [currentTool]);

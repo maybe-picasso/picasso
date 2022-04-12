@@ -10,7 +10,7 @@ const PaletteSlider = ({ onSliderChange }: Props) => {
     <Slider
       aria-label="slider-ex-1"
       defaultValue={DEFAULT_LINE_SIZE}
-      min={0}
+      min={1}
       max={20}
       colorScheme="teal"
       onChange={(val) => onSliderChange(val)}

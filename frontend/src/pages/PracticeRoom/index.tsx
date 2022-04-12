@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PageTemplate from 'components/PageTemplate';
-import { Pen, Drawing } from 'core/tools';
+import { Drawing } from 'core/drawing';
 import ColorPicker from './components/ColorPicker';
 import ToolSizeSelector from './components/ToolSizeSelector';
 
@@ -26,7 +26,7 @@ const PracticeRoom = () => {
     setCurrentTool((lastTool: Drawing | undefined) => {
       lastTool?.disable();
 
-      return new Pen({
+      return new Drawing({
         canvas,
         context,
         config: {

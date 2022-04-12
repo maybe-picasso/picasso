@@ -20,7 +20,7 @@ export interface DrawParams {
 
 type MouseEventHandler = (e: MouseEvent) => void;
 
-export class Drawing {
+export class DrawingCore {
   private context: CanvasRenderingContext2D;
   private canvas: HTMLCanvasElement;
   private config: Config | undefined;
@@ -31,6 +31,12 @@ export class Drawing {
   private mouseUpHandler: MouseEventHandler | null = null;
   private startPoint: Cursor = { x: 0, y: 0 };
   private currentPoint: Cursor = { x: 0, y: 0 };
+  private getPoint(e?: MouseEvent) {
+    return {
+      x: e?.offsetX ?? 0,
+      y: e?.offsetY ?? 0,
+    };
+  }
 
   constructor({ canvas, context, config }: DrawingConstructorParams) {
     this.canvas = canvas;
@@ -122,10 +128,7 @@ export class Drawing {
   onMouseDown(e: MouseEvent) {
     console.log('onMouseDown :>> ', e);
     this.isDragging = true;
-    this.startPoint = {
-      x: e.offsetX,
-      y: e.offsetY,
-    };
+    this.startPoint = this.getPoint(e);
     this.start();
   }
 
@@ -134,10 +137,7 @@ export class Drawing {
       return;
     }
 
-    this.currentPoint = {
-      x: e.offsetX,
-      y: e.offsetY,
-    };
+    this.currentPoint = this.getPoint(e);
     this.draw({
       context: this.context,
       config: this.config,
