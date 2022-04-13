@@ -38,10 +38,10 @@ export class DrawingCore {
   private mouseUpHandler: MouseEventHandler | null = null;
   private startPoint: Cursor = { x: 0, y: 0 };
   private currentPoint: Cursor = { x: 0, y: 0 };
-  private getPoint(e?: MouseEvent) {
+  private getPoint(e: MouseEvent) {
     return {
-      x: e?.offsetX ?? 0,
-      y: e?.offsetY ?? 0,
+      x: e.offsetX,
+      y: e.offsetY,
     };
   }
 
