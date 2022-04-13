@@ -1,5 +1,5 @@
 export enum DrawingTools {
   PEN = 'PEN',
   ERASER = 'ERASER',
-  CLEAR = 'CLEAR',
+  CLEAR_ALL = 'CLEAR_ALL',
 }

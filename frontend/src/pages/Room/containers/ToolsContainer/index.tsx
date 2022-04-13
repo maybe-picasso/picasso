@@ -6,16 +6,21 @@ import { DrawingTools } from 'types/enums';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
+import { drawing } from '../CanvasContainer';
 
 import './index.scss';
 
 const ToolsContainer = () => {
-  const { selectedColor, selectedTool } = useSelector(select.tools.state);
+  const { currentColor, currentTool } = useSelector(select.tools.state);
   const dispatch = useDispatch<Dispatch>();
 
-  const handleDrawTool = useCallback(
-    (name: any) => {
-      dispatch.tools.setTool(name);
+  const handleDrawingTool = useCallback(
+    (name: DrawingTools) => {
+      if (name === DrawingTools.CLEAR_ALL) {
+        drawing.clearAll();
+      } else {
+        dispatch.tools.setTool(name);
+      }
     },
     [dispatch]
   );
@@ -27,20 +32,26 @@ const ToolsContainer = () => {
     [dispatch]
   );
 
+  const handleSlider = useCallback(
+    (val: number) => {
+      dispatch.tools.setSize(val);
+    },
+    [dispatch]
+  );
+
   return (
     <Grid h="100%" padding={1} templateRows="repeat(3, 1fr)" templateColumns="repeat(1, 1fr)">
       <GridItem w="100%" mb={1} rowSpan={1} colSpan={1}>
         <Stack direction="row" spacing={2} align="center">
           {Object.keys(DrawingTools).map((name) => (
             <Button
-              isActive={name === selectedTool}
+              key={name}
+              isActive={name === currentTool}
               colorScheme="teal"
               variant="outline"
-              _active={{
-                bg: '#7fdbff',
-                borderColor: '#bec3c9',
-              }}
-              onClick={() => handleDrawTool(name)}
+              size="sm"
+              _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
+              onClick={() => handleDrawingTool(name as DrawingTools)}
             >
               {name}
             </Button>
@@ -48,11 +59,11 @@ const ToolsContainer = () => {
         </Stack>
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
-        <PaletteSlider />
+        <PaletteSlider onSliderChange={handleSlider} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
         {COLORS.map((color) => (
-          <PaletteColor color={color} selected={color === selectedColor} onClick={handleColor} />
+          <PaletteColor key={color} color={color} selected={color === currentColor} onClick={handleColor} />
         ))}
       </GridItem>
     </Grid>

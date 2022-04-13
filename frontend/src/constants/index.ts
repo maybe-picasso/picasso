@@ -16,3 +16,5 @@ export const COLORS: string[] = [
   '#f012be', // Fuchsia
   '#b10dc9', // Purple
 ];
+
+export const DEFAULT_LINE_SIZE: number = 3;

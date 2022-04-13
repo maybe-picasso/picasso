@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
 import { Flex, Grid, GridItem, Textarea, Button } from '@chakra-ui/react';
-import { sendMessage, SocketMessageType } from 'modules/socket';
-import event from 'modules/event';
+import { sendMessage, SocketMessageType } from 'core/socket';
+import event from 'core/event';
 import cn from 'classnames';
 import './index.scss';
 

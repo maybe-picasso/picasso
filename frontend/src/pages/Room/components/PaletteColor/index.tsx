@@ -10,11 +10,7 @@ interface Props {
 
 const PaletteColor = ({ color, selected, onClick }: Props) => {
   return (
-    <Box
-      className={cn('palette-card', { selected })}
-      backgroundColor={color}
-      onClick={() => onClick?.(color)}
-    ></Box>
+    <Box className={cn('palette-card', { selected })} backgroundColor={color} onClick={() => onClick?.(color)}></Box>
   );
 };
 
