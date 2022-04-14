@@ -1,0 +1,12 @@
+.game-timer {
+  position: relative;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  .timer-emoji {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+}
