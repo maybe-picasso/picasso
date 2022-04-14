@@ -13,6 +13,7 @@
     "@rematch/immer": "^2.1.2",
     "@rematch/select": "^3.1.1",
     "classnames": "^2.3.1",
+    "date-fns": "^2.28.0",
     "events": "^3.3.0",
     "framer-motion": "^4",
     "lodash-es": "^4.17.21",
