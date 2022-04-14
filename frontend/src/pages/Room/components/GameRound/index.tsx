@@ -1,10 +1,18 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import './index.scss';
 
 const GameRound = () => {
   return (
-    <Box w="80px" h="80px" p={5} color="black" bg="white" border="solid 4px tomato" borderRadius={30}>
-      5/10
+    <Box textAlign="right">
+      <Text fontSize="xs" color="blackAlpha.600">
+        라운드
+      </Text>
+      <Text color="blackAlpha.600">
+        <Text as="strong" color="blackAlpha.900">
+          5
+        </Text>{' '}
+        / 10
+      </Text>
     </Box>
   );
 };

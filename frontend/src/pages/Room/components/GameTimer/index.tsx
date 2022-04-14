@@ -28,7 +28,7 @@ const GameTimer = () => {
           시간초과!
         </Text>
       ) : (
-        <Text fontSize="xl" color={isNeedSpeedUp ? 'red.500' : 'blackAlpha.900'}>
+        <Text fontSize="xl" fontWeight={600} color={isNeedSpeedUp ? 'red.500' : 'blackAlpha.900'}>
           {timeFormat}
         </Text>
       )}
