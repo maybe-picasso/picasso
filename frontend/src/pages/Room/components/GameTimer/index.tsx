@@ -1,14 +1,12 @@
 import { Box, Text } from '@chakra-ui/react';
-import { useEffect, useMemo, useState } from 'react';
-import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
 
 import './index.scss';
 
-const LIMIT_TIME = 90;
+const LIMIT_TIME = 99;
 
 const GameTimer = () => {
   const [timeCount, setTimeCount] = useState(LIMIT_TIME);
-  const timeFormat = useMemo(() => format(new Date(2022, 1, 1, 1, 0, timeCount), 'mm:ss'), [timeCount]);
 
   useEffect(() => {
     if (timeCount === 0) return;
@@ -29,7 +27,7 @@ const GameTimer = () => {
         </Text>
       ) : (
         <Text fontSize="xl" fontWeight={600} color={isNeedSpeedUp ? 'red.500' : 'blackAlpha.900'}>
-          {timeFormat}
+          {timeCount}
         </Text>
       )}
     </Box>
