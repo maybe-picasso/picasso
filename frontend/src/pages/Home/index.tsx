@@ -31,7 +31,7 @@ const Home = () => {
         <TrackballControls panSpeed={0.4} minDistance={9} maxDistance={40} />
       </Canvas>
 
-      <Link to="/setting">
+      <Link to="/room/abc">
         <Button w="250px" h="60px" colorScheme="yellow" size="lg" fontWeight="bold" variant="solid">
           START
         </Button>
