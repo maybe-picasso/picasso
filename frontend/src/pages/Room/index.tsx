@@ -1,4 +1,4 @@
-import { Container, Heading, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Container, Heading, Grid, GridItem } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
 import { useParams } from 'react-router-dom';
@@ -75,11 +75,7 @@ const Room = () => {
           </Grid>
         </Container>
       ) : (
-        <Container p={0} maxW="100%" color="white">
-          <Flex h="100%">
-            <GateContainer roomId={roomId} />
-          </Flex>
-        </Container>
+        <GateContainer roomId={roomId} />
       )}
     </PageTemplate>
   );

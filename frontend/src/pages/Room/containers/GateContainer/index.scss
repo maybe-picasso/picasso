@@ -1,0 +1,12 @@
+@import '~styles/modules/mixin.scss';
+
+.gate-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  @include mobileDevice {
+    justify-content: flex-start;
+  }
+}
