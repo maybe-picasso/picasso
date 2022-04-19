@@ -1,11 +1,10 @@
 @import '~styles/modules/mixin.scss';
 
-#setting {
+.gate-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 50px;
 
   @include mobileDevice {
     justify-content: flex-start;
