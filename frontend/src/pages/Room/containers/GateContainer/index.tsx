@@ -67,7 +67,7 @@ const GateContainer = ({ roomId }: Props) => {
     const userInfo = {
       userId: getUuid(),
       nickName,
-      profileUrl: profileIndex,
+      profileIndex,
     };
 
     socket.emit('join', { roomId, userInfo });
