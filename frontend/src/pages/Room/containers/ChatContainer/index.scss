@@ -13,7 +13,7 @@
 
     li {
       width: 100%;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
   }
 
@@ -25,10 +25,23 @@
   }
 
   .mine {
-    &:after {
+    position: relative;
+    &::after {
       clear: both !important;
       display: block;
       content: '';
+    }
+
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      bottom:0;
+      right:0;
+      bottom: -5px;
+      border-top: 10px solid var(--chakra-colors-yellow-300);
+      border-left: 10px solid transparent;
     }
 
     .nickname {
@@ -37,9 +50,10 @@
 
     .body {
       float: right;
-      background: var(--chakra-colors-yellow-400);
+      background: var(--chakra-colors-yellow-300);
       white-space: pre-line;
       word-break: break-all;
+      font-size: 14px;
     }
   }
 

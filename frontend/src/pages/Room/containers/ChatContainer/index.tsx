@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
-import { Flex, Grid, GridItem, Textarea, Button } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, IconButton, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
+import { ArrowUpIcon } from '@chakra-ui/icons';
+
 import { sendMessage, SocketMessageType } from 'core/socket';
 import event from 'core/event';
 import cn from 'classnames';
@@ -13,7 +15,7 @@ const ChatContainer = () => {
   const { chatList } = useSelector(select.chat.state);
   const dispatch = useDispatch<Dispatch>();
   const listWrapRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const textRef = useRef<HTMLInputElement>(null);
 
   const handleScrollToBottom = useCallback(() => {
     const $listWrap = listWrapRef.current;
@@ -118,29 +120,29 @@ const ChatContainer = () => {
           ))}
         </ul>
       </GridItem>
-      <GridItem rowSpan={1} className="chat-input-wrap" bg="gray.500">
-        <Flex h="100%" justifyContent="space-between">
-          <Textarea
-            placeholder="메시지를 입력해주세요!"
-            background="#fff"
-            resize="none"
-            onKeyDown={handleKeyDown}
-            onKeyUp={handleKeyUp}
-            ref={textRef}
-            maxLength={50}
-            borderRadius={0}
-          />
-          <Button
-            w="80px"
-            h="100%"
-            borderRadius={0}
-            colorScheme="yellow"
-            variant="solid"
-            color="#fff"
-            onClick={handleSendMessage}
-          >
-            Send
-          </Button>
+      <GridItem rowSpan={1}>
+        <Flex h="100%" alignItems="center">
+          <InputGroup size="lg">
+            <Input
+              fontSize="16px"
+              bg="#fff"
+              pr="4.5rem"
+              type="text"
+              placeholder="메시지를 입력해주세요!"
+              ref={textRef}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+            />
+            <InputRightElement width="4rem" mr="4px" justifyContent="flex-end">
+              <IconButton
+                aria-label="전송"
+                size="md"
+                bg="gray.300"
+                icon={<ArrowUpIcon />}
+                onClick={handleSendMessage}
+              />
+            </InputRightElement>
+          </InputGroup>
         </Flex>
       </GridItem>
     </Grid>

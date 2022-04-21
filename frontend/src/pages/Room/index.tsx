@@ -35,16 +35,16 @@ const Room = () => {
 
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
-          <Grid h="100vh" templateRows="repeat(14, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.600">
+          <Grid h="100vh" templateRows="repeat(14, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
             <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400" className="head-section">
-              <Heading h="100%" paddingLeft={2} fontSize={20} color="#fff">
+              <Heading h="100%" paddingLeft={5} fontSize={20} color="#fff">
                 Picasso
               </Heading>
             </GridItem>
 
             <GridItem rowSpan={{ base: 13 }} colSpan={{ base: 15 }}>
               <Grid h="100%" padding={2} templateRows="repeat(10, 1fr)" templateColumns="repeat(15, 1fr)" gap={2}>
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 2 }} borderRadius={6} bg="gray.100">
+                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 2 }} borderRadius={6} bg="gray.300">
                   <UserListContainer />
                 </GridItem>
 
@@ -60,7 +60,7 @@ const Room = () => {
                   <CanvasContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }}>
+                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="270px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
                     <GridItem rowSpan={2} colSpan={3} borderRadius={6} bg="gray.100">
                       <ToolsContainer />

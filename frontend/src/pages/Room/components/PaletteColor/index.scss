@@ -1,6 +1,7 @@
 $size: 20px;
 
 .palette-card {
+  position: relative;
   display: inline-block;
   margin: 2px 2px 0 2px;
   width: $size;
@@ -11,5 +12,15 @@ $size: 20px;
 
   &.selected {
     border-color: rgb(81, 92, 255);
+  }
+
+  .icon-checked {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
