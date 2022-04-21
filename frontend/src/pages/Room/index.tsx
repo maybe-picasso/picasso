@@ -60,12 +60,12 @@ const Room = () => {
                   <CanvasContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="270px">
+                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} borderRadius={6} bg="gray.100">
+                    <GridItem rowSpan={2} colSpan={3} borderRadius={6} p="10px" bg="gray.100">
                       <ToolsContainer />
                     </GridItem>
-                    <GridItem rowSpan={8} colSpan={3} borderRadius={6}>
+                    <GridItem rowSpan={8} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />
                     </GridItem>
                   </Grid>

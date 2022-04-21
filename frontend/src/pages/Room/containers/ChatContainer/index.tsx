@@ -110,7 +110,7 @@ const ChatContainer = () => {
 
   return (
     <Grid h="100%" templateRows="repeat(10, 1fr)" borderRadius={6} overflow={'hidden'}>
-      <GridItem rowSpan={9} bg="gray.100" className="chat-list-wrap" ref={listWrapRef}>
+      <GridItem rowSpan={9} className="chat-list-wrap" ref={listWrapRef}>
         <ul>
           {chatList.map(({ isMine, nickName, message }, i) => (
             <li className={cn({ mine: isMine })} key={i}>
@@ -121,7 +121,7 @@ const ChatContainer = () => {
         </ul>
       </GridItem>
       <GridItem rowSpan={1}>
-        <Flex h="100%" alignItems="center">
+        <Flex h="100%" alignItems="center" p="10px">
           <InputGroup size="lg">
             <Input
               fontSize="16px"
