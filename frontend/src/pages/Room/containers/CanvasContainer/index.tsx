@@ -1,4 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
+import cn from 'classnames';
+
 import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Drawing } from 'core/drawing';
@@ -57,7 +59,17 @@ const CanvasContainer = () => {
     });
   }, [currentTool]);
 
-  return <canvas ref={canvasRef} width={size.width} height={size.height} />;
+  const isEraserTool = currentTool === 'ERASER';
+
+  return (
+    <canvas
+      id="drawingCanvas"
+      className={cn({ eraser: isEraserTool })}
+      ref={canvasRef}
+      width={size.width}
+      height={size.height}
+    />
+  );
 };
 
 export default CanvasContainer;

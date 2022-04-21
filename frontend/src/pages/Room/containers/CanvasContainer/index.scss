@@ -1,5 +1,13 @@
-canvas {
+#drawingCanvas {
   width: 100%;
   height: 100%;
   background-color: #fff;
+
+  &:hover {
+    cursor: url('./brush.svg') 0 30, pointer;
+  }
+
+  &.eraser:hover {
+    cursor: url('./eraser.svg') 0 30, pointer;
+  }
 }

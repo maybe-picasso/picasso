@@ -50,7 +50,7 @@ const ToolsContainer = () => {
               colorScheme="teal"
               variant="outline"
               size="sm"
-              _active={{ bg: '#7fdbff', borderColor: '#bec3c9' }}
+              _active={{ bg: 'teal.500', color: '#fff' }}
               onClick={() => handleDrawingTool(name as DrawingTools)}
             >
               {name}
