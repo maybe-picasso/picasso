@@ -12,7 +12,7 @@ type Cursor = {
 
 type Config = Record<string, any>;
 
-interface DrawingConstructorParams {
+export interface DrawingConstructorParams {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   config?: Config;
@@ -25,20 +25,13 @@ export interface DrawParams {
   currentPoint: Cursor;
 }
 
-type MouseEventHandler = (e: MouseEvent) => void;
-
 export class DrawingCore {
-  private context: CanvasRenderingContext2D;
-  private canvas: HTMLCanvasElement;
-  private config: Config | undefined;
-  private isDragging = false;
-  private enabled = false;
-  private mouseDownHandler: MouseEventHandler | null = null;
-  private mouseMoveHandler: MouseEventHandler | null = null;
-  private mouseUpHandler: MouseEventHandler | null = null;
-  private startPoint: Cursor = { x: 0, y: 0 };
-  private currentPoint: Cursor = { x: 0, y: 0 };
-  private getPoint(e: MouseEvent) {
+  public context: CanvasRenderingContext2D;
+  public canvas: HTMLCanvasElement;
+  public config: Config | undefined;
+  public startPoint: Cursor = { x: 0, y: 0 };
+  public currentPoint: Cursor = { x: 0, y: 0 };
+  public getPoint(e: MouseEvent) {
     return {
       x: e.offsetX,
       y: e.offsetY,
@@ -49,13 +42,6 @@ export class DrawingCore {
     this.canvas = canvas;
     this.context = context;
     this.config = config;
-    this.init();
-  }
-
-  init() {
-    this.mouseDownHandler = this.onMouseDown.bind(this);
-    this.mouseMoveHandler = this.onMouseMove.bind(this);
-    this.mouseUpHandler = this.onMouseUp.bind(this);
   }
 
   start() {
@@ -109,78 +95,5 @@ export class DrawingCore {
     };
 
     this.config = newConf;
-  }
-
-  enable() {
-    if (this.enabled) {
-      return;
-    }
-
-    this.enabled = true;
-    this.registEventHander();
-  }
-
-  disable() {
-    if (!this.enabled) {
-      return;
-    }
-
-    this.enabled = false;
-    this.unregistEventHandler();
-  }
-
-  registEventHander() {
-    if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
-      return;
-    }
-
-    this.canvas.addEventListener('mousedown', this.mouseDownHandler);
-    this.canvas.addEventListener('mousemove', this.mouseMoveHandler);
-    this.canvas.addEventListener('mouseup', this.mouseUpHandler);
-  }
-
-  unregistEventHandler() {
-    if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
-      return;
-    }
-
-    this.canvas.removeEventListener('mousedown', this.mouseDownHandler);
-    this.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
-    this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
-  }
-
-  onMouseDown(e: MouseEvent) {
-    console.log('onMouseDown :>> ', e);
-    this.isDragging = true;
-    this.startPoint = this.getPoint(e);
-    this.start();
-  }
-
-  onMouseMove(e: MouseEvent) {
-    if (!this.isDragging) {
-      return;
-    }
-
-    this.currentPoint = this.getPoint(e);
-    this.draw({
-      context: this.context,
-      config: this.config,
-      startPoint: this.startPoint,
-      currentPoint: this.currentPoint,
-    });
-    this.startPoint = this.currentPoint;
-  }
-
-  onMouseUp(e: MouseEvent) {
-    console.log('onMouseUp :>> ', e);
-    this.isDragging = false;
-    this.end();
-  }
-
-  dispose() {
-    this.unregistEventHandler();
-    this.mouseDownHandler = null;
-    this.mouseMoveHandler = null;
-    this.mouseUpHandler = null;
   }
 }

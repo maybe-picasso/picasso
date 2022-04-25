@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Drawing } from 'core/drawing';
+import { DrawingTools } from 'types/enums';
 import './index.scss';
 
 export let drawing: Drawing;
@@ -59,7 +60,7 @@ const CanvasContainer = () => {
     });
   }, [currentTool]);
 
-  const isEraserTool = currentTool === 'ERASER';
+  const isEraserTool = currentTool === DrawingTools.ERASER;
 
   return (
     <canvas
