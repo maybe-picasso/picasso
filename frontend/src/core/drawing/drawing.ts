@@ -1,6 +1,8 @@
 import { DrawingCore, DrawingConstructorParams } from './drawing-core';
-type MouseEventHandler = (e: MouseEvent) => void;
+import { sendMessage, SocketMessageType } from 'core/socket';
+import event from 'core/event';
 
+type MouseEventHandler = (e: MouseEvent) => void;
 export class Drawing extends DrawingCore {
   private enabled = false;
   private isDragging = false;
@@ -17,24 +19,7 @@ export class Drawing extends DrawingCore {
     this.mouseDownHandler = this.onMouseDown.bind(this);
     this.mouseMoveHandler = this.onMouseMove.bind(this);
     this.mouseUpHandler = this.onMouseUp.bind(this);
-  }
-
-  enable() {
-    if (this.enabled) {
-      return;
-    }
-
-    this.enabled = true;
-    this.bindMouseEventHander();
-  }
-
-  disable() {
-    if (!this.enabled) {
-      return;
-    }
-
-    this.enabled = false;
-    this.unbindMouseEventHandler();
+    this.bindSocketEventHandler();
   }
 
   onMouseDown(e: MouseEvent) {
@@ -42,6 +27,14 @@ export class Drawing extends DrawingCore {
     this.isDragging = true;
     this.startPoint = this.getPoint(e);
     this.start();
+
+    sendMessage({
+      type: SocketMessageType.Drawing,
+      body: {
+        status: 'start',
+        pos: 0,
+      },
+    });
   }
 
   onMouseMove(e: MouseEvent) {
@@ -63,6 +56,24 @@ export class Drawing extends DrawingCore {
     console.log('onMouseUp :>> ', e);
     this.isDragging = false;
     this.end();
+  }
+
+  enable() {
+    if (this.enabled) {
+      return;
+    }
+
+    this.enabled = true;
+    this.bindMouseEventHander();
+  }
+
+  disable() {
+    if (!this.enabled) {
+      return;
+    }
+
+    this.enabled = false;
+    this.unbindMouseEventHandler();
   }
 
   dispose() {
@@ -94,5 +105,8 @@ export class Drawing extends DrawingCore {
 
   bindSocketEventHandler() {
     // TODO: 소켓 메시지로 그리기 처리 예정
+    event.on(SocketMessageType.Drawing, (data) => {
+      console.log('drawing 소켓 메시지 :>> ', data);
+    });
   }
 }
