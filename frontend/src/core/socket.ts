@@ -17,7 +17,7 @@ interface SocketInitData {
 
 export enum SocketMessageType {
   Chat = 'Chat',
-  Draw = 'Draw',
+  Drawing = 'Drawing',
 }
 
 export const setupBaseInfo = ({ roomId: id, userId }: SocketInitData) => {
