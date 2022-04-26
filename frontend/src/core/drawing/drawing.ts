@@ -28,11 +28,17 @@ export class Drawing extends DrawingCore {
     this.startPoint = this.getPoint(e);
     this.start();
 
+    const { size, color, mode } = this.getConfig();
+
     sendMessage({
       type: SocketMessageType.Drawing,
       body: {
-        status: 'start',
-        pos: 0,
+        drawingStatus: 'start',
+        drawingMode: mode,
+        lineWidth: size,
+        color,
+        canvasSize: this.getCanvasSize(),
+        point: this.startPoint,
       },
     });
   }
@@ -50,12 +56,27 @@ export class Drawing extends DrawingCore {
       currentPoint: this.currentPoint,
     });
     this.startPoint = this.currentPoint;
+
+    sendMessage({
+      type: SocketMessageType.Drawing,
+      body: {
+        drawingStatus: 'draw',
+        point: this.currentPoint,
+      },
+    });
   }
 
   onMouseUp(e: MouseEvent) {
     console.log('onMouseUp :>> ', e);
     this.isDragging = false;
     this.end();
+
+    sendMessage({
+      type: SocketMessageType.Drawing,
+      body: {
+        drawingStatus: 'end',
+      },
+    });
   }
 
   enable() {
@@ -64,7 +85,7 @@ export class Drawing extends DrawingCore {
     }
 
     this.enabled = true;
-    this.bindMouseEventHander();
+    this.bindMouseEventHandler();
   }
 
   disable() {
@@ -83,7 +104,7 @@ export class Drawing extends DrawingCore {
     this.mouseUpHandler = null;
   }
 
-  bindMouseEventHander() {
+  bindMouseEventHandler() {
     if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
       return;
     }
@@ -107,6 +128,27 @@ export class Drawing extends DrawingCore {
     // TODO: 소켓 메시지로 그리기 처리 예정
     event.on(SocketMessageType.Drawing, (data) => {
       console.log('drawing 소켓 메시지 :>> ', data);
+      const { body } = data;
+
+      switch (body.drawingStatus) {
+        case 'start':
+          this.startPoint = body.point;
+          this.start();
+          break;
+        case 'draw':
+          this.currentPoint = body.point;
+          this.draw({
+            context: this.context,
+            config: this.config,
+            startPoint: this.startPoint,
+            currentPoint: this.currentPoint,
+          });
+          this.startPoint = this.currentPoint;
+          break;
+        case 'end':
+          this.end();
+          break;
+      }
     });
   }
 }

@@ -29,9 +29,6 @@ const PracticeRoom = () => {
       return new Drawing({
         canvas,
         context,
-        config: {
-          size: 5,
-        },
       });
     });
   }, [setCurrentTool]);

@@ -10,7 +10,11 @@ type Cursor = {
   y: number;
 };
 
-type Config = Record<string, any>;
+interface Config {
+  mode: string;
+  color: string;
+  size: number;
+}
 
 export interface DrawingConstructorParams {
   canvas: HTMLCanvasElement;
@@ -20,7 +24,7 @@ export interface DrawingConstructorParams {
 
 export interface DrawParams {
   context: CanvasRenderingContext2D;
-  config?: Config;
+  config: Config;
   startPoint: Cursor;
   currentPoint: Cursor;
 }
@@ -28,7 +32,7 @@ export interface DrawParams {
 export class DrawingCore {
   public context: CanvasRenderingContext2D;
   public canvas: HTMLCanvasElement;
-  public config: Config | undefined;
+  public config: Config;
   public startPoint: Cursor = { x: 0, y: 0 };
   public currentPoint: Cursor = { x: 0, y: 0 };
   public getPoint(e: MouseEvent) {
@@ -41,7 +45,11 @@ export class DrawingCore {
   constructor({ canvas, context, config }: DrawingConstructorParams) {
     this.canvas = canvas;
     this.context = context;
-    this.config = config;
+    this.config = config ?? {
+      size: DEFAULT_SIZE,
+      color: DEFAULT_COLOR,
+      mode: DEFAULT_MODE,
+    };
   }
 
   start() {
@@ -54,9 +62,7 @@ export class DrawingCore {
   }
 
   draw({ context, config, startPoint, currentPoint }: DrawParams) {
-    const size = config?.['size'] || DEFAULT_SIZE;
-    const color = config?.['color'] || DEFAULT_COLOR;
-    const mode = config?.['mode'] || DEFAULT_MODE;
+    const { mode, size, color } = config;
 
     if (mode === DrawingTools.PEN) {
       context.globalCompositeOperation = 'source-over'; // 기본 설정으로 새로운 도형을 위에 그린다.
@@ -88,12 +94,24 @@ export class DrawingCore {
     this.context.clearRect(0, 0, width, height);
   }
 
-  setConfig(config: Config) {
+  setConfig(config: Partial<Config>) {
     const newConf = {
       ...this.config,
       ...config,
     };
 
     this.config = newConf;
+  }
+
+  getConfig() {
+    return this.config;
+  }
+
+  getCanvasSize() {
+    const { width, height } = this.canvas;
+    return {
+      width,
+      height,
+    };
   }
 }
