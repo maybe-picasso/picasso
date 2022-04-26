@@ -34,18 +34,22 @@ const ChatContainer = () => {
       return;
     }
 
-    const { userId, nickName } = userInfo;
-    dispatch.chat.addChat({
-      isMine: true,
-      userId,
-      nickName,
+    const body = {
       message,
       timestamp,
-    });
+    };
 
     sendMessage({
       type: SocketMessageType.Chat,
-      body: message,
+      body,
+    });
+
+    const { userId, nickName } = userInfo;
+    dispatch.chat.addChat({
+      ...body,
+      isMine: true,
+      userId,
+      nickName,
     });
 
     textRef.current.value = '';
@@ -104,8 +108,8 @@ const ChatContainer = () => {
   );
 
   useEffect(() => {
-    event.removeAllListeners('chat');
-    event.on('chat', onChat);
+    event.removeAllListeners(SocketMessageType.Chat);
+    event.on(SocketMessageType.Chat, onChat);
   }, [onChat]);
 
   return (
