@@ -3,8 +3,8 @@ import { isNodeProdcution } from 'helpers/env';
 
 const SOCKET_SERVER = isNodeProdcution ? 'ws://localhost:3001/picasso' : 'ws://localhost:3001/picasso';
 
-let roomId: string | null = null;
-let senderId: string | null = null;
+let roomId: string;
+let senderId: string;
 
 export const socket = io(SOCKET_SERVER, {
   transports: ['websocket'],
@@ -15,26 +15,13 @@ interface SocketInitData {
   userId: string;
 }
 
-export enum SocketMessageType {
-  Chat = 'Chat',
-  Drawing = 'Drawing',
-}
-
 export const setupBaseInfo = ({ roomId: id, userId }: SocketInitData) => {
   roomId = id;
   senderId = userId;
 };
 
-export const sendMessage = ({
-  type,
-  body,
-  to = 'all',
-}: {
-  type: SocketMessageType;
-  to?: 'all' | string;
-  body: any;
-}) => {
-  const data = {
+export const sendMessage = ({ type, body, to = 'all' }: Pick<Picasso.SocketMessage, 'type' | 'body' | 'to'>) => {
+  const data: Picasso.SocketMessage = {
     roomId,
     senderId,
     to,

@@ -1,8 +1,10 @@
 import { DrawingCore, DrawingConstructorParams } from './drawing-core';
-import { sendMessage, SocketMessageType } from 'core/socket';
+import { sendMessage } from 'core/socket';
+import { DrawingStatusType, SocketMessageType } from 'types/enums';
 import event from 'core/event';
 
 type MouseEventHandler = (e: MouseEvent) => void;
+
 export class Drawing extends DrawingCore {
   private enabled = false;
   private isDragging = false;
@@ -31,9 +33,9 @@ export class Drawing extends DrawingCore {
     const { size, color, mode } = this.getConfig();
 
     sendMessage({
-      type: SocketMessageType.Drawing,
+      type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: 'start',
+        drawingStatus: DrawingStatusType.START,
         drawingMode: mode,
         lineWidth: size,
         color,
@@ -58,9 +60,9 @@ export class Drawing extends DrawingCore {
     this.startPoint = this.currentPoint;
 
     sendMessage({
-      type: SocketMessageType.Drawing,
+      type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: 'draw',
+        drawingStatus: DrawingStatusType.DRAW,
         point: this.currentPoint,
       },
     });
@@ -72,9 +74,9 @@ export class Drawing extends DrawingCore {
     this.end();
 
     sendMessage({
-      type: SocketMessageType.Drawing,
+      type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: 'end',
+        drawingStatus: DrawingStatusType.END,
       },
     });
   }
@@ -125,18 +127,21 @@ export class Drawing extends DrawingCore {
   }
 
   bindSocketEventHandler() {
-    // TODO: 소켓 메시지로 그리기 처리 예정
-    event.on(SocketMessageType.Drawing, (data) => {
-      console.log('drawing 소켓 메시지 :>> ', data);
-      const { body } = data;
+    event.on(SocketMessageType.DRAWING, ({ body }: Picasso.DrawingMessage) => {
+      const { drawingStatus, drawingMode, lineWidth, color, point } = body;
 
-      switch (body.drawingStatus) {
-        case 'start':
-          this.startPoint = body.point;
+      switch (drawingStatus) {
+        case DrawingStatusType.START:
+          this.setConfig({
+            mode: drawingMode,
+            size: lineWidth,
+            color,
+          });
+          this.startPoint = point;
           this.start();
           break;
-        case 'draw':
-          this.currentPoint = body.point;
+        case DrawingStatusType.DRAW:
+          this.currentPoint = point;
           this.draw({
             context: this.context,
             config: this.config,
@@ -145,7 +150,7 @@ export class Drawing extends DrawingCore {
           });
           this.startPoint = this.currentPoint;
           break;
-        case 'end':
+        case DrawingStatusType.END:
           this.end();
           break;
       }
