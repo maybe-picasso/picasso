@@ -5,7 +5,8 @@ import { Dispatch, select } from 'store';
 import { Flex, Grid, GridItem, IconButton, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 
-import { sendMessage, SocketMessageType } from 'core/socket';
+import { sendMessage } from 'core/socket';
+import { SocketMessageType } from 'types/enums';
 import event from 'core/event';
 import cn from 'classnames';
 import './index.scss';
@@ -40,7 +41,7 @@ const ChatContainer = () => {
     };
 
     sendMessage({
-      type: SocketMessageType.Chat,
+      type: SocketMessageType.CHAT,
       body,
     });
 
@@ -108,8 +109,8 @@ const ChatContainer = () => {
   );
 
   useEffect(() => {
-    event.removeAllListeners(SocketMessageType.Chat);
-    event.on(SocketMessageType.Chat, onChat);
+    event.removeAllListeners(SocketMessageType.CHAT);
+    event.on(SocketMessageType.CHAT, onChat);
   }, [onChat]);
 
   return (
