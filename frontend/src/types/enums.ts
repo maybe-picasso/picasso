@@ -13,4 +13,5 @@ export enum DrawingStatusType {
   START = 'START',
   DRAW = 'DRAW',
   END = 'END',
+  CLEAR_ALL = 'CLEAR_ALL',
 }

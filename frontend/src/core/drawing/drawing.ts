@@ -81,6 +81,16 @@ export class Drawing extends DrawingCore {
     });
   }
 
+  clearAll() {
+    this.clear();
+    sendMessage({
+      type: SocketMessageType.DRAWING,
+      body: {
+        drawingStatus: DrawingStatusType.CLEAR_ALL,
+      },
+    });
+  }
+
   enable() {
     if (this.enabled) {
       return;
@@ -152,6 +162,9 @@ export class Drawing extends DrawingCore {
           break;
         case DrawingStatusType.END:
           this.end();
+          break;
+        case DrawingStatusType.CLEAR_ALL:
+          this.clear();
           break;
       }
     });

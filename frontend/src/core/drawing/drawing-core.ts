@@ -89,7 +89,7 @@ export class DrawingCore {
     this.context.closePath();
   }
 
-  clearAll() {
+  clear() {
     const { width, height } = this.context.canvas;
     this.context.clearRect(0, 0, width, height);
   }
