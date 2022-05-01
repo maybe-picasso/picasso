@@ -1,7 +1,26 @@
+@import '~styles/modules/mixin.scss';
+
 .user-list {
   list-style: none;
 
   li {
     position: relative;
+  }
+
+  .profile-wrap {
+    position: relative;
+    padding-left: 70px;
+
+    .profile-avatar {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      zoom: 1.8;
+    }
+  }
+
+  .nickname {
+    width: 100%;
+    @include ellipsis();
   }
 }
