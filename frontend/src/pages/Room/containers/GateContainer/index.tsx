@@ -3,7 +3,6 @@ import {
   Container,
   Heading,
   Stack,
-  Box,
   Input,
   Button,
   RadioGroup,
@@ -13,6 +12,7 @@ import {
   GridItem,
   IconButton,
   Text,
+  FormControl,
 } from '@chakra-ui/react';
 import { BsArrowRightCircleFill, BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
@@ -88,7 +88,7 @@ const GateContainer = ({ roomId }: Props) => {
 
   return (
     <Container alignContent="center" className="gate-container">
-      <Box>
+      <FormControl>
         <Stack spacing={5}>
           <Heading as="h1" size="xl">
             프로필 설정
@@ -172,6 +172,7 @@ const GateContainer = ({ roomId }: Props) => {
           </Grid>
 
           <Button
+            type="submit"
             rightIcon={<BsArrowRightCircleFill />}
             colorScheme="teal"
             size="lg"
@@ -181,7 +182,7 @@ const GateContainer = ({ roomId }: Props) => {
             입장하기
           </Button>
         </Stack>
-      </Box>
+      </FormControl>
     </Container>
   );
 };
