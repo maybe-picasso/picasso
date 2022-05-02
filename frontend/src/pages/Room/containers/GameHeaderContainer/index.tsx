@@ -1,12 +1,12 @@
-import { Flex, Spacer } from '@chakra-ui/react';
-import { GameRound, GameTimer } from '../../components';
+import { Flex } from '@chakra-ui/react';
+import { GameQuestion, GameRound, GameTimer } from '../../components';
 import './index.scss';
 
 const GameHeaderContainer = () => {
   return (
-    <Flex className="game-header-container">
+    <Flex className="game-header-container" justifyContent="space-between">
       <GameTimer />
-      <Spacer />
+      <GameQuestion />
       <GameRound />
     </Flex>
   );

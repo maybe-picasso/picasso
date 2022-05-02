@@ -18,6 +18,7 @@ const ToolsContainer = () => {
     (name: DrawingTools) => {
       if (name === DrawingTools.CLEAR_ALL) {
         drawing.clearAll();
+        dispatch.tools.setTool(DrawingTools.PEN);
       } else {
         dispatch.tools.setTool(name);
       }

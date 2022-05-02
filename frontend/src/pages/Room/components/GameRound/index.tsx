@@ -3,7 +3,7 @@ import './index.scss';
 
 const GameRound = () => {
   return (
-    <Box textAlign="right">
+    <Box className="game-round" textAlign="right">
       <Text fontSize="xs" color="blackAlpha.600">
         라운드
       </Text>

@@ -1,3 +1,4 @@
+export { default as GameQuestion } from './GameQuestion';
 export { default as GameRound } from './GameRound';
 export { default as GameTimer } from './GameTimer';
 export { default as PaletteColor } from './PaletteColor';

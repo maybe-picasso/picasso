@@ -6,6 +6,10 @@
   align-items: center;
   height: 100vh;
 
+  .chakra-form-control {
+    width: auto;
+  }
+
   @include mobileDevice {
     justify-content: flex-start;
   }
