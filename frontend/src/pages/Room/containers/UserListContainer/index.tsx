@@ -12,10 +12,12 @@ const UserListContainer = () => {
       {participants.map(({ userId, nickName, profileIndex }) => {
         return (
           <li key={userId}>
-            <Flex bg="white" margin={1} padding={2} borderRadius={6}>
+            <Flex className="profile-wrap" bg="white" margin={2} mb={4} padding={2} borderRadius={6}>
               <ProfileAvatar index={profileIndex} />
               <Box ml="3">
-                <Text fontWeight="bold">{nickName}</Text>
+                <Text className="nickname" fontWeight="bold">
+                  {nickName}
+                </Text>
                 <Badge colorScheme="green">0 points</Badge>
               </Box>
             </Flex>
