@@ -26,3 +26,12 @@ npm run start:be
 ## 백앤드 기술 스택
 
 - [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+
+## 맴버
+
+<div>
+   <a target="_blank" href="https://github.com/codejs-kr"><img width="100" src="https://github.com/codejs-kr.png" alt="codejs-kr"></a>
+   <a target="_blank" href="https://github.com/code-sign"><img width="100" src="https://github.com/code-sign.png" alt="code-sign"></a>
+   <a target="_blank" href="https://github.com/lotstar87"><img width="100" src="https://github.com/lotstar87.png" alt="lotstar87"></a>
+ </div>
