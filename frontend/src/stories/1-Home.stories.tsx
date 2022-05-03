@@ -7,7 +7,7 @@ export default {
   title: 'Home',
 } as Meta;
 
-export const HomeStory: StoryObj = {
+export const DefaultStory: StoryObj = {
   name: '기본',
   render: () => <Home />,
   decorators: [withRouter({ url: PATHS.HOME })],
