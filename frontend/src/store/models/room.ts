@@ -1,14 +1,14 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
 
-interface RoomState {
+export interface RoomState {
   isConnectedSocket: boolean;
   isJoined: boolean;
   userInfo: Record<string, any> | null;
   participants: Record<string, any>[];
 }
 
-const initialState: RoomState = {
+export const initialState: RoomState = {
   isConnectedSocket: false,
   isJoined: false,
   userInfo: null,

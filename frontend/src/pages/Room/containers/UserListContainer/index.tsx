@@ -6,6 +6,7 @@ import './index.scss';
 
 const UserListContainer = () => {
   const { participants } = useSelector(select.room.state);
+  console.log('확인 participants :>> ', participants);
 
   return (
     <ul className="user-list">

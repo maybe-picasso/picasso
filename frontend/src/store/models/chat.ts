@@ -9,11 +9,11 @@ interface ChatMessage {
   isMine?: boolean;
 }
 
-interface ChatState {
+export interface ChatState {
   chatList: ChatMessage[];
 }
 
-const initialState: ChatState = {
+export const initialState: ChatState = {
   chatList: [],
 };
 

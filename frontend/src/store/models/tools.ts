@@ -3,13 +3,13 @@ import { RootModel } from './';
 import { COLORS, DEFAULT_LINE_SIZE } from 'constants/index';
 import { DrawingTools } from 'types/enums';
 
-interface ToolsState {
+export interface ToolsState {
   currentTool: DrawingTools;
   currentColor: string;
   currentSize: number;
 }
 
-const initialState: ToolsState = {
+export const initialState: ToolsState = {
   currentTool: DrawingTools.PEN,
   currentColor: COLORS[0],
   currentSize: DEFAULT_LINE_SIZE,
