@@ -9,7 +9,8 @@ import PageTemplate from 'components/PageTemplate';
 import {
   SocketContainer,
   GateContainer,
-  GameHeaderContainer,
+  HeaderContainer,
+  CanvasHeaderContainer,
   CanvasContainer,
   ChatContainer,
   UserListContainer,
@@ -36,10 +37,8 @@ const Room = () => {
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
           <Grid h="100vh" templateRows="repeat(14, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
-            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400" className="head-section">
-              <Heading h="100%" paddingLeft={5} fontSize={20} color="#fff">
-                Picasso
-              </Heading>
+            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400">
+              <HeaderContainer />
             </GridItem>
 
             <GridItem rowSpan={{ base: 13 }} colSpan={{ base: 15 }}>
@@ -56,7 +55,7 @@ const Room = () => {
                   padding={3}
                   bg="white"
                 >
-                  <GameHeaderContainer />
+                  <CanvasHeaderContainer />
                   <CanvasContainer />
                 </GridItem>
 
