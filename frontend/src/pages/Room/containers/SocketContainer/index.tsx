@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
+import { isStorybook } from 'helpers/env';
 
 import socket, { setupBaseInfo } from 'core/socket';
 import event from 'core/event';
@@ -11,7 +12,7 @@ const SocketContainer = ({ roomId }: { roomId: string }) => {
 
   const onGateIn = useCallback(
     ({ participants }) => {
-      console.log('onGateIn', participants);
+      if (isStorybook) return;
       dispatch.room.setSocketState(true);
       dispatch.room.updateParticipants(participants);
     },

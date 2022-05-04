@@ -1,21 +1,25 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
 
+export interface CommonState {
+  isLoading: boolean;
+}
+
+export const initialState: CommonState = {
+  isLoading: false,
+};
+
 export const common = createModel<RootModel>()({
-  state: 0,
-  selectors: (slice, createSelector) => ({
-    state() {
-      return slice;
-    },
+  state: initialState,
+  selectors: (slice) => ({
+    state: () => slice,
   }),
   reducers: {
-    increment(state, payload: number) {
-      return state + payload;
+    showLoading(state) {
+      state.isLoading = true;
+    },
+    hideLoading(state) {
+      state.isLoading = false;
     },
   },
-  effects: (dispatch) => ({
-    incrementAsync(payload: number, state) {
-      dispatch.count.increment(payload);
-    },
-  }),
 });
