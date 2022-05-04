@@ -4,7 +4,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 extend({ TextGeometry });
 
-const fontsrc = 'fonts/Jua_Regular.json';
+const fontsrc = 'fonts/Jua_Regular-picaso.json';
 
 const Typo3D = ({
   children,
@@ -22,7 +22,7 @@ const Typo3D = ({
       font,
       size: 3,
       height: 0.5, //앞뒤 두께감
-      curveSegments: 2, //너무 높게하면 리렌더링 오래걸림
+      curveSegments: 1.5, //너무 높게하면 리렌더링 오래걸림
       bevelEnabled: true,
       bevelThickness: 1,
       bevelSize: 0.1,
