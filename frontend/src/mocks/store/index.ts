@@ -4,6 +4,7 @@ import { initialState as chatInitState } from 'store/models/chat';
 import { initialState as toolsInitState } from 'store/models/tools';
 import { RootState } from '../../../src/store';
 import { participants } from './room';
+import { chatList } from './chat';
 
 export type MockStore = Pick<RootState, 'common' | 'room' | 'chat' | 'tools'>;
 
@@ -23,6 +24,9 @@ export const 룸_게임화면: MockStore = {
     userInfo: participants[0],
     participants,
   },
-  chat: chatInitState,
+  chat: {
+    ...chatInitState,
+    chatList,
+  },
   tools: toolsInitState,
 };
