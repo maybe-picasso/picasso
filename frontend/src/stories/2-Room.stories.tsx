@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withRouter, withRedux } from '../../.storybook/decorators';
 import { Room } from 'pages';
-import { 룸_기본, 룸_입장 } from 'mocks/store';
+import { 룸_프로필설정, 룸_게임화면 } from 'mocks/store';
 import PATHS from 'routes/paths';
 
 export default {
@@ -15,7 +15,7 @@ export const GameProfileStory: StoryObj = {
     withRouter({
       url: PATHS.ROOM,
     }),
-    withRedux(룸_기본),
+    withRedux(룸_프로필설정),
   ],
 };
 
@@ -26,6 +26,6 @@ export const GameDefaultStory: StoryObj = {
     withRouter({
       url: PATHS.ROOM,
     }),
-    withRedux(룸_입장),
+    withRedux(룸_게임화면),
   ],
 };
