@@ -20,7 +20,7 @@ import { motion } from 'framer-motion';
 import { useMotion } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
-import { getUuid } from 'helpers/utils';
+import { getUuid, getRandomNumber } from 'helpers/utils';
 import { PROFILE_CHARACTERS } from 'constants/index';
 import socket from 'core/socket';
 
@@ -31,7 +31,8 @@ interface Props {
 }
 
 const GateContainer = ({ roomId }: Props) => {
-  const [profileIndex, setProfileIndex] = useState(1);
+  const randomIndex = getRandomNumber(PROFILE_CHARACTERS.length);
+  const [profileIndex, setProfileIndex] = useState(randomIndex);
   const [drawTime, setDrawTime] = useState('60');
   const [round, setRound] = useState('10');
 
@@ -45,7 +46,7 @@ const GateContainer = ({ roomId }: Props) => {
   const { controls } = useMotion({ deps: [profileIndex] });
 
   const getRandomProfile = useCallback(() => {
-    const index = Math.floor(Math.random() * PROFILE_CHARACTERS.length);
+    const index = getRandomNumber(PROFILE_CHARACTERS.length);
     setProfileIndex(index);
   }, [setProfileIndex]);
 
