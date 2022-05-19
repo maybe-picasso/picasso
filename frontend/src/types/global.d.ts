@@ -2,6 +2,13 @@ import { SocketMessageType, DrawingStatusType } from './enums';
 
 declare global {
   namespace Picasso {
+    interface UserInfo {
+      clientId?: string;
+      userId: string;
+      nickName: string;
+      profileIndex: number;
+    }
+
     interface SocketMessage {
       roomId: string;
       senderId: string;
