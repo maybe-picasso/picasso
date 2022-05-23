@@ -1,6 +1,6 @@
 import { DrawingCore, DrawingConstructorParams } from './drawing-core';
 import { sendMessage } from 'core/socket';
-import { DrawingStatusType, SocketMessageType } from 'types/enums';
+import { DrawingStatus, SocketMessageType } from 'types/enums';
 import event from 'core/event';
 
 type MouseEventHandler = (e: MouseEvent) => void;
@@ -35,7 +35,7 @@ export class Drawing extends DrawingCore {
     sendMessage({
       type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: DrawingStatusType.START,
+        drawingStatus: DrawingStatus.START,
         drawingMode: mode,
         lineWidth: size,
         color,
@@ -62,7 +62,7 @@ export class Drawing extends DrawingCore {
     sendMessage({
       type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: DrawingStatusType.DRAW,
+        drawingStatus: DrawingStatus.DRAW,
         point: this.currentPoint,
       },
     });
@@ -76,7 +76,7 @@ export class Drawing extends DrawingCore {
     sendMessage({
       type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: DrawingStatusType.END,
+        drawingStatus: DrawingStatus.END,
       },
     });
   }
@@ -86,7 +86,7 @@ export class Drawing extends DrawingCore {
     sendMessage({
       type: SocketMessageType.DRAWING,
       body: {
-        drawingStatus: DrawingStatusType.CLEAR_ALL,
+        drawingStatus: DrawingStatus.CLEAR_ALL,
       },
     });
   }
@@ -141,7 +141,7 @@ export class Drawing extends DrawingCore {
       const { drawingStatus, drawingMode, lineWidth, color, point } = body;
 
       switch (drawingStatus) {
-        case DrawingStatusType.START:
+        case DrawingStatus.START:
           this.setConfig({
             mode: drawingMode,
             size: lineWidth,
@@ -150,7 +150,7 @@ export class Drawing extends DrawingCore {
           this.startPoint = point;
           this.start();
           break;
-        case DrawingStatusType.DRAW:
+        case DrawingStatus.DRAW:
           this.currentPoint = point;
           this.draw({
             context: this.context,
@@ -160,10 +160,10 @@ export class Drawing extends DrawingCore {
           });
           this.startPoint = this.currentPoint;
           break;
-        case DrawingStatusType.END:
+        case DrawingStatus.END:
           this.end();
           break;
-        case DrawingStatusType.CLEAR_ALL:
+        case DrawingStatus.CLEAR_ALL:
           this.clear();
           break;
       }

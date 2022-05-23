@@ -9,7 +9,7 @@ export enum DrawingTools {
   CLEAR_ALL = 'CLEAR_ALL',
 }
 
-export enum DrawingStatusType {
+export enum DrawingStatus {
   START = 'START',
   DRAW = 'DRAW',
   END = 'END',
