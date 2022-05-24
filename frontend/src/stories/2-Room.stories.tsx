@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { withRouter, withRedux } from '../../.storybook/decorators';
 import { Room } from 'pages';
-import { 룸_프로필설정, 룸_게임화면 } from 'mocks/store';
+import { 룸_프로필설정, 룸_게임화면, 룸_게임완료, 룸_게임종료 } from 'mocks/store';
 import PATHS from 'routes/paths';
 
 export default {
@@ -27,5 +27,27 @@ export const GameDefaultStory: StoryObj = {
       url: PATHS.ROOM,
     }),
     withRedux(룸_게임화면),
+  ],
+};
+
+export const GameCompleteStory: StoryObj = {
+  name: '게임 한 문제 완료',
+  render: () => <Room />,
+  decorators: [
+    withRouter({
+      url: PATHS.ROOM,
+    }),
+    withRedux(룸_게임완료),
+  ],
+};
+
+export const GameOverStory: StoryObj = {
+  name: '게임 전체 문제 완료',
+  render: () => <Room />,
+  decorators: [
+    withRouter({
+      url: PATHS.ROOM,
+    }),
+    withRedux(룸_게임종료),
   ],
 };
