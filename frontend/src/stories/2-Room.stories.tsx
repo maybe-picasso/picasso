@@ -31,7 +31,7 @@ export const GameDefaultStory: StoryObj = {
 };
 
 export const GameCompleteStory: StoryObj = {
-  name: '게임 한 문제 완료',
+  name: '게임 라운드별 완료',
   render: () => <Room />,
   decorators: [
     withRouter({
@@ -42,7 +42,7 @@ export const GameCompleteStory: StoryObj = {
 };
 
 export const GameOverStory: StoryObj = {
-  name: '게임 전체 문제 완료',
+  name: '게임 전체 라운드 종료',
   render: () => <Room />,
   decorators: [
     withRouter({
