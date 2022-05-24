@@ -16,7 +16,7 @@ export const initialState: GameState = {
   time: 60,
 };
 
-// 점수처리 방법 고민,
+// TODO: 점수처리 방법 고민
 // 3위까지는 남은 시간의 2배, 1.5배, 1.2배 4위 부터 1.0
 // 참여자수 가산점?
 
@@ -24,6 +24,8 @@ export const game = createModel<RootModel>()({
   state: initialState,
   selectors: (slice) => ({
     state: () => slice,
+    isVisibleOverlayContent: () =>
+      slice(({ status }) => status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER),
   }),
   reducers: {
     setQuestions(state, payload: string[]) {

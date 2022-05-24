@@ -4,3 +4,7 @@ export { default as GameTimer } from './GameTimer';
 export { default as PaletteColor } from './PaletteColor';
 export { default as PaletteSlider } from './PaletteSlider';
 export { default as ProfileAvatar } from './ProfileAvatar';
+
+// overlay
+export { default as CompleteContent } from './overlay/CompleteContent';
+export { default as GameOverContent } from './overlay/GameOverContent';
