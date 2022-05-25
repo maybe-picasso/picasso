@@ -1,9 +1,13 @@
 import { Box } from '@chakra-ui/react';
 
-const GameQuestion = () => {
+interface Props {
+  word: string;
+}
+
+const GameQuestion = ({ word }: Props) => {
   return (
     <Box bg="green.400" minWidth="100px" textAlign="center" fontWeight={600} p={2} color="white" borderRadius="6">
-      스타벅스
+      {word}
     </Box>
   );
 };

@@ -4,11 +4,11 @@ import { initialState as chatInitState } from 'store/models/chat';
 import { initialState as toolsInitState } from 'store/models/tools';
 import { initialState as gameInitState } from 'store/models/game';
 import { initialState as gamePointInitState } from 'store/models/gamePoint';
-import { RootState } from '../../../src/store';
+import { RootState } from 'store';
 import { participants } from './room';
-import { status } from './game';
 import { chatList } from './chat';
 import { QUESTIONS } from 'constants/index';
+import { GameStatus } from 'types/enums';
 
 export type MockStore = Pick<RootState, 'common' | 'room' | 'game' | 'gamePoint' | 'chat' | 'tools'>;
 
@@ -30,7 +30,12 @@ export const 룸_게임화면: MockStore = {
     userInfo: participants[0],
     participants,
   },
-  game: gameInitState,
+  game: {
+    ...gameInitState,
+    questions: QUESTIONS,
+    status: GameStatus.PLAYING,
+    time: 60,
+  },
   gamePoint: gamePointInitState,
   chat: {
     ...chatInitState,
@@ -44,7 +49,8 @@ export const 룸_게임완료: MockStore = {
   game: {
     ...룸_게임화면.game,
     questions: QUESTIONS,
-    status: status.COMPLETED,
+    status: GameStatus.COMPLETED,
+    round: QUESTIONS.length,
     time: 0,
   },
 };
@@ -53,6 +59,6 @@ export const 룸_게임종료: MockStore = {
   ...룸_게임완료,
   game: {
     ...룸_게임완료.game,
-    status: status.GAMEOVER,
+    status: GameStatus.GAMEOVER,
   },
 };

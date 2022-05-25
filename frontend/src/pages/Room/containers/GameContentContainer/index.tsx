@@ -9,15 +9,16 @@ import './index.scss';
 
 const GameContentContainer = () => {
   const { participants } = useSelector(select.room.state);
-  const { status } = useSelector(select.game.state);
+  const { status, time, questions, round } = useSelector(select.game.state);
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
+  const word = questions[round - 1];
 
   return (
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
-        <GameTimer />
-        <GameQuestion />
-        <GameRound />
+        <GameTimer time={time} />
+        <GameQuestion word={word} />
+        <GameRound round={round} totalRound={questions.length} />
       </Flex>
 
       <Flex className="body" justifyContent="center" alignItems="center">
@@ -25,7 +26,7 @@ const GameContentContainer = () => {
 
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">
-            {status === GameStatus.COMPLETED && <CompleteContent userList={participants} />}
+            {status === GameStatus.COMPLETED && <CompleteContent userList={participants} word={word} />}
             {status === GameStatus.GAMEOVER && <GameOverContent userList={participants} />}
           </Flex>
         )}
