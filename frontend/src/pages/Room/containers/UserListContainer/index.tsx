@@ -6,10 +6,13 @@ import './index.scss';
 
 const UserListContainer = () => {
   const { participants } = useSelector(select.room.state);
+  const { correctUsersPoint } = useSelector(select.gamePoint.state);
 
   return (
     <ul className="user-list">
       {participants.map(({ userId, nickName, profileIndex }) => {
+        const currectUserInfo = correctUsersPoint.find((users) => users.userId === userId);
+
         return (
           <li key={userId}>
             <Flex className="profile-wrap" bg="white" margin={2} mb={4} padding={2} borderRadius={6}>
@@ -18,7 +21,7 @@ const UserListContainer = () => {
                 <Text className="nickname" fontWeight="bold">
                   {nickName}
                 </Text>
-                <Badge colorScheme="green">0 points</Badge>
+                <Badge colorScheme={currectUserInfo ? 'green' : 'gray'}>{currectUserInfo?.point ?? 0} points</Badge>
               </Box>
             </Flex>
           </li>

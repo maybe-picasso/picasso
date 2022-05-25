@@ -6,6 +6,7 @@ import { initialState as gameInitState } from 'store/models/game';
 import { initialState as gamePointInitState } from 'store/models/gamePoint';
 import { RootState } from 'store';
 import { participants } from './room';
+import { correctUsersPoint } from './gamePoint';
 import { chatList } from './chat';
 import { QUESTIONS } from 'constants/index';
 import { GameStatus } from 'types/enums';
@@ -44,10 +45,18 @@ export const 룸_게임화면: MockStore = {
   tools: toolsInitState,
 };
 
-export const 룸_게임완료: MockStore = {
+export const 룸_게임정답자표시: MockStore = {
   ...룸_게임화면,
+  gamePoint: {
+    ...룸_게임화면.gamePoint,
+    correctUsersPoint,
+  },
+};
+
+export const 룸_게임완료: MockStore = {
+  ...룸_게임정답자표시,
   game: {
-    ...룸_게임화면.game,
+    ...룸_게임정답자표시.game,
     questions: QUESTIONS,
     status: GameStatus.COMPLETED,
     round: QUESTIONS.length,
