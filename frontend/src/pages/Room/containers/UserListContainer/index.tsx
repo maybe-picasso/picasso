@@ -27,11 +27,11 @@ const UserListContainer = () => {
               borderRadius={6}
             >
               <ProfileAvatar index={profileIndex} />
-              <Box ml="3">
+              <Box ml="3" width="100%" overflow="hidden">
                 <Text className="nickname" fontWeight="bold">
                   {nickName}
                 </Text>
-                <Badge colorScheme={currectUserInfo ? 'green' : 'gray'} minWidth={90} textAlign="right">
+                <Badge className="point" colorScheme={currectUserInfo ? 'green' : 'gray'}>
                   <span>{currectUserInfo?.point ?? 0}</span> 점
                 </Badge>
               </Box>
