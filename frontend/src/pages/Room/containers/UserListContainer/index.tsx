@@ -31,8 +31,8 @@ const UserListContainer = () => {
                 <Text className="nickname" fontWeight="bold">
                   {nickName}
                 </Text>
-                <Badge colorScheme={currectUserInfo ? 'green' : 'gray'}>
-                  <span>{currectUserInfo?.point ?? 0}</span> Points
+                <Badge colorScheme={currectUserInfo ? 'green' : 'gray'} minWidth={90} textAlign="right">
+                  <span>{currectUserInfo?.point ?? 0}</span> 점
                 </Badge>
               </Box>
             </Flex>
