@@ -10,6 +10,11 @@
   .profile-wrap {
     position: relative;
     padding-left: 70px;
+    border: solid 2px transparent;
+
+    &.painter {
+      border-color: var(--chakra-colors-pink-300);
+    }
 
     .profile-avatar {
       position: absolute;

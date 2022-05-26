@@ -4,6 +4,7 @@ import { GameStatus } from 'types/enums';
 
 export interface GameState {
   status: GameStatus;
+  painterId: string | null;
   questions: string[];
   round: number;
   time: number;
@@ -11,6 +12,7 @@ export interface GameState {
 
 export const initialState: GameState = {
   status: GameStatus.WAITING,
+  painterId: null,
   questions: [],
   round: 1,
   time: 60,
