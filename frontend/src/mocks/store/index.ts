@@ -13,7 +13,7 @@ import { GameStatus } from 'types/enums';
 
 export type MockStore = Pick<RootState, 'common' | 'room' | 'game' | 'gamePoint' | 'chat' | 'tools'>;
 
-export const 룸_프로필설정: MockStore = {
+export const 프로필설정: MockStore = {
   common: commonInitState,
   room: roomInitState,
   game: gameInitState,
@@ -22,7 +22,7 @@ export const 룸_프로필설정: MockStore = {
   tools: toolsInitState,
 };
 
-export const 룸_게임화면: MockStore = {
+export const 게임_기본화면: MockStore = {
   common: commonInitState,
   room: {
     ...roomInitState,
@@ -45,18 +45,27 @@ export const 룸_게임화면: MockStore = {
   tools: toolsInitState,
 };
 
-export const 룸_게임정답자표시: MockStore = {
-  ...룸_게임화면,
+export const 게임_현재페인터: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    painterId: participants[0].userId,
+  },
+  gamePoint: gamePointInitState,
+};
+
+export const 게임_정답자표시: MockStore = {
+  ...게임_기본화면,
   gamePoint: {
-    ...룸_게임화면.gamePoint,
+    ...게임_기본화면.gamePoint,
     correctUsersPoint,
   },
 };
 
-export const 룸_게임완료: MockStore = {
-  ...룸_게임정답자표시,
+export const 게임_라운드완료: MockStore = {
+  ...게임_정답자표시,
   game: {
-    ...룸_게임정답자표시.game,
+    ...게임_정답자표시.game,
     questions: QUESTIONS,
     status: GameStatus.COMPLETED,
     round: QUESTIONS.length,
@@ -64,10 +73,10 @@ export const 룸_게임완료: MockStore = {
   },
 };
 
-export const 룸_게임종료: MockStore = {
-  ...룸_게임완료,
+export const 게임_종료: MockStore = {
+  ...게임_라운드완료,
   game: {
-    ...룸_게임완료.game,
+    ...게임_라운드완료.game,
     status: GameStatus.GAMEOVER,
   },
 };
