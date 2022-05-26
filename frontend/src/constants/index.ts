@@ -14,7 +14,11 @@ export const COLORS: string[] = [
   '#ff4136', // Red
   '#85144b', // Maroon
   '#f012be', // Fuchsia
-  '#b10dc9', // Purple
+  '#b10dc9', // Purple\
+  '#F05E5F', // Pastal red
+  '#5A4B50', // Pastal brown
+  '#8BBEB4', // Pastal green
+  '#F0B85E', // Pastal yellow
 ];
 
 export const DEFAULT_LINE_SIZE: number = 3;
