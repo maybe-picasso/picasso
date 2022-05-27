@@ -1,6 +1,8 @@
 @import '~styles/modules/mixin.scss';
 
 .user-list {
+  height: 100%;
+  overflow-y: auto;
   list-style: none;
 
   li {

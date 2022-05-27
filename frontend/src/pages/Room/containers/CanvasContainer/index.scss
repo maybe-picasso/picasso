@@ -3,6 +3,7 @@
   height: 100%;
   background-color: #fff;
   border-radius: 6px;
+  aspect-ratio: 4 / 3;
 
   &:hover {
     cursor: url('./brush.svg') 0 30, pointer;

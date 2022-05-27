@@ -4,13 +4,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 1200px;
 
   .joined {
     background-color: #286381;
+
+    > div {
+      min-height: 500px;
+    }
   }
 
   .gate-container {
     height: 100vh;
     background-color: #fff;
+  }
+}
+
+.head-section {
+  min-height: 50px;
+  h2 {
+    display: flex;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 }
