@@ -41,7 +41,7 @@ const ToolsContainer = () => {
   );
 
   return (
-    <Grid h="100%" padding={1} templateRows="repeat(3, 1fr)" templateColumns="repeat(1, 1fr)">
+    <Grid h="100%" templateRows="repeat(3, 1fr)" templateColumns="repeat(1, 1fr)">
       <GridItem w="100%" mb={1} rowSpan={1} colSpan={1}>
         <Stack direction="row" spacing={2} align="center">
           {Object.keys(DrawingTools).map((name) => (
