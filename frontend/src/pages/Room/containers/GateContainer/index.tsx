@@ -64,7 +64,7 @@ const GateContainer = ({ roomId }: Props) => {
       return;
     }
 
-    const userInfo = {
+    const userInfo: Picasso.UserInfo = {
       userId: getUuid(),
       nickName,
       profileIndex,

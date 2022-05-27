@@ -4,8 +4,8 @@ import { RootModel } from './';
 export interface RoomState {
   isConnectedSocket: boolean;
   isJoined: boolean;
-  userInfo: Record<string, any> | null;
-  participants: Record<string, any>[];
+  userInfo: Picasso.UserInfo | null;
+  participants: Picasso.UserInfo[];
 }
 
 export const initialState: RoomState = {
@@ -29,11 +29,11 @@ export const room = createModel<RootModel>()({
       state.isJoined = payload;
       return state;
     },
-    setUserInfo(state, payload: Record<string, any>) {
+    setUserInfo(state, payload: Picasso.UserInfo) {
       state.userInfo = payload;
       return state;
     },
-    updateParticipants(state, payload: Record<string, any>[]) {
+    updateParticipants(state, payload: Picasso.UserInfo[]) {
       state.participants = payload;
       return state;
     },

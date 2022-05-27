@@ -1,12 +1,13 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-
 import './index.scss';
 
-const LIMIT_TIME = 99;
+interface Props {
+  time?: number;
+}
 
-const GameTimer = () => {
-  const [timeCount, setTimeCount] = useState(LIMIT_TIME);
+const GameTimer = ({ time = 60 }: Props) => {
+  const [timeCount, setTimeCount] = useState(time);
 
   useEffect(() => {
     if (timeCount === 0) return;

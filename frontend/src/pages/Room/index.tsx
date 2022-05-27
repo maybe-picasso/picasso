@@ -9,9 +9,7 @@ import PageTemplate from 'components/PageTemplate';
 import {
   SocketContainer,
   GateContainer,
-  HeaderContainer,
-  CanvasHeaderContainer,
-  CanvasContainer,
+  GameContentContainer,
   ChatContainer,
   UserListContainer,
   ToolsContainer,
@@ -47,16 +45,8 @@ const Room = () => {
                   <UserListContainer />
                 </GridItem>
 
-                <GridItem
-                  position="relative"
-                  rowSpan={{ base: 10 }}
-                  colSpan={{ base: 10 }}
-                  borderRadius={6}
-                  padding={3}
-                  bg="white"
-                >
-                  <CanvasHeaderContainer />
-                  <CanvasContainer />
+                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 10 }} borderRadius={6} bg="white">
+                  <GameContentContainer />
                 </GridItem>
 
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
