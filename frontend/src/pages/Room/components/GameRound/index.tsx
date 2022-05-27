@@ -1,7 +1,12 @@
 import { Box, Text } from '@chakra-ui/react';
 import './index.scss';
 
-const GameRound = () => {
+interface Props {
+  round: number;
+  totalRound: number;
+}
+
+const GameRound = ({ round, totalRound }: Props) => {
   return (
     <Box className="game-round" textAlign="right">
       <Text fontSize="xs" color="blackAlpha.600">
@@ -9,9 +14,9 @@ const GameRound = () => {
       </Text>
       <Text color="blackAlpha.600">
         <Text as="strong" color="blackAlpha.900">
-          5
+          {round}
         </Text>{' '}
-        / 10
+        / {totalRound}
       </Text>
     </Box>
   );

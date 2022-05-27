@@ -10,12 +10,23 @@
   .profile-wrap {
     position: relative;
     padding-left: 70px;
+    border: solid 2px transparent;
+
+    &.painter {
+      border-color: var(--chakra-colors-pink-300);
+    }
 
     .profile-avatar {
       position: absolute;
       top: -7px;
       left: -4px;
       zoom: 1.8;
+    }
+
+    .point {
+      display: inline-block;
+      width: 100%;
+      text-align: right;
     }
   }
 

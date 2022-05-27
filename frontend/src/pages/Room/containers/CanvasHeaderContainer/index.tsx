@@ -2,9 +2,9 @@ import { Flex } from '@chakra-ui/react';
 import { GameQuestion, GameRound, GameTimer } from '../../components';
 import './index.scss';
 
-const GameHeaderContainer = () => {
+const CanvasHeaderContainer = () => {
   return (
-    <Flex className="game-header-container" justifyContent="space-between">
+    <Flex className="canvas-header-container" justifyContent="space-between">
       <GameTimer />
       <GameQuestion />
       <GameRound />
@@ -12,4 +12,4 @@ const GameHeaderContainer = () => {
   );
 };
 
-export default GameHeaderContainer;
+export default CanvasHeaderContainer;

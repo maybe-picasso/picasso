@@ -1,7 +1,14 @@
-import { SocketMessageType, DrawingStatusType } from './enums';
+import { SocketMessageType, DrawingStatus } from './enums';
 
 declare global {
   namespace Picasso {
+    interface UserInfo {
+      clientId?: string;
+      userId: string;
+      nickName: string;
+      profileIndex: number;
+    }
+
     interface SocketMessage {
       roomId: string;
       senderId: string;
@@ -12,7 +19,7 @@ declare global {
 
     interface DrawingMessage extends SocketMessage {
       body: {
-        drawingStatus: DrawingStatusType;
+        drawingStatus: DrawingStatus;
         drawingMode?: string;
         lineWidth?: number;
         canvasSize?: number;
