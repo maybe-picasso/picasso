@@ -1,4 +1,3 @@
-export { default as CanvasHeaderContainer } from './CanvasHeaderContainer';
 export { default as CanvasContainer } from './CanvasContainer';
 export { default as ChatContainer } from './ChatContainer';
 export { default as GameContentContainer } from './GameContentContainer';
