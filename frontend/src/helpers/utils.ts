@@ -10,15 +10,22 @@ const THROTTLE_OPTIONS = {
 /**
  * UUID를 반환합니다.
  */
-export const getUuid = () => {
+export const getUuid = (): string => {
   return uuidv4();
 };
 
 /**
  * 룸ID에 사용할 랜덤한 단어를 반환합니다.
  */
-export const getRandomRoomId = (count: number = 1) => {
+export const getRandomRoomId = (count: number = 1): string => {
   return randomWord(count).join('-');
+};
+
+/**
+ * 최대값내에 랜덤값을 반환합니다.
+ */
+export const getRandomNumber = (max: number): number => {
+  return Math.floor(Math.random() * max);
 };
 
 /**
