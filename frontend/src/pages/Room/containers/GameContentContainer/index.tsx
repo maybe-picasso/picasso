@@ -5,19 +5,21 @@ import { CanvasContainer } from '../../containers';
 import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { GameStatus } from 'types/enums';
+import { useMyTurn } from '../../hooks';
 import './index.scss';
 
 const GameContentContainer = () => {
   const { participants } = useSelector(select.room.state);
   const { status, time, questions, round } = useSelector(select.game.state);
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
+  const isMyTurn = useMyTurn();
   const word = questions[round - 1];
 
   return (
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
         <GameTimer time={time} />
-        <GameQuestion word={word} />
+        <GameQuestion word={word} isMyTurn={isMyTurn} />
         <GameRound round={round} totalRound={questions.length} />
       </Flex>
 
