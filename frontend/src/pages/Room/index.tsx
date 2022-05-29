@@ -17,7 +17,6 @@ import {
 } from './containers';
 
 import './index.scss';
-import { useEffect } from 'react';
 
 const Room = () => {
   const { roomId = '' } = useParams();
@@ -29,17 +28,6 @@ const Room = () => {
     lg: '1024px',
     xl: '1280px',
   });
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      const $bodySection = document.querySelector('.body-section');
-      const width = window.outerWidth;
-
-      console.log('$bodySection :>> ', $bodySection, width, width / 1.77);
-
-      // $bodySection.
-    });
-  }, []);
 
   return (
     <PageTemplate id="room">
