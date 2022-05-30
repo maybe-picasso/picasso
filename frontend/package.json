@@ -4,7 +4,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
-    "@chakra-ui/storybook-addon": "^1.0.3",
+    "@chakra-ui/storybook-addon": "^3.0.2",
     "@chakra-ui/theme-tools": "^1.3.6",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -35,13 +35,13 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.22",
-    "@storybook/addon-essentials": "^6.4.22",
-    "@storybook/addon-interactions": "^6.4.22",
-    "@storybook/addon-links": "^6.4.22",
-    "@storybook/node-logger": "^6.4.22",
+    "@storybook/addon-actions": "^6.5.6",
+    "@storybook/addon-essentials": "^6.5.6",
+    "@storybook/addon-interactions": "^6.5.6",
+    "@storybook/addon-links": "^6.5.6",
+    "@storybook/node-logger": "^6.5.6",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.4.22",
+    "@storybook/react": "^6.5.6",
     "@storybook/testing-library": "^0.0.11",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^11.2.7",
