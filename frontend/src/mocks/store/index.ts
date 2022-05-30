@@ -54,8 +54,17 @@ export const 게임_현재페인터: MockStore = {
   gamePoint: gamePointInitState,
 };
 
-export const 게임_정답자표시: MockStore = {
+export const 게임_문제푸는사람: MockStore = {
   ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    painterId: participants[1].userId,
+  },
+  gamePoint: gamePointInitState,
+};
+
+export const 게임_정답자표시: MockStore = {
+  ...게임_현재페인터,
   gamePoint: {
     ...게임_기본화면.gamePoint,
     correctUsersPoint,

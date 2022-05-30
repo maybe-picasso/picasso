@@ -11,17 +11,18 @@ import {
   GateContainer,
   HeaderContainer,
   GameContentContainer,
+  GameStatusContainer,
   ChatContainer,
   UserListContainer,
   ToolsContainer,
 } from './containers';
-
+import { useMyTurn } from './hooks';
 import './index.scss';
-import { useEffect } from 'react';
 
 const Room = () => {
   const { roomId = '' } = useParams();
   const { isJoined } = useSelector(select.room.state);
+  const isMyTurn = useMyTurn();
 
   createBreakpoints({
     sm: '480px',
@@ -29,17 +30,6 @@ const Room = () => {
     lg: '1024px',
     xl: '1280px',
   });
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      const $bodySection = document.querySelector('.body-section');
-      const width = window.outerWidth;
-
-      console.log('$bodySection :>> ', $bodySection, width, width / 1.77);
-
-      // $bodySection.
-    });
-  }, []);
 
   return (
     <PageTemplate id="room">
@@ -72,8 +62,8 @@ const Room = () => {
 
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} borderRadius={6} p="10px" bg="gray.100" minHeight={150}>
-                      <ToolsContainer />
+                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
+                      {isMyTurn ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={8} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />
