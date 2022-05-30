@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, Center } from '@chakra-ui/react';
+import { Container, Grid, GridItem } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
 import { useParams } from 'react-router-dom';
@@ -11,19 +11,18 @@ import {
   GateContainer,
   HeaderContainer,
   GameContentContainer,
+  GameStatusContainer,
   ChatContainer,
   UserListContainer,
   ToolsContainer,
 } from './containers';
-import { useMyTurn, usePainterInfo } from './hooks';
-
+import { useMyTurn } from './hooks';
 import './index.scss';
 
 const Room = () => {
   const { roomId = '' } = useParams();
   const { isJoined } = useSelector(select.room.state);
   const isMyTurn = useMyTurn();
-  const painterInfo = usePainterInfo();
 
   createBreakpoints({
     sm: '480px',
@@ -63,14 +62,8 @@ const Room = () => {
 
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} borderRadius={6} p="10px" bg="gray.100" minHeight={150}>
-                      {isMyTurn ? (
-                        <ToolsContainer />
-                      ) : (
-                        <Center height="100%" bg="tomato" color="white">
-                          {painterInfo?.nickName} 님이 그림을 그리고 있습니다.
-                        </Center>
-                      )}
+                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
+                      {isMyTurn ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={8} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />

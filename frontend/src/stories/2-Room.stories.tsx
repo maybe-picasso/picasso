@@ -27,7 +27,7 @@ export const GameProfileStory: StoryObj = {
 };
 
 export const GameDefaultStory: StoryObj = {
-  name: '게임 화면',
+  name: '게임 대기 화면',
   render: () => <Room />,
   decorators: [router, withRedux(게임_기본화면)],
 };
