@@ -4,14 +4,20 @@
   height: 100%;
   overflow-y: auto;
   list-style: none;
+  padding: 10px;
 
   li {
     position: relative;
+
+    + li {
+      margin-top: 10px;
+    }
   }
 
   .profile-wrap {
     position: relative;
     padding-left: 60px;
+    margin: 0;
     border: solid 2px transparent;
 
     &.painter {
