@@ -80,7 +80,10 @@ export const 게임_라운드완료: MockStore = {
     round: QUESTIONS.length,
     time: 0,
   },
-};
+  gamePoint: {
+    ...게임_기본화면.gamePoint,
+    correctUsersPoint,
+  },};
 
 export const 게임_종료: MockStore = {
   ...게임_라운드완료,
