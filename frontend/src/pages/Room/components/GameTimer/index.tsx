@@ -1,5 +1,8 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import useSound from 'use-sound';
+
+import tickTock from '../../../../assets/sound/tick-tock.mp3';
 import './index.scss';
 
 interface Props {
@@ -18,6 +21,24 @@ const GameTimer = ({ time = 60 }: Props) => {
   // 10초 미만시 강조 컬러
   const isNeedSpeedUp = timeCount < 10;
   const isTimeout = timeCount === 0;
+
+  const [play, { stop }] = useSound(tickTock, {
+    playbackRate: 2,
+    interrupt: true,
+  });
+
+  useEffect(() => {
+    if (isNeedSpeedUp && !isTimeout) {
+      play({
+        forceSoundEnabled: true,
+      });
+    } else {
+      stop();
+    }
+    return () => {
+      stop();
+    };
+  }, [isNeedSpeedUp, isTimeout, play, stop]);
 
   return (
     <Box className="game-timer">

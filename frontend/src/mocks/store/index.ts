@@ -89,3 +89,13 @@ export const 게임_종료: MockStore = {
     status: GameStatus.GAMEOVER,
   },
 };
+
+export const 게임_서둘러: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    painterId: participants[1].userId,
+    time: 10,
+  },
+  gamePoint: gamePointInitState,
+};

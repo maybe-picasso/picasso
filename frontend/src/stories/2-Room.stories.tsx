@@ -6,6 +6,7 @@ import {
   게임_기본화면,
   게임_현재페인터,
   게임_문제푸는사람,
+  게임_서둘러,
   게임_정답자표시,
   게임_라운드완료,
   게임_종료,
@@ -60,4 +61,10 @@ export const GamePlayerStory: StoryObj = {
   name: '게임 문제 푸는 사람',
   render: () => <Room />,
   decorators: [router, withRedux(게임_문제푸는사람)],
+};
+
+export const GamePlayerHurryUpStory: StoryObj = {
+  name: '게임 서둘러!',
+  render: () => <Room />,
+  decorators: [router, withRedux(게임_서둘러)],
 };
