@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Box, Heading, Text, Badge } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-
 import { ProfileAvatar } from 'pages/Room/components';
 
 import './index.scss';
@@ -31,12 +30,13 @@ const CompleteContent = ({ userList, word }: Props) => {
         <ul className="round-result-rank">
           {userList.map(({ nickName, userId, profileIndex }) => {
             const currectUserInfo = correctUsersPoint.find((users) => users.userId === userId);
-
             return (
               <li key={userId}>
                 <div className="rank-name">
-                  <ProfileAvatar size={25} index={profileIndex} />
-                  <strong>{nickName}</strong>
+                  <ProfileAvatar size={20} index={profileIndex} />
+                  <Text m={2} color={currectUserInfo ? 'green.400' : 'black'} as="strong">
+                    {nickName} {currectUserInfo && '🎉'}
+                  </Text>
                 </div>
                 <Badge className="rank-score" colorScheme={currectUserInfo ? 'green' : 'gray'}>
                   <span>{currectUserInfo?.point ?? 0}</span> 점
