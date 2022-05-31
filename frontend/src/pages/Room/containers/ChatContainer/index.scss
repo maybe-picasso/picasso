@@ -37,6 +37,16 @@
     @include ellipsis();
   }
 
+  .body {
+    display: inline-block;
+    white-space: pre-line;
+    word-break: break-all;
+    padding: 5px 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
   .mine {
     position: relative;
     &::after {
@@ -64,17 +74,7 @@
     .body {
       float: right;
       background: var(--chakra-colors-yellow-300);
-      white-space: pre-line;
-      word-break: break-all;
-      font-size: 14px;
     }
-  }
-
-  .body {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #fff;
-    border-radius: 5px;
   }
 }
 
