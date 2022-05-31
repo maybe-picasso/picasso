@@ -31,7 +31,7 @@ const UserListContainer = () => {
                 <Text className="nickname" fontWeight="bold">
                   {nickName}
                 </Text>
-                <Badge className="point" colorScheme={currectUserInfo ? 'green' : 'gray'}>
+                <Badge className="point" borderRadius={4} colorScheme={currectUserInfo ? 'green' : 'gray'}>
                   <span>{currectUserInfo?.point ?? 0}</span> 점
                 </Badge>
               </Box>

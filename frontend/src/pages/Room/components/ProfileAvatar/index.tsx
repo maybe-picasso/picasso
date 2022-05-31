@@ -6,7 +6,7 @@ interface Props {
   size?: number;
 }
 
-const ProfileAvatar = ({ index = 0, size = 45 }: Props) => {
+const ProfileAvatar = ({ index = 0, size = 40 }: Props) => {
   return (
     <div className="profile-avatar" style={{ width: `${size}px`, fontSize: `${size}px` }}>
       {PROFILE_CHARACTERS[index]}
