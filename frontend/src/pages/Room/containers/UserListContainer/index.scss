@@ -4,25 +4,45 @@
   height: 100%;
   overflow-y: auto;
   list-style: none;
+  padding: 10px;
 
   li {
     position: relative;
+
+    + li {
+      margin-top: 10px;
+    }
   }
 
   .profile-wrap {
     position: relative;
-    padding-left: 70px;
+    padding-left: 60px;
+    margin: 0;
     border: solid 2px transparent;
 
     &.painter {
       border-color: var(--chakra-colors-pink-300);
+
+      .profile-avatar {
+        zoom: 1.5;
+        left: 4px;
+        animation: avatarShake 0.4s infinite linear alternate;
+      }
+    }
+
+    @keyframes avatarShake {
+      0% {
+        transform: rotate(-8deg);
+      }
+      0% {
+        transform: rotate(8deg);
+      }
     }
 
     .profile-avatar {
       position: absolute;
-      top: -7px;
-      left: -4px;
-      zoom: 1.8;
+      top: 0;
+      left: 12px;
     }
 
     .point {
