@@ -3,10 +3,15 @@ import './index.scss';
 
 interface Props {
   index: number;
+  size?: number;
 }
 
-const ProfileAvatar = ({ index = 0 }: Props) => {
-  return <div className="profile-avatar">{PROFILE_CHARACTERS[index]}</div>;
+const ProfileAvatar = ({ index = 0, size = 40 }: Props) => {
+  return (
+    <div className="profile-avatar" style={{ width: `${size}px`, fontSize: `${size}px` }}>
+      {PROFILE_CHARACTERS[index]}
+    </div>
+  );
 };
 
 export default ProfileAvatar;
