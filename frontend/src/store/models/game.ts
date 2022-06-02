@@ -34,6 +34,10 @@ export const game = createModel<RootModel>()({
       state.questions = payload;
       return state;
     },
+    setPainterId(state, payload: string) {
+      state.painterId = payload;
+      return state;
+    },
     setRound(state, payload: number) {
       state.round = payload;
       return state;
@@ -48,27 +52,33 @@ export const game = createModel<RootModel>()({
     },
   },
   effects: (dispatch) => ({
-    init({ questions }: Pick<GameState, 'questions'>, state) {
-      state.game.status = GameStatus.WAITING;
+    init({ questions }: Pick<GameState, 'questions'>, rootState) {
+      const { game } = rootState;
+      game.status = GameStatus.STANDBY;
       dispatch.game.setQuestions(questions);
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
     },
-    play(dispatch, state) {
+    play(payload, rootState) {
       dispatch.game.setStatus(GameStatus.PLAYING);
     },
-    complete(dispatch, state) {
+    complete(payload, rootState) {
       dispatch.game.setStatus(GameStatus.COMPLETED);
     },
-    nextQuestion(_, state) {
-      const { game } = state;
-      dispatch.game.setRound(game.round + 1);
+    nextQuestion(payload, rootState) {
+      const { game, room } = rootState;
+      const nextRound = game.round + 1;
+      const nextPainterId = room.participants[nextRound].userId;
+
+      dispatch.game.setRound(nextRound);
       dispatch.game.setTime(initialState.time);
+      dispatch.game.setPainterId(nextPainterId);
+
       // TODO: 사용자 프로필 점수 반영 처리
       dispatch.gamePoint.resetCorrectUserPoint();
     },
-    finish(dispatch, state) {
-      const { game } = state;
+    finish(payload, rootState) {
+      const { game } = rootState;
       dispatch.game.setStatus(GameStatus.GAMEOVER);
       dispatch.game.setRound(game.questions.length);
     },
