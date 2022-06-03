@@ -46,6 +46,7 @@ const ChatContainer = () => {
     });
 
     const { userId, nickName } = userInfo;
+    dispatch.game.checkUserAnswer(message.trim());
     dispatch.chat.addChat({
       ...body,
       isMine: true,

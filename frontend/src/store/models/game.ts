@@ -1,6 +1,7 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
 import { GameStatus } from 'types/enums';
+import { compare } from 'helpers/utils';
 
 export interface GameState {
   status: GameStatus;
@@ -88,6 +89,14 @@ export const game = createModel<RootModel>()({
 
       // TODO: 사용자 프로필 점수 반영 처리
       dispatch.gamePoint.resetCorrectUserPoint();
+    },
+    checkUserAnswer(payload: string, rootState) {
+      const { game } = rootState;
+      const { questions, round } = game;
+      const currentQuestion = questions[round - 1];
+      const isCorrect = compare(currentQuestion, payload);
+
+      console.log('isCorrect :>> ', isCorrect, round, currentQuestion, payload);
     },
   }),
 });
