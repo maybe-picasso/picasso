@@ -83,7 +83,8 @@ export const 게임_라운드완료: MockStore = {
   gamePoint: {
     ...게임_기본화면.gamePoint,
     correctUsersPoint,
-  },};
+  },
+};
 
 export const 게임_종료: MockStore = {
   ...게임_라운드완료,
@@ -93,11 +94,23 @@ export const 게임_종료: MockStore = {
   },
 };
 
+export const 게임_마지막라운드: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    painterId: participants[4].userId,
+    round: 10,
+    time: 3,
+  },
+  gamePoint: gamePointInitState,
+};
+
 export const 게임_서둘러: MockStore = {
   ...게임_기본화면,
   game: {
     ...게임_기본화면.game,
-    painterId: participants[1].userId,
+    painterId: participants[4].userId,
+    round: 5,
     time: 10,
   },
   gamePoint: gamePointInitState,

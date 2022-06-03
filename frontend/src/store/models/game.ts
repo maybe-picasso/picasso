@@ -59,16 +59,28 @@ export const game = createModel<RootModel>()({
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
     },
-    play(payload, rootState) {
+    play() {
       dispatch.game.setStatus(GameStatus.PLAYING);
     },
-    complete(payload, rootState) {
+    complete() {
       dispatch.game.setStatus(GameStatus.COMPLETED);
     },
-    nextQuestion(payload, rootState) {
+    finish() {
+      dispatch.game.setStatus(GameStatus.GAMEOVER);
+    },
+    nextQuestion(_, rootState) {
       const { game, room } = rootState;
+      const { participants } = room;
       const nextRound = game.round + 1;
-      const nextPainterId = room.participants[nextRound].userId;
+      const nextPainterIndex = nextRound - 1;
+      const nextPainterId =
+        participants[nextPainterIndex]?.userId ??
+        participants[(nextPainterIndex - participants.length) % participants.length].userId; // 사용자 수보다 라운드가 커질때 순차 탐색 연산 처리
+
+      if (nextRound > game.questions.length) {
+        dispatch.game.finish();
+        return;
+      }
 
       dispatch.game.setRound(nextRound);
       dispatch.game.setTime(initialState.time);
@@ -76,11 +88,6 @@ export const game = createModel<RootModel>()({
 
       // TODO: 사용자 프로필 점수 반영 처리
       dispatch.gamePoint.resetCorrectUserPoint();
-    },
-    finish(payload, rootState) {
-      const { game } = rootState;
-      dispatch.game.setStatus(GameStatus.GAMEOVER);
-      dispatch.game.setRound(game.questions.length);
     },
   }),
 });

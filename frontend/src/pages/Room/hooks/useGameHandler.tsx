@@ -26,8 +26,6 @@ const useGameHandler = () => {
       clearInterval(timer);
     };
   }, [status, time, dispatch]);
-
-  return null;
 };
 
 export default useGameHandler;
