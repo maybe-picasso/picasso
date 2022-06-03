@@ -17,7 +17,8 @@ export enum DrawingStatus {
 }
 
 export enum GameStatus {
-  WAITING = 'WAITING', // 게임 시작 대기
+  WAITING = 'WAITING', // 참여자 대기
+  STANDBY = 'STANDBY', // 게임 시작 조건 만족 후 게임 시작 전 상태
   PLAYING = 'PLAYING', // 게임 진행중
   COMPLETED = 'COMPLETED', // 한 단어 완료
   GAMEOVER = 'GAMEOVER', // 게임 종료

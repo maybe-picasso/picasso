@@ -5,7 +5,7 @@ import { usePainterInfo } from '../../hooks';
 const GameStatusContainer = () => {
   const painterInfo = usePainterInfo();
   return (
-    <Center height="100%" bg="gray.500" color="white" borderRadius={6}>
+    <Center height="100%" p={3} bg="gray.500" color="white" borderRadius={6}>
       <VStack>
         {painterInfo ? (
           <>
