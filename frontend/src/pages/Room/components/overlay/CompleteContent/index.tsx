@@ -11,12 +11,13 @@ interface Props {
   word: string;
 }
 
+const variants = {
+  initial: { opacity: 0, y: 30, scale: 0.85 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+};
+
 const CompleteContent = ({ userList, word }: Props) => {
-  const { correctUsersPoint } = useSelector(select.gamePoint.state);
-  const variants = {
-    initial: { opacity: 0, y: 30, scale: 0.85 },
-    visible: { opacity: 1, y: 0, scale: 1 },
-  };
+  const { correctUserList } = useSelector(select.gamePoint.state);
   return (
     <motion.div initial="initial" animate="visible" variants={variants} transition={{ duration: 0.3 }}>
       <Heading mb={5} color="white" textAlign="center">
@@ -29,7 +30,7 @@ const CompleteContent = ({ userList, word }: Props) => {
       <Box bgColor="white" borderRadius={6} padding={6}>
         <ul className="round-result-rank">
           {userList.map(({ nickName, userId, profileIndex }) => {
-            const currectUserInfo = correctUsersPoint.find((users) => users.userId === userId);
+            const currectUserInfo = correctUserList.find((user) => user.userId === userId);
             return (
               <li key={userId}>
                 <div className="rank-name">

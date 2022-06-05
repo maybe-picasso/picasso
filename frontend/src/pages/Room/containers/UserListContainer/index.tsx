@@ -8,12 +8,12 @@ import './index.scss';
 const UserListContainer = () => {
   const { participants } = useSelector(select.room.state);
   const { painterId } = useSelector(select.game.state);
-  const { correctUsersPoint } = useSelector(select.gamePoint.state);
+  const { correctUserList } = useSelector(select.gamePoint.state);
 
   return (
     <ul className="user-list">
-      {participants.map(({ userId, nickName, profileIndex }) => {
-        const currectUserInfo = correctUsersPoint.find((users) => users.userId === userId);
+      {participants.map(({ userId, nickName, profileIndex, point = 0 }) => {
+        const currectUserInfo = correctUserList.find((user) => user.userId === userId);
         const isPainter = painterId === userId;
 
         return (
@@ -32,7 +32,7 @@ const UserListContainer = () => {
                   {nickName}
                 </Text>
                 <Badge className="point" borderRadius={4} colorScheme={currectUserInfo ? 'green' : 'gray'}>
-                  <span>{currectUserInfo?.point ?? 0}</span> 점
+                  <span>{point}</span> 점
                 </Badge>
               </Box>
             </Flex>

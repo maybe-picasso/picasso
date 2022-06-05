@@ -6,7 +6,7 @@ import { initialState as gameInitState } from 'store/models/game';
 import { initialState as gamePointInitState } from 'store/models/gamePoint';
 import { RootState } from 'store';
 import { participants } from './room';
-import { correctUsersPoint } from './gamePoint';
+import { correctUserList } from './gamePoint';
 import { chatList } from './chat';
 import { QUESTIONS } from 'constants/index';
 import { GameStatus } from 'types/enums';
@@ -67,7 +67,7 @@ export const 게임_정답자표시: MockStore = {
   ...게임_현재페인터,
   gamePoint: {
     ...게임_기본화면.gamePoint,
-    correctUsersPoint,
+    correctUserList,
   },
 };
 
@@ -82,7 +82,7 @@ export const 게임_라운드완료: MockStore = {
   },
   gamePoint: {
     ...게임_기본화면.gamePoint,
-    correctUsersPoint,
+    correctUserList,
   },
 };
 

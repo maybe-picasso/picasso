@@ -86,17 +86,17 @@ export const game = createModel<RootModel>()({
       dispatch.game.setRound(nextRound);
       dispatch.game.setTime(initialState.time);
       dispatch.game.setPainterId(nextPainterId);
-
-      // TODO: 사용자 프로필 점수 반영 처리
-      dispatch.gamePoint.resetCorrectUserPoint();
+      dispatch.gamePoint.resetCorrectUserInfo();
     },
-    checkUserAnswer(payload: string, rootState) {
+    checkUserAnswer({ userId, text }: { userId: string; text: string }, rootState) {
       const { game } = rootState;
-      const { questions, round } = game;
+      const { questions, round, time } = game;
       const currentQuestion = questions[round - 1];
-      const isCorrect = compare(currentQuestion, payload);
+      const isCorrect = compare(currentQuestion, text);
 
-      console.log('isCorrect :>> ', isCorrect, round, currentQuestion, payload);
+      if (isCorrect && time) {
+        dispatch.gamePoint.correctUser({ userId });
+      }
     },
   }),
 });
