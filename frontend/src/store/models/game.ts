@@ -90,9 +90,14 @@ export const game = createModel<RootModel>()({
     },
     checkUserAnswer({ userId, text }: { userId: string; text: string }, rootState) {
       const { game } = rootState;
-      const { questions, round, time } = game;
+      const { questions, round, time, painterId } = game;
       const currentQuestion = questions[round - 1];
       const isCorrect = compare(currentQuestion, text);
+
+      // 페인터가 입력한 정답 무시
+      if (painterId === userId) {
+        return;
+      }
 
       if (isCorrect && time) {
         dispatch.gamePoint.correctUser({ userId });
