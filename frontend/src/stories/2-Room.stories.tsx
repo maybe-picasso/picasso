@@ -9,6 +9,7 @@ import {
   게임_서둘러,
   게임_정답자표시,
   게임_라운드완료,
+  게임_마지막라운드,
   게임_종료,
 } from 'mocks/store';
 import PATHS from 'routes/paths';
@@ -55,6 +56,12 @@ export const GameOverStory: StoryObj = {
   name: '게임 전체 라운드 종료',
   render: () => <Room />,
   decorators: [router, withRedux(게임_종료)],
+};
+
+export const GameLastRoundStory: StoryObj = {
+  name: '게임 마지막 라운드',
+  render: () => <Room />,
+  decorators: [router, withRedux(게임_마지막라운드)],
 };
 
 export const GamePlayerStory: StoryObj = {

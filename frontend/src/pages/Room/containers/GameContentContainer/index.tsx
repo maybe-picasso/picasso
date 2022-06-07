@@ -18,7 +18,7 @@ const GameContentContainer = () => {
   return (
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
-        <GameTimer time={time} />
+        <GameTimer timeCount={time} />
         <GameQuestion word={word} isMyTurn={isMyTurn} />
         <GameRound round={round} totalRound={questions.length} />
       </Flex>

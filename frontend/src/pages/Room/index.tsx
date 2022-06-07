@@ -16,13 +16,14 @@ import {
   UserListContainer,
   ToolsContainer,
 } from './containers';
-import { useMyTurn } from './hooks';
+import { useMyTurn, useGameHandler } from './hooks';
 import './index.scss';
 
 const Room = () => {
   const { roomId = '' } = useParams();
   const { isJoined } = useSelector(select.room.state);
   const isMyTurn = useMyTurn();
+  useGameHandler();
 
   createBreakpoints({
     sm: '480px',
