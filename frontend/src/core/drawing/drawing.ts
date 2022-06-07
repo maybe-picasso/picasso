@@ -1,16 +1,21 @@
-import { DrawingCore, DrawingConstructorParams } from './drawing-core';
+import { DrawingCore, DrawingConstructorParams, DrawParams } from './drawing-core';
 import { sendMessage } from 'core/socket';
 import { DrawingStatus, SocketMessageType } from 'types/enums';
 import event from 'core/event';
 
 type MouseEventHandler = (e: MouseEvent) => void;
+type KeyboardEventHandler = (e: KeyboardEvent) => void;
 
 export class Drawing extends DrawingCore {
   private enabled = false;
   private isDragging = false;
+  private drawCommandQueue: DrawParams[][] = [];
+  private currentDrawCommand: DrawParams[] = [];
+  private redoDrawingStack: DrawParams[][] = [];
   private mouseDownHandler: MouseEventHandler | null = null;
   private mouseMoveHandler: MouseEventHandler | null = null;
   private mouseUpHandler: MouseEventHandler | null = null;
+  private keyDownHandler: KeyboardEventHandler | null = null;
 
   constructor(params: DrawingConstructorParams) {
     super(params);
@@ -21,6 +26,7 @@ export class Drawing extends DrawingCore {
     this.mouseDownHandler = this.onMouseDown.bind(this);
     this.mouseMoveHandler = this.onMouseMove.bind(this);
     this.mouseUpHandler = this.onMouseUp.bind(this);
+    this.keyDownHandler = this.onKeyDown.bind(this);
     this.bindSocketEventHandler();
   }
 
@@ -29,6 +35,7 @@ export class Drawing extends DrawingCore {
     this.isDragging = true;
     this.startPoint = this.getPoint(e);
     this.start();
+    this.currentDrawCommand = [];
 
     const { size, color, mode } = this.getConfig();
 
@@ -51,13 +58,16 @@ export class Drawing extends DrawingCore {
     }
 
     this.currentPoint = this.getPoint(e);
-    this.draw({
+    const drawingCommand = {
       context: this.context,
       config: this.config,
       startPoint: this.startPoint,
       currentPoint: this.currentPoint,
-    });
+    };
+    this.draw(drawingCommand);
     this.startPoint = this.currentPoint;
+
+    this.currentDrawCommand.push(drawingCommand);
 
     sendMessage({
       type: SocketMessageType.DRAWING,
@@ -68,10 +78,63 @@ export class Drawing extends DrawingCore {
     });
   }
 
+  undo() {
+    const drawing = this.drawCommandQueue.pop();
+
+    // []가 들어있는 경우가 있어서, 유효한 커맨드가 존재할때까지 반복
+    if (drawing?.length === 0 && this.drawCommandQueue.length > 0) {
+      this.undo();
+    } else if (drawing) {
+      this.redoDrawingStack.push(drawing);
+    }
+
+    this.restoreDraw();
+
+    sendMessage({
+      type: SocketMessageType.DRAWING,
+      body: {
+        drawingStatus: DrawingStatus.REDO,
+      },
+    });
+  }
+
+  redo() {
+    const drawing = this.redoDrawingStack.pop();
+
+    // []가 들어있는 경우가 있어서, 유효한 커맨드가 존재할때까지 반복
+    if (drawing?.length === 0 && this.redoDrawingStack.length > 0) {
+      this.redo();
+    } else if (drawing) {
+      this.drawCommandQueue.push(drawing);
+    }
+
+    this.restoreDraw();
+
+    sendMessage({
+      type: SocketMessageType.DRAWING,
+      body: {
+        drawingStatus: DrawingStatus.REDO,
+      },
+    });
+  }
+
+  restoreDraw() {
+    this.clear();
+    this.drawCommandQueue.forEach((drawing) => {
+      this.context.beginPath();
+      drawing.forEach((drawingParams, i) => {
+        this.draw(drawingParams);
+      });
+      this.context.closePath();
+    });
+  }
+
   onMouseUp(e: MouseEvent) {
     console.log('onMouseUp :>> ', e);
     this.isDragging = false;
     this.end();
+    this.drawCommandQueue.push(this.currentDrawCommand);
+    this.currentDrawCommand = [];
 
     sendMessage({
       type: SocketMessageType.DRAWING,
@@ -79,6 +142,19 @@ export class Drawing extends DrawingCore {
         drawingStatus: DrawingStatus.END,
       },
     });
+  }
+
+  onKeyDown(e: KeyboardEvent) {
+    if (e.key === 'z') {
+      if (e.metaKey) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          this.redo();
+        } else {
+          this.undo();
+        }
+      }
+    }
   }
 
   clearAll() {
@@ -98,6 +174,7 @@ export class Drawing extends DrawingCore {
 
     this.enabled = true;
     this.bindMouseEventHandler();
+    this.bindKeyboardEventHandler();
   }
 
   disable() {
@@ -107,13 +184,16 @@ export class Drawing extends DrawingCore {
 
     this.enabled = false;
     this.unbindMouseEventHandler();
+    this.unbindKeyboardEventHandler();
   }
 
   dispose() {
     this.unbindMouseEventHandler();
+    this.unbindKeyboardEventHandler();
     this.mouseDownHandler = null;
     this.mouseMoveHandler = null;
     this.mouseUpHandler = null;
+    this.keyDownHandler = null;
   }
 
   bindMouseEventHandler() {
@@ -126,6 +206,14 @@ export class Drawing extends DrawingCore {
     this.canvas.addEventListener('mouseup', this.mouseUpHandler);
   }
 
+  bindKeyboardEventHandler() {
+    if (!this.keyDownHandler) {
+      return;
+    }
+
+    window.addEventListener('keydown', this.keyDownHandler);
+  }
+
   unbindMouseEventHandler() {
     if (!(this.mouseDownHandler && this.mouseMoveHandler && this.mouseUpHandler)) {
       return;
@@ -134,6 +222,14 @@ export class Drawing extends DrawingCore {
     this.canvas.removeEventListener('mousedown', this.mouseDownHandler);
     this.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
     this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
+  }
+
+  unbindKeyboardEventHandler() {
+    if (!this.keyDownHandler) {
+      return;
+    }
+
+    window.removeEventListener('keydown', this.keyDownHandler);
   }
 
   bindSocketEventHandler() {
@@ -165,6 +261,12 @@ export class Drawing extends DrawingCore {
           break;
         case DrawingStatus.CLEAR_ALL:
           this.clear();
+          break;
+        case DrawingStatus.UNDO:
+          this.undo();
+          break;
+        case DrawingStatus.REDO:
+          this.redo();
           break;
       }
     });
