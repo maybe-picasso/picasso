@@ -2,6 +2,8 @@ import { createModel } from '@rematch/core';
 import { RootModel } from './';
 import { GameStatus } from 'types/enums';
 import { compare } from 'helpers/utils';
+import { sendMessage } from 'core/socket';
+import { SocketMessageType } from 'types/enums';
 
 export interface GameState {
   status: GameStatus;
@@ -89,18 +91,28 @@ export const game = createModel<RootModel>()({
       dispatch.gamePoint.resetCorrectUserInfo();
     },
     checkUserAnswer({ userId, text }: { userId: string; text: string }, rootState) {
-      const { game } = rootState;
+      const { game, gamePoint } = rootState;
       const { questions, round, time, painterId } = game;
+      const { correctUserList } = gamePoint;
       const currentQuestion = questions[round - 1];
       const isCorrect = compare(currentQuestion, text);
+      const isExistCorrectUser = correctUserList.find((user) => user.userId === userId);
 
       // 페인터가 입력한 정답 무시
-      if (painterId === userId) {
+      // 이미 정답을 맞힌 사용자 무시
+      if (painterId === userId || isExistCorrectUser) {
         return;
       }
 
       if (isCorrect && time) {
         dispatch.gamePoint.correctUser({ userId });
+
+        sendMessage({
+          type: SocketMessageType.CORRECT_USER,
+          body: {
+            userId,
+          },
+        });
       }
     },
   }),

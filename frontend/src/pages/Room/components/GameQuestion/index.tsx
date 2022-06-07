@@ -6,6 +6,10 @@ interface Props {
 }
 
 const GameQuestion = ({ word, isBlind }: Props) => {
+  if (!word) {
+    return null;
+  }
+
   return (
     <Box bg="green.400" minWidth="100px" textAlign="center" fontWeight={600} p={2} color="white" borderRadius="6">
       {isBlind ? Array.from({ length: word.length }).fill(' O ') : word}

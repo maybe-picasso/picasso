@@ -1,6 +1,7 @@
 export enum SocketMessageType {
   CHAT = 'CHAT',
   DRAWING = 'DRAWING',
+  CORRECT_USER = 'CORRECT_USER',
 }
 
 export enum DrawingTools {

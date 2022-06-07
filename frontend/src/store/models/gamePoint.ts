@@ -37,19 +37,13 @@ export const gamePoint = createModel<RootModel>()({
   effects: (dispatch) => ({
     correctUser({ userId }, rootState) {
       const { room, game, gamePoint } = rootState;
-      const { time } = game;
       const { correctUserList } = gamePoint;
       const { participants } = room;
-      const isExistUser = correctUserList.find((user) => user.userId === userId);
+      const { time } = game;
       const ranking = correctUserList.length + 1;
       const rankingPoint = RANK_POINT_BASE[ranking < 4 ? ranking : 99];
       const participantsPoint = participants.length * 10;
       const point = time * rankingPoint + participantsPoint;
-
-      if (isExistUser) {
-        console.log('이미 정답을 맞힌 사용자입니다.');
-        return;
-      }
 
       // 현재 라운드 포인트 정보 추가
       dispatch.gamePoint.addCorrectUserInfo({
@@ -59,6 +53,7 @@ export const gamePoint = createModel<RootModel>()({
       });
 
       // 사용자의 기존 포인트 정보에 추가
+      // TODO: 서버 API로 대체 예정
       dispatch.room.updateUserPoint({
         userId,
         roundPoint: point,
