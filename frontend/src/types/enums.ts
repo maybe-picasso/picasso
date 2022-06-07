@@ -14,6 +14,8 @@ export enum DrawingStatus {
   DRAW = 'DRAW',
   END = 'END',
   CLEAR_ALL = 'CLEAR_ALL',
+  UNDO = 'UNDO',
+  REDO = 'REDO',
 }
 
 export enum GameStatus {
