@@ -123,7 +123,7 @@ export class Drawing extends DrawingCore {
     this.clear();
     this.drawCommandQueue.forEach((drawing) => {
       this.context.beginPath();
-      drawing.forEach((drawingParams, i) => {
+      drawing.forEach((drawingParams) => {
         this.draw(drawingParams);
       });
       this.context.closePath();
