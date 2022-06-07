@@ -36,6 +36,7 @@ export class Drawing extends DrawingCore {
     this.startPoint = this.getPoint(e);
     this.start();
     this.currentDrawCommand = [];
+    this.redoDrawingStack = [];
 
     const { size, color, mode } = this.getConfig();
 
