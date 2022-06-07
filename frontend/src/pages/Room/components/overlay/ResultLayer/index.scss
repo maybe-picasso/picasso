@@ -1,0 +1,46 @@
+.result-score {
+  li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    +li {
+      margin-top: 16px;
+    }
+
+    strong {
+      margin: 0 10px;
+    }
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rank-name {
+      display: flex;
+      align-items: center;
+    }
+
+    .medal {
+      min-width: 25px;
+      font-size: 25px;
+      line-height: 1;
+      transform: translate(-5px, -2px);
+    }
+
+    .avatar-wrap {
+      position: relative;
+
+      .crown {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        line-height: 1;
+      }
+    }
+  }
+}
