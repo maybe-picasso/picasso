@@ -1,4 +1,14 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Text, Badge } from '@chakra-ui/react';
+import cn from 'classnames';
+import confetti from 'canvas-confetti';
+
+import { ProfileAvatar } from 'pages/Room/components';
+import { useSelector } from 'react-redux';
+import { select } from 'store';
+
+import ResultLayer from '../ResultLayer';
+
 import './index.scss';
 
 interface Props {
@@ -6,15 +16,47 @@ interface Props {
 }
 
 const GameOverContent = ({ userList }: Props) => {
+  const { correctUserList } = useSelector(select.gamePoint.state);
+
+  useEffect(() => {
+    confetti({
+      particleCount: 100,
+      spread: 150,
+      zIndex: 1000,
+    });
+  }, []);
+
   return (
-    <Box>
-      <Heading mb={5} color="white" textAlign="center">
-        순위를 발표합니다!
-      </Heading>
-      <Box width="500px" height="400px" bgColor="white" borderRadius={6} padding={5}>
-        전체 라운드 종료후 순위 노출
-      </Box>
-    </Box>
+    <ResultLayer title="🎉 순위를 발표합니다!">
+      <ul className="result-score">
+        {userList.map(({ nickName, userId, profileIndex }, index) => {
+          const currectUserInfo = correctUserList.find((user) => user.userId === userId);
+          const isFirstUser = index === 0;
+          const isSecondUser = index === 1;
+          const isThirdUser = index === 2;
+
+          return (
+            <li key={userId} className={cn({ winner: isFirstUser })}>
+              <div className="rank-name">
+                <span className="medal">
+                  {isFirstUser && '🏅'} {isSecondUser && '🥈'} {isThirdUser && '🥉'}
+                </span>
+                <div className="avatar-wrap">
+                  <ProfileAvatar size={25} index={profileIndex} />
+                  {isFirstUser && <span className="crown">👑</span>}
+                </div>
+                <Text m={2} color="black" as="strong">
+                  {nickName} {isFirstUser && '🎉'}
+                </Text>
+              </div>
+              <Badge className="rank-score" colorScheme="gray">
+                <span>{currectUserInfo?.point ?? 0}</span> 점
+              </Badge>
+            </li>
+          );
+        })}
+      </ul>
+    </ResultLayer>
   );
 };
 
