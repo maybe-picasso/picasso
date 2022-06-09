@@ -7,9 +7,10 @@ import './index.scss';
 
 interface Props {
   timeCount?: number;
+  isWaiting: boolean;
 }
 
-const GameTimer = ({ timeCount = 60 }: Props) => {
+const GameTimer = ({ timeCount = 60, isWaiting }: Props) => {
   // 10초 미만시 강조 컬러
   const isNeedSpeedUp = timeCount < 10;
   const isTimeout = timeCount === 0;
@@ -41,7 +42,7 @@ const GameTimer = ({ timeCount = 60 }: Props) => {
         </Text>
       ) : (
         <Text fontSize="xl" fontWeight={600} color={isNeedSpeedUp ? 'red.500' : 'blackAlpha.900'}>
-          {timeCount}
+          {isWaiting ? '∞' : timeCount}
         </Text>
       )}
     </Box>

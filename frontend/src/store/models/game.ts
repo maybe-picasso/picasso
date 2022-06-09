@@ -56,11 +56,16 @@ export const game = createModel<RootModel>()({
   },
   effects: (dispatch) => ({
     init({ questions }: Pick<GameState, 'questions'>, rootState) {
-      const { game } = rootState;
-      game.status = GameStatus.STANDBY;
+      const { room } = rootState;
+      const { participants } = room;
+      dispatch.game.setStatus(GameStatus.STANDBY);
       dispatch.game.setQuestions(questions);
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
+      dispatch.game.setPainterId(participants[0].userId);
+    },
+    wait() {
+      dispatch.game.setStatus(GameStatus.WAITING);
     },
     play() {
       dispatch.game.setStatus(GameStatus.PLAYING);
