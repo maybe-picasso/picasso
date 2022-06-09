@@ -52,6 +52,10 @@ const ChatContainer = () => {
       userId,
       nickName,
     });
+    dispatch.game.checkUserAnswer({
+      userId,
+      text: message.trim(),
+    });
 
     textRef.current.value = '';
     setTimeout(() => handleScrollToBottom(), 0);

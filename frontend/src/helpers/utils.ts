@@ -34,3 +34,10 @@ export const getRandomNumber = (max: number): number => {
 export const getThrottledFunc = (func: any) => {
   return throttle(func, REPEAT_HOLD_TIME, THROTTLE_OPTIONS);
 };
+
+/**
+ * 두 값이 같은지 비교합니다.
+ */
+export const compare = (a: any, b: any) => {
+  return a === b;
+};

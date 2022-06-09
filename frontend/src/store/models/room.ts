@@ -37,5 +37,16 @@ export const room = createModel<RootModel>()({
       state.participants = payload;
       return state;
     },
+    updateUserPoint(state, { userId, roundPoint }: { userId: string; roundPoint: number }) {
+      const participants = state.participants.map((user) => {
+        if (user.userId === userId) {
+          user.point = user.point ?? 0 + roundPoint;
+        }
+        return user;
+      });
+
+      state.participants = participants;
+      return state;
+    },
   },
 });

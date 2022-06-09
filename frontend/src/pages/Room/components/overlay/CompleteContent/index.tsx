@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Text, Badge } from '@chakra-ui/react';
 import { ProfileAvatar } from 'pages/Room/components';
-import ResultLayer from '../ResultLayer'
+import ResultLayer from '../ResultLayer';
 
 import './index.scss';
 
@@ -12,21 +12,23 @@ interface Props {
 }
 
 const CompleteContent = ({ userList, word }: Props) => {
-  const { correctUsersPoint } = useSelector(select.gamePoint.state);
+  const { correctUserList } = useSelector(select.gamePoint.state);
 
   return (
     <ResultLayer
       title={
-        <>정답은
+        <>
+          정답은
           <Text m={2} color="green.300" as="span" textDecoration="underline">
             {word}
           </Text>
-          입니다!</>
+          입니다!
+        </>
       }
     >
       <ul className="result-score">
         {userList.map(({ nickName, userId, profileIndex }) => {
-          const currectUserInfo = correctUsersPoint.find((users) => users.userId === userId);
+          const currectUserInfo = correctUserList.find((user) => user.userId === userId);
           return (
             <li key={userId}>
               <div className="rank-name">

@@ -2,13 +2,17 @@ import { Box } from '@chakra-ui/react';
 
 interface Props {
   word: string;
-  isMyTurn: boolean;
+  isBlind: boolean;
 }
 
-const GameQuestion = ({ word, isMyTurn }: Props) => {
+const GameQuestion = ({ word, isBlind }: Props) => {
+  if (!word) {
+    return null;
+  }
+
   return (
     <Box bg="green.400" minWidth="100px" textAlign="center" fontWeight={600} p={2} color="white" borderRadius="6">
-      {isMyTurn ? word : Array.from({ length: word.length }).fill(' O ')}
+      {isBlind ? Array.from({ length: word.length }).fill(' O ') : word}
     </Box>
   );
 };

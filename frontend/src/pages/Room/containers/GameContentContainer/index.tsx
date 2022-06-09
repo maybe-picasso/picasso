@@ -9,9 +9,11 @@ import { useMyTurn } from '../../hooks';
 import './index.scss';
 
 const GameContentContainer = () => {
-  const { participants } = useSelector(select.room.state);
+  const { participants, userInfo } = useSelector(select.room.state);
   const { status, time, questions, round } = useSelector(select.game.state);
+  const { correctUserList } = useSelector(select.gamePoint.state);
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
+  const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
   const isMyTurn = useMyTurn();
   const word = questions[round - 1];
 
@@ -19,7 +21,7 @@ const GameContentContainer = () => {
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
         <GameTimer timeCount={time} />
-        <GameQuestion word={word} isMyTurn={isMyTurn} />
+        <GameQuestion word={word} isBlind={!isMyTurn && !isCurrectUser} />
         <GameRound round={round} totalRound={questions.length} />
       </Flex>
 
