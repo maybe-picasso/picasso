@@ -2,7 +2,7 @@ import { createModel } from '@rematch/core';
 import { RootModel } from './';
 import { COLORS, DEFAULT_LINE_SIZE, LOCAL_STORAGE } from 'constants/index';
 import { DrawingTools } from 'types/enums';
-import { deleteStorage, getStorage, setStorage } from 'helpers/storage';
+import { getStorage, setStorage } from 'helpers/storage';
 
 export interface ToolsState {
   currentTool: DrawingTools;
@@ -11,7 +11,6 @@ export interface ToolsState {
 }
 
 const { tool, color, size } = getStorage(LOCAL_STORAGE.DRAWING_TOOLS) || {};
-deleteStorage(LOCAL_STORAGE.DRAWING_TOOLS);
 
 export const initialState: ToolsState = {
   currentTool: tool || DrawingTools.PEN,
