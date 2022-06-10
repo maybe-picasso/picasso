@@ -36,3 +36,8 @@ export const PROFILE_CHARACTERS = [
 export const QUESTIONS = [
   "햄버거", "스타벅스", "녹차", "풍선껌", "수영복", "노래방", "할머니", "감기약", "아이폰", "크리스마스",
 ]
+
+export const LOCAL_STORAGE = {
+  NICK_NAME: 'nickName',
+  DRAWING_TOOLS: 'drawingTools',
+};

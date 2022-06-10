@@ -21,7 +21,8 @@ import { useMotion } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
 import { getUuid, getRandomNumber } from 'helpers/utils';
-import { PROFILE_CHARACTERS } from 'constants/index';
+import { setStorage, getStorage } from 'helpers/storage';
+import { PROFILE_CHARACTERS, LOCAL_STORAGE } from 'constants/index';
 import socket from 'core/socket';
 
 import './index.scss';
@@ -40,7 +41,7 @@ const GateContainer = ({ roomId }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
   const isNextDisabled = useMemo(() => profileIndex === PROFILE_CHARACTERS.length - 1, [profileIndex]);
-  const defaultNickName = localStorage.getItem('nickName') || '';
+  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || '';
 
   // 프로필 설정 애니메이션
   const { controls } = useMotion({ deps: [profileIndex] });
@@ -74,7 +75,7 @@ const GateContainer = ({ roomId }: Props) => {
     socket.emit('join', { roomId, userInfo });
     dispatch.room.setUserInfo(userInfo);
     dispatch.room.setJoinedState(true);
-    window.localStorage.setItem('nickName', nickName);
+    setStorage(LOCAL_STORAGE.NICK_NAME, nickName);
   }, [dispatch, roomId, profileIndex, inputRef]);
 
   const handleKeyDown = useCallback(
