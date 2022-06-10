@@ -2,10 +2,11 @@ import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/
 import { DEFAULT_LINE_SIZE } from 'constants/index';
 
 interface Props {
+  value?: number;
   onSliderChange: (val: number) => void;
 }
 
-const PaletteSlider = ({ onSliderChange }: Props) => {
+const PaletteSlider = ({ value, onSliderChange }: Props) => {
   return (
     <Slider
       aria-label="slider-ex-1"
@@ -13,6 +14,7 @@ const PaletteSlider = ({ onSliderChange }: Props) => {
       min={1}
       max={20}
       colorScheme="teal"
+      value={value}
       onChange={(val) => onSliderChange(val)}
     >
       <SliderTrack>
