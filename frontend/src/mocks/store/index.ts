@@ -45,6 +45,19 @@ export const 게임_기본화면: MockStore = {
   tools: toolsInitState,
 };
 
+export const 게임_대기화면: MockStore = {
+  ...게임_기본화면,
+  room: {
+    ...게임_기본화면.room,
+    participants: participants.slice(0, 1),
+  },
+  game: {
+    ...게임_기본화면.game,
+    status: GameStatus.WAITING,
+  },
+  gamePoint: gamePointInitState,
+};
+
 export const 게임_현재페인터: MockStore = {
   ...게임_기본화면,
   game: {

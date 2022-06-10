@@ -15,14 +15,16 @@ const GameContentContainer = () => {
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
   const isMyTurn = useMyTurn();
-  const word = questions[round - 1];
+  const isWaiting = status === GameStatus.WAITING;
+  const word = isWaiting ? '연습모드' : questions[round - 1];
+  const isBlind = !isWaiting && !isMyTurn && !isCurrectUser;
 
   return (
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
-        <GameTimer timeCount={time} />
-        <GameQuestion word={word} isBlind={!isMyTurn && !isCurrectUser} />
-        <GameRound round={round} totalRound={questions.length} />
+        <GameTimer timeCount={time} isWaiting={isWaiting} />
+        <GameQuestion word={word} isBlind={isBlind} />
+        <GameRound round={round} totalRound={questions.length} isWaiting={isWaiting} />
       </Flex>
 
       <Flex className="body" justifyContent="center" alignItems="center">
