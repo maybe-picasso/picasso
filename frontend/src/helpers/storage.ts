@@ -15,7 +15,7 @@ export function setStorage(key: string, value: any): void {
 export function getStorage(key: string): any {
   let value = localStorage[key];
   if (!value) {
-    // console.info(`localStorage에 ${key}는 없습니다.`);
+    console.info(`localStorage에 ${key}는 없습니다.`);
     return null;
   }
 
