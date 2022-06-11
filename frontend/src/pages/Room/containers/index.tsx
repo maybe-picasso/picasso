@@ -1,5 +1,6 @@
 export { default as CanvasContainer } from './CanvasContainer';
 export { default as ChatContainer } from './ChatContainer';
+export { default as DevLogContainer } from './DevLogContainer';
 export { default as GameContentContainer } from './GameContentContainer';
 export { default as GameStatusContainer } from './GameStatusContainer';
 export { default as GateContainer } from './GateContainer';

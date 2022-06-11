@@ -31,6 +31,7 @@ export const game = createModel<RootModel>()({
     state: () => slice,
     isVisibleOverlayContent: () =>
       slice(({ status }) => status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER),
+    currentQuestion: () => slice(({ questions, round }) => questions[round - 1]),
   }),
   reducers: {
     setQuestions(state, payload: string[]) {

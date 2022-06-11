@@ -15,8 +15,10 @@ import {
   ChatContainer,
   UserListContainer,
   ToolsContainer,
+  DevLogContainer,
 } from './containers';
 import { useMyTurn, useGameHandler } from './hooks';
+import { isNodeProdcution } from 'helpers/env';
 import './index.scss';
 
 const Room = () => {
@@ -55,6 +57,7 @@ const Room = () => {
               >
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 2 }} borderRadius={6} bg="gray.300" w="230px">
                   <UserListContainer />
+                  {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 10 }} borderRadius={6} bg="white">
