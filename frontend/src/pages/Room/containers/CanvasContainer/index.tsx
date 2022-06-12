@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import { useSelector } from 'react-redux';
 import { select } from 'store';
-import { useMyTurn } from '../../hooks';
+import { useMyTurn, useGameStatus } from '../../hooks';
 import { Drawing } from 'core/drawing';
-import { DrawingTools, GameStatus } from 'types/enums';
+import { DrawingTools } from 'types/enums';
 import './index.scss';
 
 export let drawing: Drawing;
@@ -14,9 +14,9 @@ const CanvasContainer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
-  const { status } = useSelector(select.game.state);
+  const { isWaiting } = useGameStatus();
   const isMyTurn = useMyTurn();
-  const isWaiting = status === GameStatus.WAITING;
+
   const isPainterMode = isMyTurn || isWaiting;
 
   useEffect(() => {
