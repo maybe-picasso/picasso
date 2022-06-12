@@ -11,7 +11,7 @@ import { drawing } from '../CanvasContainer';
 import './index.scss';
 
 const ToolsContainer = () => {
-  const { currentColor, currentTool } = useSelector(select.tools.state);
+  const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
   const dispatch = useDispatch<Dispatch>();
 
   const handleDrawingTool = useCallback(
@@ -60,7 +60,7 @@ const ToolsContainer = () => {
         </Stack>
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
-        <PaletteSlider onSliderChange={handleSlider} />
+        <PaletteSlider value={currentSize} onSliderChange={handleSlider} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
         {COLORS.map((color) => (

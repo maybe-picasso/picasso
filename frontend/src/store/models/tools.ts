@@ -1,7 +1,8 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
-import { COLORS, DEFAULT_LINE_SIZE } from 'constants/index';
+import { COLORS, DEFAULT_LINE_SIZE, LOCAL_STORAGE } from 'constants/index';
 import { DrawingTools } from 'types/enums';
+import { getStorage, setStorage } from 'helpers/storage';
 
 export interface ToolsState {
   currentTool: DrawingTools;
@@ -9,10 +10,12 @@ export interface ToolsState {
   currentSize: number;
 }
 
+const { tool, color, size } = getStorage(LOCAL_STORAGE.DRAWING_TOOLS) || {};
+
 export const initialState: ToolsState = {
-  currentTool: DrawingTools.PEN,
-  currentColor: COLORS[0],
-  currentSize: DEFAULT_LINE_SIZE,
+  currentTool: tool || DrawingTools.PEN,
+  currentColor: color || COLORS[0],
+  currentSize: size || DEFAULT_LINE_SIZE,
 };
 
 export const tools = createModel<RootModel>()({
@@ -22,16 +25,46 @@ export const tools = createModel<RootModel>()({
   }),
   reducers: {
     setTool(state, payload: DrawingTools) {
-      state.currentTool = payload;
-      return state;
+      const { currentColor, currentSize } = state;
+
+      setStorage(LOCAL_STORAGE.DRAWING_TOOLS, {
+        tool: payload,
+        color: currentColor,
+        size: currentSize,
+      });
+
+      return {
+        ...state,
+        currentTool: payload,
+      };
     },
     setColor(state, payload: string) {
-      state.currentColor = payload;
-      return state;
+      const { currentTool, currentSize } = state;
+
+      setStorage(LOCAL_STORAGE.DRAWING_TOOLS, {
+        tool: currentTool,
+        color: payload,
+        size: currentSize,
+      });
+
+      return {
+        ...state,
+        currentColor: payload,
+      };
     },
     setSize(state, payload: number) {
-      state.currentSize = payload;
-      return state;
+      const { currentTool, currentColor } = state;
+
+      setStorage(LOCAL_STORAGE.DRAWING_TOOLS, {
+        tool: currentTool,
+        color: currentColor,
+        size: payload,
+      });
+
+      return {
+        ...state,
+        currentSize: payload,
+      };
     },
   },
 });
