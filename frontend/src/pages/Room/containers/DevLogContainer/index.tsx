@@ -12,7 +12,7 @@ const DevLogContainer = () => {
 
   return (
     <div className="dev-log">
-      <h3>Dev Status</h3>
+      <h3>Game Dev Status</h3>
       <ul>
         <li>
           <strong>Socket</strong>
