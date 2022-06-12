@@ -17,13 +17,14 @@ import {
   ToolsContainer,
   DevLogContainer,
 } from './containers';
-import { useMyTurn, useGameHandler } from './hooks';
+import { useMyTurn, useGameHandler, useGameStatus } from './hooks';
 import { isNodeProdcution } from 'helpers/env';
 import './index.scss';
 
 const Room = () => {
   const { roomId = '' } = useParams();
   const { isJoined } = useSelector(select.room.state);
+  const { isWaiting } = useGameStatus();
   const isMyTurn = useMyTurn();
   useGameHandler();
 
@@ -67,7 +68,7 @@ const Room = () => {
                 <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
                     <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
-                      {isMyTurn ? <ToolsContainer /> : <GameStatusContainer />}
+                      {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={8} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />
