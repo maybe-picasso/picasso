@@ -4,18 +4,13 @@ import { GameStatus } from 'types/enums';
 
 const useGameStatus = () => {
   const { status } = useSelector(select.game.state);
-  const isWaiting = status === GameStatus.WAITING;
-  const isStandby = status === GameStatus.STANDBY;
-  const isPlaying = status === GameStatus.PLAYING;
-  const isComplete = status === GameStatus.COMPLETED;
-  const isGameOver = status === GameStatus.GAMEOVER;
 
   return {
-    isWaiting,
-    isStandby,
-    isPlaying,
-    isComplete,
-    isGameOver,
+    isWaiting: status === GameStatus.WAITING,
+    isStandby: status === GameStatus.STANDBY,
+    isPlaying: status === GameStatus.PLAYING,
+    isComplete: status === GameStatus.COMPLETED,
+    isGameOver: status === GameStatus.GAMEOVER,
   };
 };
 
