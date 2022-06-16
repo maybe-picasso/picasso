@@ -1,36 +1,38 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
-import { GameStatus, SocketMessageType } from 'types/enums';
+import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
 import { drawing } from '../containers/CanvasContainer';
+import { useGameStatus } from '../hooks';
 import event from 'core/event';
 
 let timer: ReturnType<typeof setTimeout>;
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
-  const { status, time } = useSelector(select.game.state);
+  const { time } = useSelector(select.game.state);
+  const { isWaiting, isPlaying, isComplete, isGameOver } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
-    if (userCount >= 2 && status === GameStatus.WAITING) {
+    if (userCount >= 2 && isWaiting) {
       dispatch.game.init({ questions: QUESTIONS });
       // TODO: 페인터 문제 안내 작업 예정
       console.log('3초뒤 플레이됩니다.');
       setTimeout(() => {
         dispatch.game.play();
       }, 3000);
-    } else if (userCount <= 1 && status !== GameStatus.WAITING) {
+    } else if (userCount <= 1 && !isWaiting) {
       dispatch.game.wait();
     }
-  }, [userCount, status, dispatch]);
+  }, [isWaiting, userCount, dispatch]);
 
   // 게임 진행 시간별 핸들링
   useEffect(() => {
-    if (status === GameStatus.PLAYING) {
+    if (isPlaying) {
       timer = setTimeout(() => {
         if (time === 0) {
           dispatch.game.nextQuestion({});
@@ -39,14 +41,14 @@ const useGameHandler = () => {
           dispatch.game.setTime(time - 1);
         }
       }, 1000);
-    } else if (status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER) {
+    } else if (isComplete || isGameOver) {
       clearInterval(timer);
     }
 
     return () => {
       clearInterval(timer);
     };
-  }, [status, time, dispatch]);
+  }, [isPlaying, isComplete, isGameOver, time, dispatch]);
 
   // 정답자 소켓 메시지 핸들링
   useEffect(() => {

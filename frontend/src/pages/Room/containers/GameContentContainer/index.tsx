@@ -4,19 +4,19 @@ import { CanvasContainer } from '../../containers';
 
 import { useSelector } from 'react-redux';
 import { select } from 'store';
-import { GameStatus } from 'types/enums';
-import { useMyTurn } from '../../hooks';
+import { useMyTurn, useGameStatus } from '../../hooks';
 import './index.scss';
 
 const GameContentContainer = () => {
   const { participants, userInfo } = useSelector(select.room.state);
-  const { status, time, questions, round } = useSelector(select.game.state);
+  const { time, questions, round } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
+
+  const { isWaiting, isComplete, isGameOver } = useGameStatus();
   const isMyTurn = useMyTurn();
-  const isWaiting = status === GameStatus.WAITING;
-  const word = isWaiting ? '연습모드' : questions[round - 1];
+  const word = isWaiting ? '한명 더 들어오면 시작 할 수 있어!' : questions[round - 1];
   const isBlind = !isWaiting && !isMyTurn && !isCurrectUser;
 
   return (
@@ -32,8 +32,8 @@ const GameContentContainer = () => {
 
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">
-            {status === GameStatus.COMPLETED && <CompleteContent userList={participants} word={word} />}
-            {status === GameStatus.GAMEOVER && <GameOverContent userList={participants} />}
+            {isComplete && <CompleteContent userList={participants} word={word} />}
+            {isGameOver && <GameOverContent userList={participants} />}
           </Flex>
         )}
       </Flex>
