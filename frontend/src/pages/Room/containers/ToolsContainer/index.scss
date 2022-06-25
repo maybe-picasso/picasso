@@ -1,0 +1,53 @@
+.tool-type-wrap {
+  button {
+    width: 60px;
+    height: 40px;
+    font-size: 0;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+
+    // icon
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: #bbb;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+
+      &::after {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    &[data-active] {
+      background-color: #4299e1;
+
+      &::after {
+        background-color: #fff;
+        zoom: 1.1;
+      }
+    }
+  }
+
+  .PEN {
+    &::after {
+      mask: url('~assets/img/brush.svg') no-repeat 50% 50%;
+    }
+  }
+
+  .ERASER {
+    &::after {
+      mask: url('~assets/img/eraser.svg') no-repeat 50% 50%;
+    }
+  }
+
+  .CLEAR_ALL {
+    &::after {
+      mask: url('~assets/img/trash-can.svg') no-repeat 50% 50%;
+      mask-size: 80%;
+    }
+  }
+}
