@@ -6,10 +6,10 @@ import './index.scss';
 interface Props {
   isMyTurn: boolean;
   word: string;
-  painterNickName: string;
+  painterName: string;
 }
 
-const NextTurnContent = ({ isMyTurn, word, painterNickName }: Props) => {
+const NextTurnContent = ({ isMyTurn, word, painterName }: Props) => {
   const PainterText = (
     <Text as="p" lineHeight={1.5}>
       내가 그릴 차례에요!
@@ -25,7 +25,7 @@ const NextTurnContent = ({ isMyTurn, word, painterNickName }: Props) => {
   const GamerText = (
     <Text as="p" lineHeight={1.5}>
       <Text m={2} color="green.300" as="span" textDecoration="underline">
-        {painterNickName}
+        {painterName}
       </Text>
       님이 그림 그릴 차례입니다!
     </Text>
