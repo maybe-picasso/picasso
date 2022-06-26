@@ -18,8 +18,10 @@ export const initialState: GameState = {
   painterId: null,
   questions: [],
   round: 1,
-  time: 60,
+  time: 30,
 };
+
+const NEXT_ACTION_DELAY = 5000;
 
 // TODO: 점수처리 방법 고민
 // 3위까지는 남은 시간의 2배, 1.5배, 1.2배 4위 부터 1.0
@@ -62,7 +64,7 @@ export const game = createModel<RootModel>()({
     init({ questions }: Pick<GameState, 'questions'>, rootState) {
       const { room } = rootState;
       const { participants } = room;
-      dispatch.game.setStatus(GameStatus.STANDBY_TURN);
+      dispatch.game.standBy();
       dispatch.game.setQuestions(questions);
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
@@ -71,11 +73,24 @@ export const game = createModel<RootModel>()({
     wait() {
       dispatch.game.setStatus(GameStatus.WAITING);
     },
+    standBy() {
+      dispatch.game.setStatus(GameStatus.STANDBY_TURN);
+
+      // 문제 안내 후 5초뒤 게임 시작
+      setTimeout(() => {
+        dispatch.game.play();
+      }, NEXT_ACTION_DELAY);
+    },
     play() {
       dispatch.game.setStatus(GameStatus.PLAYING);
     },
     complete() {
       dispatch.game.setStatus(GameStatus.COMPLETED);
+
+      // 라운드 완료 후 5초뒤 다음 문제 안내
+      setTimeout(() => {
+        dispatch.game.nextQuestion({});
+      }, NEXT_ACTION_DELAY);
     },
     finish() {
       dispatch.game.setStatus(GameStatus.GAMEOVER);
@@ -94,6 +109,7 @@ export const game = createModel<RootModel>()({
         return;
       }
 
+      dispatch.game.standBy();
       dispatch.game.setRound(nextRound);
       dispatch.game.setTime(initialState.time);
       dispatch.game.setPainterId(nextPainterId);

@@ -20,11 +20,6 @@ const useGameHandler = () => {
   useEffect(() => {
     if (userCount >= 2 && isWaiting) {
       dispatch.game.init({ questions: QUESTIONS });
-      // TODO: 페인터 문제 안내 작업 예정
-      console.log('3초뒤 플레이됩니다.');
-      setTimeout(() => {
-        dispatch.game.play();
-      }, 3000);
     } else if (userCount <= 1 && !isWaiting) {
       dispatch.game.wait();
     }
@@ -35,7 +30,7 @@ const useGameHandler = () => {
     if (isPlaying) {
       timer = setTimeout(() => {
         if (time === 0) {
-          dispatch.game.nextQuestion({});
+          dispatch.game.complete();
           drawing.clearAll();
         } else {
           dispatch.game.setTime(time - 1);

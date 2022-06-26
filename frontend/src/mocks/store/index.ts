@@ -35,7 +35,7 @@ export const 게임_기본화면: MockStore = {
     ...gameInitState,
     questions: QUESTIONS,
     status: GameStatus.PLAYING,
-    time: 60,
+    time: 30,
   },
   gamePoint: gamePointInitState,
   chat: {
