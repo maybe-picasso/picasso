@@ -4,7 +4,7 @@ import { GameStatus } from 'types/enums';
 import { compare } from 'helpers/utils';
 import { sendMessage } from 'core/socket';
 import { SocketMessageType } from 'types/enums';
-import { drawing } from 'pages/Room/containers/CanvasContainer';
+
 export interface GameState {
   status: GameStatus;
   painterId: string | null;
@@ -82,7 +82,6 @@ export const game = createModel<RootModel>()({
       }, NEXT_ACTION_DELAY);
     },
     play() {
-      drawing.clearAll();
       dispatch.game.setStatus(GameStatus.PLAYING);
     },
     complete() {

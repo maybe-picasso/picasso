@@ -4,6 +4,7 @@ import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
 import { useGameStatus } from '../hooks';
+import { drawing } from 'pages/Room/containers/CanvasContainer';
 import event from 'core/event';
 
 let timer: ReturnType<typeof setTimeout>;
@@ -42,6 +43,13 @@ const useGameHandler = () => {
       clearInterval(timer);
     };
   }, [isPlaying, isComplete, isGameOver, time, dispatch]);
+
+  // 게임 시작시 그리기 클리어
+  useEffect(() => {
+    if (isPlaying) {
+      drawing.clearAll();
+    }
+  }, [isPlaying]);
 
   // 정답자 소켓 메시지 핸들링
   useEffect(() => {
