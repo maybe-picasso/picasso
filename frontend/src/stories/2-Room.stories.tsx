@@ -5,6 +5,8 @@ import {
   프로필설정,
   게임_기본화면,
   게임_대기화면,
+  게임_다음턴안내_출제자,
+  게임_다음턴안내_플레이어,
   게임_현재페인터,
   게임_문제푸는사람,
   게임_서둘러,
@@ -34,9 +36,14 @@ export const GameDefaultStory: StoryObj = {
   decorators: [router, withRedux(게임_대기화면)],
 };
 
-export const GameStartStory: StoryObj = {
-  name: '게임 시작 중',
-  decorators: [router, withRedux(게임_기본화면)],
+export const GameNextMyTurnStory: StoryObj = {
+  name: '게임 다음 턴 안내(출제자)',
+  decorators: [router, withRedux(게임_다음턴안내_출제자)],
+};
+
+export const GameNextTurnStory: StoryObj = {
+  name: '게임 다음 턴 안내(플레이어)',
+  decorators: [router, withRedux(게임_다음턴안내_플레이어)],
 };
 
 export const GamePainterStory: StoryObj = {

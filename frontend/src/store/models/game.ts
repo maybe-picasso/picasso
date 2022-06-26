@@ -30,7 +30,10 @@ export const game = createModel<RootModel>()({
   selectors: (slice) => ({
     state: () => slice,
     isVisibleOverlayContent: () =>
-      slice(({ status }) => status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER),
+      slice(
+        ({ status }) =>
+          status === GameStatus.STANDBY_TURN || status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER
+      ),
     currentQuestion: () => slice(({ questions, round }) => questions[round - 1]),
   }),
   reducers: {

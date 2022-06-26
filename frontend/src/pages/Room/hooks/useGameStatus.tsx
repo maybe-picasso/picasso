@@ -7,7 +7,7 @@ const useGameStatus = () => {
 
   return {
     isWaiting: status === GameStatus.WAITING,
-    isStandby: status === GameStatus.STANDBY,
+    isStandByTurn: status === GameStatus.STANDBY_TURN,
     isPlaying: status === GameStatus.PLAYING,
     isComplete: status === GameStatus.COMPLETED,
     isGameOver: status === GameStatus.GAMEOVER,

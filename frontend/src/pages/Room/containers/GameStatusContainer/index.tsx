@@ -10,7 +10,7 @@ const GameStatusContainer = () => {
         {painterInfo ? (
           <>
             <Text fontSize="3xl">🎨 {PROFILE_CHARACTERS[painterInfo.profileIndex]}</Text>
-            <Text>{painterInfo.nickName} 님이 그림을 그리고 있습니다.</Text>
+            <Text>{painterInfo.nickName} 님이 그림 그릴 차례입니다!</Text>
           </>
         ) : (
           <Text>게임 준비중입니다.</Text>
