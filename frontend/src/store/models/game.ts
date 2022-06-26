@@ -62,7 +62,7 @@ export const game = createModel<RootModel>()({
     init({ questions }: Pick<GameState, 'questions'>, rootState) {
       const { room } = rootState;
       const { participants } = room;
-      dispatch.game.setStatus(GameStatus.STANDBY);
+      dispatch.game.setStatus(GameStatus.STANDBY_TURN);
       dispatch.game.setQuestions(questions);
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);

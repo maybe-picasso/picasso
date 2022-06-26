@@ -51,6 +51,11 @@ export const GamePainterStory: StoryObj = {
   decorators: [router, withRedux(게임_현재페인터)],
 };
 
+export const GamePlayerStory: StoryObj = {
+  name: '게임 문제 푸는 사람',
+  decorators: [router, withRedux(게임_문제푸는사람)],
+};
+
 export const GameCorrectStory: StoryObj = {
   name: '게임 정답자 표시',
   decorators: [router, withRedux(게임_정답자표시)],
@@ -69,11 +74,6 @@ export const GameOverStory: StoryObj = {
 export const GameLastRoundStory: StoryObj = {
   name: '게임 마지막 라운드',
   decorators: [router, withRedux(게임_마지막라운드)],
-};
-
-export const GamePlayerStory: StoryObj = {
-  name: '게임 문제 푸는 사람',
-  decorators: [router, withRedux(게임_문제푸는사람)],
 };
 
 export const GamePlayerHurryUpStory: StoryObj = {
