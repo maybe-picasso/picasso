@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
-import { drawing } from '../containers/CanvasContainer';
 import { useGameStatus } from '../hooks';
 import event from 'core/event';
 
@@ -31,7 +30,6 @@ const useGameHandler = () => {
       timer = setTimeout(() => {
         if (time === 0) {
           dispatch.game.complete();
-          drawing.clearAll();
         } else {
           dispatch.game.setTime(time - 1);
         }
