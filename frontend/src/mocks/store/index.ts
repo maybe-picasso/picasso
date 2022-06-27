@@ -35,7 +35,7 @@ export const 게임_기본화면: MockStore = {
     ...gameInitState,
     questions: QUESTIONS,
     status: GameStatus.PLAYING,
-    time: 60,
+    time: 30,
   },
   gamePoint: gamePointInitState,
   chat: {
@@ -56,6 +56,24 @@ export const 게임_대기화면: MockStore = {
     status: GameStatus.WAITING,
   },
   gamePoint: gamePointInitState,
+};
+
+export const 게임_다음턴안내_출제자: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    status: GameStatus.STANDBY_TURN,
+    painterId: participants[0].userId,
+  },
+};
+
+export const 게임_다음턴안내_플레이어: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    status: GameStatus.STANDBY_TURN,
+    painterId: participants[1].userId,
+  },
 };
 
 export const 게임_현재페인터: MockStore = {

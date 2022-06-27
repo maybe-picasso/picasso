@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
-import { drawing } from '../containers/CanvasContainer';
 import { useGameStatus } from '../hooks';
+import { drawing } from 'pages/Room/containers/CanvasContainer';
 import event from 'core/event';
 
 let timer: ReturnType<typeof setTimeout>;
@@ -20,11 +20,6 @@ const useGameHandler = () => {
   useEffect(() => {
     if (userCount >= 2 && isWaiting) {
       dispatch.game.init({ questions: QUESTIONS });
-      // TODO: 페인터 문제 안내 작업 예정
-      console.log('3초뒤 플레이됩니다.');
-      setTimeout(() => {
-        dispatch.game.play();
-      }, 3000);
     } else if (userCount <= 1 && !isWaiting) {
       dispatch.game.wait();
     }
@@ -35,8 +30,7 @@ const useGameHandler = () => {
     if (isPlaying) {
       timer = setTimeout(() => {
         if (time === 0) {
-          dispatch.game.nextQuestion({});
-          drawing.clearAll();
+          dispatch.game.complete();
         } else {
           dispatch.game.setTime(time - 1);
         }
@@ -49,6 +43,13 @@ const useGameHandler = () => {
       clearInterval(timer);
     };
   }, [isPlaying, isComplete, isGameOver, time, dispatch]);
+
+  // 게임 시작시 그리기 클리어
+  useEffect(() => {
+    if (isPlaying) {
+      drawing.clearAll();
+    }
+  }, [isPlaying]);
 
   // 정답자 소켓 메시지 핸들링
   useEffect(() => {

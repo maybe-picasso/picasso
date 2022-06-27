@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import './index.scss';
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title: string | React.ReactNode;
 }
 
@@ -18,9 +18,11 @@ const ResultLayer = ({ children, title }: Props) => {
       <Heading mb={5} color="white" textAlign="center">
         {title}
       </Heading>
-      <Box bgColor="white" width="370px" borderRadius={6} padding={6}>
-        {children}
-      </Box>
+      {children && (
+        <Box bgColor="white" width="370px" borderRadius={6} padding={6}>
+          {children}
+        </Box>
+      )}
     </motion.div>
   );
 };

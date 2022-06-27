@@ -34,7 +34,7 @@ interface Props {
 const GateContainer = ({ roomId }: Props) => {
   const randomIndex = getRandomNumber(PROFILE_CHARACTERS.length);
   const [profileIndex, setProfileIndex] = useState(randomIndex);
-  const [drawTime, setDrawTime] = useState('60');
+  const [drawTime, setDrawTime] = useState('30');
   const [round, setRound] = useState('10');
 
   const dispatch = useDispatch<Dispatch>();
