@@ -42,16 +42,15 @@ const ToolsContainer = () => {
 
   return (
     <Grid h="100%" p="10px" templateRows="repeat(3, 1fr)" templateColumns="repeat(1, 1fr)">
-      <GridItem w="100%" mb={1} rowSpan={1} colSpan={1}>
+      <GridItem w="100%" mb={3} rowSpan={1} colSpan={1} className="tool-type-wrap">
         <Stack direction="row" spacing={2} align="center">
           {Object.keys(DrawingTools).map((name) => (
             <Button
               key={name}
+              className={name}
               isActive={name === currentTool}
-              colorScheme="teal"
               variant="outline"
               size="sm"
-              _active={{ bg: 'teal.500', color: '#fff' }}
               onClick={() => handleDrawingTool(name as DrawingTools)}
             >
               {name}
@@ -59,7 +58,7 @@ const ToolsContainer = () => {
           ))}
         </Stack>
       </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
+      <GridItem rowSpan={1} colSpan={1} mb={1}>
         <PaletteSlider value={currentSize} onSliderChange={handleSlider} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
