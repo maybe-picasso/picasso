@@ -12,6 +12,9 @@ export class Drawing extends DrawingCore {
   private drawCommandQueue: DrawParams[][] = [];
   private currentDrawCommand: DrawParams[] = [];
   private redoDrawingStack: DrawParams[][] = [];
+  private canvasSize: Picasso.CanvasSizeType | null = null;
+  private scaleX: number = 1;
+  private scaleY: number = 1;
   private mouseDownHandler: MouseEventHandler | null = null;
   private mouseMoveHandler: MouseEventHandler | null = null;
   private mouseUpHandler: MouseEventHandler | null = null;
@@ -33,6 +36,7 @@ export class Drawing extends DrawingCore {
   onMouseDown(e: MouseEvent) {
     console.log('onMouseDown :>> ', e);
     this.isDragging = true;
+    this.canvasSize = this.getCanvasSize();
     this.startPoint = this.getPoint(e);
     this.start();
     this.currentDrawCommand = [];
@@ -47,7 +51,7 @@ export class Drawing extends DrawingCore {
         drawingMode: mode,
         lineWidth: size,
         color,
-        canvasSize: this.getCanvasSize(),
+        canvasSize: this.canvasSize,
         point: this.startPoint,
       },
     });
@@ -59,15 +63,26 @@ export class Drawing extends DrawingCore {
     }
 
     this.currentPoint = this.getPoint(e);
+
+    // 캔버스 사이즈 변화에 대한 좌표 처리
+    const { scaleX, scaleY } = this.canvasSize!;
+    const startPoinByScale = {
+      x: this.startPoint.x * scaleX,
+      y: this.startPoint.y * scaleY,
+    };
+    const currentPointByScale = {
+      x: this.currentPoint.x * scaleX,
+      y: this.currentPoint.y * scaleY,
+    };
     const drawingCommand = {
       context: this.context,
       config: this.config,
-      startPoint: this.startPoint,
-      currentPoint: this.currentPoint,
+      startPoint: startPoinByScale,
+      currentPoint: currentPointByScale,
     };
+
     this.draw(drawingCommand);
     this.startPoint = this.currentPoint;
-
     this.currentDrawCommand.push(drawingCommand);
 
     sendMessage({
@@ -235,7 +250,14 @@ export class Drawing extends DrawingCore {
 
   bindSocketEventHandler() {
     event.on(SocketMessageType.DRAWING, ({ body }: Picasso.DrawingMessage) => {
-      const { drawingStatus, drawingMode, lineWidth, color, point } = body;
+      const { drawingStatus, drawingMode, lineWidth, color, point, canvasSize } = body;
+
+      // 출제자와 캔버스 사이즈 차이로 인한 좌표 보정 처리
+      if (canvasSize) {
+        this.canvasSize = this.getCanvasSize();
+        this.scaleX = this.canvasSize.width / canvasSize.scrollWidth;
+        this.scaleY = this.canvasSize.height / canvasSize.scrollHeight;
+      }
 
       switch (drawingStatus) {
         case DrawingStatus.START:
@@ -244,11 +266,17 @@ export class Drawing extends DrawingCore {
             size: lineWidth,
             color,
           });
-          this.startPoint = point;
+          this.startPoint = {
+            x: point.x * this.scaleX,
+            y: point.y * this.scaleY,
+          };
           this.start();
           break;
         case DrawingStatus.DRAW:
-          this.currentPoint = point;
+          this.currentPoint = {
+            x: point.x * this.scaleX,
+            y: point.y * this.scaleY,
+          };
           this.draw({
             context: this.context,
             config: this.config,
