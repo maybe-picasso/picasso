@@ -1,13 +1,15 @@
+import * as workerTimers from 'worker-timers';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
 import { useGameStatus } from '../hooks';
+import { clearWorkerTimer } from 'helpers/timer';
 import { drawing } from 'pages/Room/containers/CanvasContainer';
 import event from 'core/event';
 
-let timer: ReturnType<typeof setTimeout>;
+let timer: ReturnType<typeof workerTimers.setTimeout>;
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
@@ -28,7 +30,7 @@ const useGameHandler = () => {
   // 게임 진행 시간별 핸들링
   useEffect(() => {
     if (isPlaying) {
-      timer = setTimeout(() => {
+      timer = workerTimers.setTimeout(() => {
         if (time === 0) {
           dispatch.game.complete();
         } else {
@@ -36,11 +38,11 @@ const useGameHandler = () => {
         }
       }, 1000);
     } else if (isComplete || isGameOver) {
-      clearInterval(timer);
+      clearWorkerTimer(timer);
     }
 
     return () => {
-      clearInterval(timer);
+      clearWorkerTimer(timer);
     };
   }, [isPlaying, isComplete, isGameOver, time, dispatch]);
 
