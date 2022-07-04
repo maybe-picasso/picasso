@@ -59,19 +59,19 @@ const CanvasContainer = () => {
     drawing.setConfig({
       color: currentColor,
     });
-  }, [currentColor]);
+  }, [currentColor, isPainterMode]);
 
   useEffect(() => {
     drawing.setConfig({
       size: currentSize,
     });
-  }, [currentSize]);
+  }, [currentSize, isPainterMode]);
 
   useEffect(() => {
     drawing.setConfig({
       mode: currentTool,
     });
-  }, [currentTool]);
+  }, [currentTool, isPainterMode]);
 
   const isEraserTool = currentTool === DrawingTools.ERASER;
 

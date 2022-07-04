@@ -15,13 +15,22 @@ declare global {
         drawingStatus: DrawingStatus;
         drawingMode?: string;
         lineWidth?: number;
-        canvasSize?: number;
+        canvasSize?: CanvasSizeType;
         color?: string;
         point: {
           x: number;
           y: number;
         };
       };
+    }
+
+    interface CanvasSizeType {
+      width: number;
+      height: number;
+      scrollWidth: number;
+      scrollHeight: number;
+      scaleX: number;
+      scaleY: number;
     }
 
     interface UserInfo {

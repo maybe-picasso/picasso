@@ -107,11 +107,16 @@ export class DrawingCore {
     return this.config;
   }
 
-  getCanvasSize() {
-    const { width, height } = this.canvas;
+  getCanvasSize(): Picasso.CanvasSizeType {
+    const { width, height, scrollWidth, scrollHeight } = this.canvas;
+
     return {
       width,
       height,
+      scrollWidth,
+      scrollHeight,
+      scaleX: width / scrollWidth,
+      scaleY: height / scrollHeight,
     };
   }
 }
