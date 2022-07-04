@@ -1,3 +1,4 @@
+import * as workerTimers from 'worker-timers';
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
 import { GameStatus } from 'types/enums';
@@ -77,7 +78,7 @@ export const game = createModel<RootModel>()({
       dispatch.game.setStatus(GameStatus.STANDBY_TURN);
 
       // 문제 안내 후 5초뒤 게임 시작
-      setTimeout(() => {
+      workerTimers.setTimeout(() => {
         dispatch.game.play();
       }, NEXT_ACTION_DELAY);
     },
@@ -88,7 +89,7 @@ export const game = createModel<RootModel>()({
       dispatch.game.setStatus(GameStatus.COMPLETED);
 
       // 라운드 완료 후 5초뒤 다음 문제 안내
-      setTimeout(() => {
+      workerTimers.setTimeout(() => {
         dispatch.game.nextQuestion({});
       }, NEXT_ACTION_DELAY);
     },

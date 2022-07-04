@@ -1,3 +1,4 @@
+import * as workerTimers from 'worker-timers';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
@@ -7,12 +8,10 @@ import { useGameStatus } from '../hooks';
 import { drawing } from 'pages/Room/containers/CanvasContainer';
 import event from 'core/event';
 
-let timer: ReturnType<typeof setTimeout>;
-
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
   const { time } = useSelector(select.game.state);
-  const { isWaiting, isPlaying, isComplete, isGameOver } = useGameStatus();
+  const { isWaiting, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
 
@@ -27,26 +26,22 @@ const useGameHandler = () => {
 
   // 게임 진행 시간별 핸들링
   useEffect(() => {
-    if (isPlaying) {
-      timer = setTimeout(() => {
-        if (time === 0) {
-          dispatch.game.complete();
-        } else {
-          dispatch.game.setTime(time - 1);
-        }
-      }, 1000);
-    } else if (isComplete || isGameOver) {
-      clearInterval(timer);
+    if (!isPlaying) {
+      return;
     }
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, [isPlaying, isComplete, isGameOver, time, dispatch]);
+    workerTimers.setTimeout(() => {
+      if (time === 0) {
+        dispatch.game.complete();
+      } else {
+        dispatch.game.setTime(time - 1);
+      }
+    }, 1000);
+  }, [isPlaying, time, dispatch]);
 
   // 게임 시작시 그리기 클리어
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && drawing) {
       drawing.clearAll();
     }
   }, [isPlaying]);
