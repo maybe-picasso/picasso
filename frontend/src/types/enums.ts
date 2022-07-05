@@ -2,6 +2,7 @@ export enum SocketMessageType {
   CHAT = 'CHAT',
   DRAWING = 'DRAWING',
   CORRECT_USER = 'CORRECT_USER',
+  SYNC_GAME_STATUS = 'SYNC_GAME_STATUS',
 }
 
 export enum DrawingTools {
