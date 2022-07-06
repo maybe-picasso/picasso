@@ -4,18 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
 import { QUESTIONS } from 'constants/index';
-import { useGameStatus, useMyTurn } from '../hooks';
+import { useGameStatus } from '../hooks';
 import { drawing } from 'pages/Room/containers/CanvasContainer';
 import event from 'core/event';
-import { sendMessage } from 'core/socket';
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
-  const { time, painterId, status, round } = useSelector(select.game.state);
+  const { time } = useSelector(select.game.state);
   const { isWaiting, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
-  const isMyTurn = useMyTurn();
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
@@ -54,38 +52,6 @@ const useGameHandler = () => {
     event.on(SocketMessageType.CORRECT_USER, ({ body }) => {
       const { userId } = body;
       dispatch.gamePoint.correctUser({ userId });
-    });
-  }, [dispatch]);
-
-  // 진행중 입장한 유저 게임 진행 상태 싱크
-  useEffect(() => {
-    event.removeAllListeners('join');
-    event.on('join', (data) => {
-      console.log('확인 join :>> ', data);
-      if (!isWaiting && isMyTurn) {
-        sendMessage({
-          type: SocketMessageType.SYNC_GAME_STATUS,
-          body: {
-            status,
-            painterId,
-            round,
-            time,
-          },
-        });
-      }
-    });
-  }, [isWaiting, isMyTurn, painterId, round, time, status]);
-
-  useEffect(() => {
-    event.removeAllListeners(SocketMessageType.SYNC_GAME_STATUS);
-    event.on(SocketMessageType.SYNC_GAME_STATUS, ({ body }) => {
-      console.log('확인 SYNC_GAME_STATUS :>> ', body);
-      const { status, painterId, round, time } = body;
-
-      dispatch.game.setStatus(status);
-      dispatch.game.setPainterId(painterId);
-      dispatch.game.setRound(round);
-      dispatch.game.setTime(time);
     });
   }, [dispatch]);
 };

@@ -17,7 +17,7 @@ import {
   ToolsContainer,
   DevLogContainer,
 } from './containers';
-import { useMyTurn, useGameHandler, useGameStatus } from './hooks';
+import { useMyTurn, useGameHandler, useGameSync, useGameStatus } from './hooks';
 import { isNodeProdcution } from 'helpers/env';
 import './index.scss';
 
@@ -27,6 +27,7 @@ const Room = () => {
   const { isWaiting } = useGameStatus();
   const isMyTurn = useMyTurn();
   useGameHandler();
+  useGameSync();
 
   createBreakpoints({
     sm: '480px',
