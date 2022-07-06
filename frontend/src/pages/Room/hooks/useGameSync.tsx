@@ -8,7 +8,7 @@ import event from 'core/event';
 
 const useGameSync = () => {
   const { time, painterId, status, round } = useSelector(select.game.state);
-  const { isWaiting, isPlaying } = useGameStatus();
+  const { isWaiting } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const isMyTurn = useMyTurn();
 
@@ -17,9 +17,11 @@ const useGameSync = () => {
     event.removeAllListeners('join');
     event.on('join', (data) => {
       console.log('확인 join :>> ', data);
+
       if (!isWaiting && isMyTurn) {
         sendMessage({
           type: SocketMessageType.SYNC_GAME_STATUS,
+          to: data.userId,
           body: {
             painterId,
             status,
