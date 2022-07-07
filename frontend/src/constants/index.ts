@@ -22,13 +22,14 @@ export const COLORS: string[] = [
 ];
 
 export const DEFAULT_LINE_SIZE: number = 3;
+export const DEFAULT_LINE_OPACITY: number = 1;
 
 // https://emojiterra.com/animals/
 // prettier-ignore
 export const PROFILE_CHARACTERS = [
   '🐶', '🐱', '🦁', '🐰', '🦊', '🐨', '🐼', '🐯', '🐥', '🐷',
   '🐮', '🐹', '🐻‍❄️', '🐸', '🐲', '🐳', '🐙', '🐔', '🦄', '🐺',
-  '🦥', '🦦', '🦭', '🦖', '🐢', 
+  '🦥', '🦦', '🦭', '🦖', '🐢',
   '🦋', '🐛', '🐝', '🕷️', '🐌',
 ];
 

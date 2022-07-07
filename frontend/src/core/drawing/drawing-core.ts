@@ -3,6 +3,7 @@ import { DrawingTools } from 'types/enums';
 const DEFAULT_MODE = DrawingTools.PEN;
 const DEFAULT_COLOR = 'black';
 const DEFAULT_SIZE = 3;
+const DEFAULT_LINE_OPACITY = 1;
 const LINE_CAP = 'round';
 
 type Cursor = {
@@ -14,6 +15,7 @@ interface Config {
   mode: string;
   color: string;
   size: number;
+  opacity: number;
 }
 
 export interface DrawingConstructorParams {
@@ -48,6 +50,7 @@ export class DrawingCore {
     this.config = config ?? {
       size: DEFAULT_SIZE,
       color: DEFAULT_COLOR,
+      opacity: DEFAULT_LINE_OPACITY,
       mode: DEFAULT_MODE,
     };
   }
@@ -62,11 +65,12 @@ export class DrawingCore {
   }
 
   draw({ context, config, startPoint, currentPoint }: DrawParams) {
-    const { mode, size, color } = config;
+    const { mode, size, color, opacity } = config;
 
     if (mode === DrawingTools.PEN) {
       context.globalCompositeOperation = 'source-over'; // 기본 설정으로 새로운 도형을 위에 그린다.
       context.strokeStyle = color;
+      context.globalAlpha = opacity;
       context.lineWidth = size;
     } else if (mode === DrawingTools.ERASER) {
       context.globalCompositeOperation = 'destination-out'; // 새롭게 그려지는 도형이 이전 그림과 겹치는 부분을 투명하게 바꾼다.
