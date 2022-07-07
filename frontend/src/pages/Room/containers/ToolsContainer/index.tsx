@@ -67,7 +67,7 @@ const ToolsContainer = () => {
       </GridItem>
       <GridItem rowSpan={1} colSpan={1} mb={1} display="flex" alignItems='center'>
         <Text fontSize='xs' width={120}>브러쉬 크기 <strong>{currentSize}</strong></Text>
-        <PaletteSlider value={currentSize} onSliderChange={handleSliderSize} />
+        <PaletteSlider value={currentSize} max={50} onSliderChange={handleSliderSize} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1} mb={1} display="flex" alignItems='center'>
         <Text fontSize='xs' width={120}>투명도 <strong>{Math.floor(currentOpacity * 100)}%</strong></Text>

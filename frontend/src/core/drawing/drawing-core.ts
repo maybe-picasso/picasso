@@ -70,6 +70,7 @@ export class DrawingCore {
     if (mode === DrawingTools.PEN) {
       context.globalCompositeOperation = 'source-over'; // 기본 설정으로 새로운 도형을 위에 그린다.
       context.strokeStyle = color;
+      context.fillStyle = color;
       context.globalAlpha = opacity;
       context.lineWidth = size;
     } else if (mode === DrawingTools.ERASER) {

@@ -13,7 +13,7 @@ export let drawing: Drawing;
 const CanvasContainer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
-  const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
+  const { currentColor, currentTool, currentSize, currentOpacity } = useSelector(select.tools.state);
   const { isWaiting } = useGameStatus();
   const isMyTurn = useMyTurn();
 
@@ -64,8 +64,9 @@ const CanvasContainer = () => {
   useEffect(() => {
     drawing.setConfig({
       size: currentSize,
+      opacity: currentOpacity,
     });
-  }, [currentSize, isPainterMode]);
+  }, [currentSize, currentOpacity, isPainterMode]);
 
   useEffect(() => {
     drawing.setConfig({
