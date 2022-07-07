@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Grid, GridItem, Button, Stack } from '@chakra-ui/react';
+import { Grid, GridItem, Button, Stack, Text } from '@chakra-ui/react';
 import { PaletteSlider, PaletteColor } from 'pages/Room/components';
 import { COLORS } from 'constants/index';
 import { DrawingTools } from 'types/enums';
@@ -65,10 +65,12 @@ const ToolsContainer = () => {
           ))}
         </Stack>
       </GridItem>
-      <GridItem rowSpan={1} colSpan={1} mb={1}>
+      <GridItem rowSpan={1} colSpan={1} mb={1} display="flex" alignItems='center'>
+        <Text fontSize='xs' width={120}>브러쉬 크기 <strong>{currentSize}</strong></Text>
         <PaletteSlider value={currentSize} onSliderChange={handleSliderSize} />
       </GridItem>
-      <GridItem rowSpan={1} colSpan={1} mb={1}>
+      <GridItem rowSpan={1} colSpan={1} mb={1} display="flex" alignItems='center'>
+        <Text fontSize='xs' width={120}>투명도 <strong>{Math.floor(currentOpacity * 100)}%</strong></Text>
         <PaletteSlider value={currentOpacity} min={0} max={1} step={0.01} onSliderChange={handleSliderOpacity} />
       </GridItem>
       <GridItem rowSpan={1} colSpan={1}>
