@@ -21,7 +21,7 @@ const useGameSync = () => {
       if (!isWaiting && isMyTurn) {
         sendMessage({
           type: SocketMessageType.SYNC_GAME_STATUS,
-          to: data.userId,
+          to: data.userInfo.userId,
           body: {
             painterId,
             status,

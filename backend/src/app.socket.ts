@@ -70,7 +70,7 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
     if (roomId) {
       const targetRoom = this.rooms[roomId];
-      const userInfo = targetRoom.find((data) => data.clientId === clientId)[0];
+      const userInfo = targetRoom.find((data) => data.clientId === clientId);
 
       // 해당 유저 목록 제거
       this.rooms[roomId] = targetRoom.filter((data) => data.clientId !== clientId);
@@ -84,7 +84,13 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
   }
 
   private message(client: Socket, data) {
-    client.broadcast.to(data.roomId).emit('message', data);
+    if (data.to === 'all') {
+      client.broadcast.to(data.roomId).emit('message', data);
+    } else {
+      const targetRoom = this.rooms[data.roomId];
+      const userInfo = targetRoom.find((info) => info.userId === data.to);
+      client.to(userInfo.clientId).emit('message', data);
+    }
   }
 
   afterInit(server: Server) {
