@@ -16,8 +16,7 @@ const useGameSync = () => {
   useEffect(() => {
     event.removeAllListeners('join');
     event.on('join', (data) => {
-      console.log('확인 join :>> ', data);
-
+      console.log('[디버깅] join :>> ', data);
       if (!isWaiting && isMyTurn) {
         sendMessage({
           type: SocketMessageType.SYNC_GAME_STATUS,
@@ -36,13 +35,13 @@ const useGameSync = () => {
   useEffect(() => {
     event.removeAllListeners(SocketMessageType.SYNC_GAME_STATUS);
     event.on(SocketMessageType.SYNC_GAME_STATUS, ({ body }) => {
-      console.log('확인 SYNC_GAME_STATUS :>> ', body);
+      console.log('[디버깅] SYNC_GAME_STATUS :>> ', body);
       const { status, painterId, round, time } = body;
 
       dispatch.game.setPainterId(painterId);
-      dispatch.game.setStatus(status);
-      dispatch.game.setRound(round);
       dispatch.game.setTime(time);
+      dispatch.game.setRound(round);
+      dispatch.game.setStatus(status);
     });
   }, [dispatch]);
 };
