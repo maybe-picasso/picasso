@@ -51,7 +51,6 @@ const useGameHandler = () => {
     event.removeAllListeners(SocketMessageType.CORRECT_USER);
     event.on(SocketMessageType.CORRECT_USER, ({ body }) => {
       const { userId } = body;
-      console.log('SocketMessageType.CORRECT_USER :>> ', userId);
       dispatch.gamePoint.correctUser({ userId });
     });
   }, [dispatch]);
