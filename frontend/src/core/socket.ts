@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { isNodeProdcution } from 'helpers/env';
 
-const SOCKET_SERVER = isNodeProdcution ? 'ws://localhost:3000/picasso' : 'ws://localhost:3000/picasso';
+const SOCKET_SERVER = isNodeProdcution ? 'wss://maybe-picasso.herokuapp.com' : 'ws://localhost:3000/picasso';
 
 let roomId: string;
 let senderId: string;
