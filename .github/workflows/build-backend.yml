@@ -28,16 +28,11 @@ jobs:
         run: cd backend && npm install
       - name: Build Backend
         run: npm run build:be
-      - name: Deploy to Heroku
-        # You may pin to the exact commit or the version.
-        # uses: AkhileshNS/heroku-deploy@79ef2ae4ff9b897010907016b268fd0f88561820
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          # This will be used for authentication. You can find it in your heroku homepage account settings
-          heroku_api_key: 5a277c89-ad28-4b1b-8fd1-4163c06c73dd
-          # Email that you use with heroku
-          heroku_email: dodortus@gmail.com
-          # The appname to use for deploying/updating
-          heroku_app_name: maybe-picasso
-          # Set if your app is located in a subdirectory.
-          appdir: backend/dist
+      - name: Push to build branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: build-backend # The branch name where you want to push the assets
+          FOLDER: backend/dist # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: 'Build: ({sha}) {msg}' # The commit message
