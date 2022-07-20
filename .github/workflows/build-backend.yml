@@ -40,6 +40,6 @@ jobs:
           # The appname to use for deploying/updating
           heroku_app_name: maybe-picasso
           # The branch that you would like to deploy to Heroku
-          branch: feature/deploy-setting
+          branch: master
           # Set if your app is located in a subdirectory.
           appdir: backend/dist
