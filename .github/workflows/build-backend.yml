@@ -24,10 +24,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Install Backend
-        run: cd backend && npm install
-      - name: Build Backend
-        run: npm run build:be
       - name: Push to deploy branch
         uses: s0/git-publish-subdir-action@develop
         env:
