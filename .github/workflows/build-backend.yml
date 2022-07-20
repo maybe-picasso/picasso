@@ -24,9 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Move Backend
-        run: cd backend
       - name: Install Backend
-        run: npm install
+        run: cd backend && npm install
       - name: Build Backend
-        run: npm run build
+        run: npm run build:be
