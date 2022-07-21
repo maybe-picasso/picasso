@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/picasso/static/css/main.715d54df.chunk.css",
-    "main.js": "/picasso/static/js/main.52e2e51e.chunk.js",
-    "main.js.map": "/picasso/static/js/main.52e2e51e.chunk.js.map",
-    "runtime-main.js": "/picasso/static/js/runtime-main.bf4876c8.js",
-    "runtime-main.js.map": "/picasso/static/js/runtime-main.bf4876c8.js.map",
-    "static/js/2.deeca327.chunk.js": "/picasso/static/js/2.deeca327.chunk.js",
-    "static/js/2.deeca327.chunk.js.map": "/picasso/static/js/2.deeca327.chunk.js.map",
-    "static/js/3.c29f2ed0.chunk.js": "/picasso/static/js/3.c29f2ed0.chunk.js",
-    "static/js/3.c29f2ed0.chunk.js.map": "/picasso/static/js/3.c29f2ed0.chunk.js.map",
-    "index.html": "/picasso/index.html",
-    "static/css/main.715d54df.chunk.css.map": "/picasso/static/css/main.715d54df.chunk.css.map",
-    "static/js/2.deeca327.chunk.js.LICENSE.txt": "/picasso/static/js/2.deeca327.chunk.js.LICENSE.txt",
-    "static/js/3.c29f2ed0.chunk.js.LICENSE.txt": "/picasso/static/js/3.c29f2ed0.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/picasso/static/media/trash-can.fac72743.svg",
-    "static/media/tick-tock.f2342ab4.mp3": "/picasso/static/media/tick-tock.f2342ab4.mp3"
+    "main.css": "./static/css/main.73e2ee23.chunk.css",
+    "main.js": "./static/js/main.8e5983df.chunk.js",
+    "main.js.map": "./static/js/main.8e5983df.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.1d4b17bd.js",
+    "runtime-main.js.map": "./static/js/runtime-main.1d4b17bd.js.map",
+    "static/js/2.a32a78db.chunk.js": "./static/js/2.a32a78db.chunk.js",
+    "static/js/2.a32a78db.chunk.js.map": "./static/js/2.a32a78db.chunk.js.map",
+    "static/js/3.c29f2ed0.chunk.js": "./static/js/3.c29f2ed0.chunk.js",
+    "static/js/3.c29f2ed0.chunk.js.map": "./static/js/3.c29f2ed0.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.73e2ee23.chunk.css.map": "./static/css/main.73e2ee23.chunk.css.map",
+    "static/js/2.a32a78db.chunk.js.LICENSE.txt": "./static/js/2.a32a78db.chunk.js.LICENSE.txt",
+    "static/js/3.c29f2ed0.chunk.js.LICENSE.txt": "./static/js/3.c29f2ed0.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "./static/media/trash-can.fac72743.svg",
+    "static/media/tick-tock.f2342ab4.mp3": "./static/media/tick-tock.f2342ab4.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.bf4876c8.js",
-    "static/js/2.deeca327.chunk.js",
-    "static/css/main.715d54df.chunk.css",
-    "static/js/main.52e2e51e.chunk.js"
+    "static/js/runtime-main.1d4b17bd.js",
+    "static/js/2.a32a78db.chunk.js",
+    "static/css/main.73e2ee23.chunk.css",
+    "static/js/main.8e5983df.chunk.js"
   ]
 }
