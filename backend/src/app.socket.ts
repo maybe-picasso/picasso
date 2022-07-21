@@ -12,6 +12,7 @@ import {
 @WebSocketGateway({
   transports: ['websocket'],
   namespace: 'picasso',
+  cors: true
 })
 export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   constructor() {
