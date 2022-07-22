@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/picasso/static/css/main.715d54df.chunk.css",
-    "main.js": "/picasso/static/js/main.78099aed.chunk.js",
-    "main.js.map": "/picasso/static/js/main.78099aed.chunk.js.map",
+    "main.js": "/picasso/static/js/main.dc91112b.chunk.js",
+    "main.js.map": "/picasso/static/js/main.dc91112b.chunk.js.map",
     "runtime-main.js": "/picasso/static/js/runtime-main.e4186b7b.js",
     "runtime-main.js.map": "/picasso/static/js/runtime-main.e4186b7b.js.map",
     "static/js/2.9405f4b5.chunk.js": "/picasso/static/js/2.9405f4b5.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.e4186b7b.js",
     "static/js/2.9405f4b5.chunk.js",
     "static/css/main.715d54df.chunk.css",
-    "static/js/main.78099aed.chunk.js"
+    "static/js/main.dc91112b.chunk.js"
   ]
 }
