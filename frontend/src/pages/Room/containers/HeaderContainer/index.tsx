@@ -5,7 +5,7 @@ import './index.scss';
 
 const HeaderContainer = () => {
   const handleExit = useCallback(() => {
-    window.location.pathname = '';
+    window.location.href = './';
   }, []);
 
   return (
