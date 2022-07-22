@@ -13,7 +13,6 @@
     "start:be": "cd backend && npm run start:dev",
     "start:fe": "cd frontend && npm run start",
     "storybook": "cd frontend && npm run storybook",
-    "install": "scripts/install.sh",
-    "build:be": "cd backend && npm run build"
+    "install": "scripts/install.sh"
   }
 }
