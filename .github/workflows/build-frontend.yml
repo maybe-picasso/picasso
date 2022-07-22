@@ -25,6 +25,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Build
-        run: |
-          cd frontend && npm install
-          npm run deploy
+        run: cd frontend && npm install
+      - name: Deploy
+        run: cd frontend && npm run deploy
