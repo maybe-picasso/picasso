@@ -63,14 +63,15 @@
     "@types/socket.io-client": "^3.0.0",
     "@types/three": "^0.139.0",
     "@types/uuid": "^8.3.3",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "react-app-rewired": "^2.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "deploy": "gh-pages -d build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "storybook": "start-storybook -p 4005 -s public",
     "build-storybook": "build-storybook -s public"
   },
