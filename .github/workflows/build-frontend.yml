@@ -29,4 +29,7 @@ jobs:
       - name: Build
         run: cd frontend && npm run build
       - name: Deploy
-        run: cd frontend && npm run deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_ACTIONS_TOKEN }}
+          publish_dir: ./frontend/build
