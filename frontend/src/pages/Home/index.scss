@@ -1,6 +1,9 @@
+@import '~styles/modules/mixin.scss';
+
 .home-wrap {
   height: 100vh;
   width: 100vw;
+  @include primaryBackground();
 
   button {
     position: fixed;
