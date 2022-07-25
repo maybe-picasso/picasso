@@ -2,27 +2,50 @@
 
 .home-wrap {
   height: 100vh;
-  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   @include primaryBackground();
 
-  button {
-    position: fixed;
-    bottom: 50px;
-    bottom: calc(env(safe-area-inset-bottom) / 2 + 50px);
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    box-shadow: 3px 3px 20px 5px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    animation: 0.3s 2s buttonMotion ease-out forwards;
+  .room-list-wrap {
+    position: relative;
+    padding: 20px;
+    width: 380px;
+    height: 458px;
+    border-radius: 10px;
+    background-color: #fff;
 
-    @keyframes buttonMotion {
-      0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(100px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
+    h1 {
+      position: absolute;
+      top: -80px;
+      left: 0;
+    }
+
+    ul {
+      padding: 0 2px;
+      height: calc(100% - 69px);
+      list-style: none;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      button {
+        display: block;
+        margin-bottom: 10px;
+        padding: 15px 25px;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
+        font-size: 18px;
+        color: #333;
+        text-align: left;
+
+        &.active {
+          // background-color: #1d5284;
+          background-color: #85dec4;
+        }
       }
     }
   }

@@ -5,8 +5,6 @@ import {
   Stack,
   Input,
   Button,
-  RadioGroup,
-  Radio,
   Divider,
   Grid,
   GridItem,
@@ -34,9 +32,6 @@ interface Props {
 const GateContainer = ({ roomId }: Props) => {
   const randomIndex = getRandomNumber(PROFILE_CHARACTERS.length);
   const [profileIndex, setProfileIndex] = useState(randomIndex);
-  const [drawTime, setDrawTime] = useState('30');
-  const [round, setRound] = useState('10');
-
   const dispatch = useDispatch<Dispatch>();
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
