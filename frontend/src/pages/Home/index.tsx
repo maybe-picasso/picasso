@@ -39,7 +39,8 @@ const Home = () => {
             return (
               <li>
                 <button type="button" className={className} onClick={() => handleListClick(index)}>
-                  {name}
+                  <span>{name}</span>
+                  <span>{selected && '🎨'}</span>
                 </button>
               </li>
             );

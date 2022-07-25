@@ -42,9 +42,19 @@
         color: #333;
         text-align: left;
 
+        span {
+          display: inline-block;
+
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+
         &.active {
           // background-color: #1d5284;
-          background-color: #85dec4;
+          // background-color: #85dec4;
+
+          background-color: #d7dd85;
         }
       }
     }
