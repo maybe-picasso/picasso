@@ -56,3 +56,9 @@ export const LOCAL_STORAGE = {
   NICK_NAME: 'nickName',
   DRAWING_TOOLS: 'drawingTools',
 };
+
+export const MEMBER_PROFILES: string[] = [
+  'https://github.com/codejs-kr.png',
+  'https://github.com/code-sign.png',
+  'https://github.com/lotstar87.png',
+];

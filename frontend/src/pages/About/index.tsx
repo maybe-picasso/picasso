@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { Canvas } from '@react-three/fiber';
 import { TrackballControls } from '@react-three/drei'; //7.0.1 써 에러x
@@ -31,11 +30,11 @@ const About = () => {
         <TrackballControls panSpeed={0.4} minDistance={9} maxDistance={40} />
       </Canvas>
 
-      <Link to="/room/abc">
-        <Button w="250px" h="60px" colorScheme="yellow" size="lg" fontWeight="bold" variant="solid">
+      <Button w="200px" h="50px" colorScheme="yellow" size="lg" fontWeight="bold" variant="solid">
+        <a href="https://github.com/maybe-picasso/picasso" target="_blank" rel="noreferrer">
           Github
-        </Button>
-      </Link>
+        </a>
+      </Button>
     </div>
   );
 };
