@@ -28,3 +28,8 @@
   background-attachment: fixed;
   background-size: cover;
 }
+
+@mixin logoFont() {
+  font-family: 'Merriweather', serif;
+  font-family: 'Saira Semi Condensed', sans-serif;
+}
