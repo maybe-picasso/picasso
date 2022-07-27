@@ -19,11 +19,6 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
       - name: Push to deploy-backend branch
         uses: s0/git-publish-subdir-action@develop
         env:
