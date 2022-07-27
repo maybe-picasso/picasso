@@ -1,0 +1,29 @@
+@import '~styles/modules/mixin.scss';
+
+.about-wrap {
+  height: 100vh;
+  width: 100vw;
+  background: #31384c;
+
+  button {
+    position: fixed;
+    bottom: 50px;
+    bottom: calc(env(safe-area-inset-bottom) / 2 + 50px);
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    box-shadow: 3px 3px 20px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: 0.3s 2s buttonMotion ease-out forwards;
+
+    @keyframes buttonMotion {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  }
+}

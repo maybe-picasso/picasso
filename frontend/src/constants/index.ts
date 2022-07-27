@@ -1,3 +1,18 @@
+export const ROOM_LIST: Record<string, string>[] = [
+  { name: '양자리' },
+  { name: '황소자리' },
+  { name: '쌍둥이자리' },
+  { name: '게자리' },
+  { name: '사자자리' },
+  { name: '처녀자리' },
+  { name: '천칭자리' },
+  { name: '전갈자리' },
+  { name: '뱀주인자리' },
+  { name: '궁수자리' },
+  { name: '염소자리' },
+  { name: '물고기자리' },
+];
+
 export const COLORS: string[] = [
   '#000000', // Black
   '#aaaaaa', // Gray
@@ -41,3 +56,9 @@ export const LOCAL_STORAGE = {
   NICK_NAME: 'nickName',
   DRAWING_TOOLS: 'drawingTools',
 };
+
+export const MEMBER_PROFILES: string[] = [
+  'https://github.com/codejs-kr.png',
+  'https://github.com/code-sign.png',
+  'https://github.com/lotstar87.png',
+];

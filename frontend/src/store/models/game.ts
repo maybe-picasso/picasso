@@ -19,7 +19,7 @@ export const initialState: GameState = {
   painterId: null,
   questions: [],
   round: 1,
-  time: 30,
+  time: 60,
 };
 
 const NEXT_ACTION_DELAY = 5000;

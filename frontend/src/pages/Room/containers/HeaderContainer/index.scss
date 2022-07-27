@@ -1,5 +1,10 @@
+@import '~styles/modules/mixin.scss';
+
 .header-container {
   h2 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    @include logoFont();
   }
+
+  @include primaryBackground();
 }
