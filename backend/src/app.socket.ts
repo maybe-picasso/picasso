@@ -9,9 +9,9 @@ import {
   SubscribeMessage,
 } from '@nestjs/websockets';
 
-@WebSocketGateway(3001, {
+@WebSocketGateway({
   transports: ['websocket'],
-  namespace: 'picasso',
+  cors: true,
 })
 export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   constructor() {
