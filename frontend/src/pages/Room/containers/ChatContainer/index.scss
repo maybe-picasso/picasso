@@ -3,11 +3,38 @@
 // 채팅
 .chat-list-wrap {
   position: relative;
+
   ul {
     position: relative;
     padding: 10px 10px 20px 10px;
     height: 100%;
     overflow-y: auto;
+
+    &.hide-scrollbar {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    display: inline-block;
+    transform: translateX(-50%);
+    animation: chatDownMotion .6s infinite alternate ease-in-out;
+    z-index: 10;
+
+    @keyframes chatDownMotion {
+      0% {
+        transform: translate(-50%, 0);
+      }
+
+      100% {
+        transform: translate(-50%, 5px);
+      }
+    }
   }
 
   &::after {
@@ -49,6 +76,7 @@
 
   .mine {
     position: relative;
+
     &::after {
       clear: both !important;
       display: block;

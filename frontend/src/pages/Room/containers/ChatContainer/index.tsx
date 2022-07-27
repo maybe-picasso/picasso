@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 
 import { Flex, Grid, GridItem, IconButton, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
-import { ArrowUpIcon } from '@chakra-ui/icons';
+import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
 
 import { sendMessage } from 'core/socket';
 import { SocketMessageType } from 'types/enums';
@@ -15,17 +15,26 @@ const ChatContainer = () => {
   const { userInfo, participants } = useSelector(select.room.state);
   const { chatList } = useSelector(select.chat.state);
   const dispatch = useDispatch<Dispatch>();
-  const listWrapRef = useRef<HTMLDivElement>(null);
+  const chatListRef = useRef<HTMLUListElement>(null);
   const textRef = useRef<HTMLInputElement>(null);
+  const [hasScrollChat, setHasScrollChat] = useState(false);
+  const [isHideScrollbar, setIsHideScrollbar] = useState(false);
 
   const handleScrollToBottom = useCallback(() => {
-    const $listWrap = listWrapRef.current;
-    if (!$listWrap) {
+    const $chatList = chatListRef.current;
+    if (!$chatList) {
       return;
     }
 
-    $listWrap.scrollTop = $listWrap.scrollHeight;
-  }, [listWrapRef]);
+    $chatList.scrollTop = $chatList.scrollHeight;
+  }, [chatListRef]);
+
+
+  const handleScrollChat = () => {
+    if (!chatListRef.current) return;
+    const isScrollUp = chatListRef.current.scrollHeight - (chatListRef.current.scrollTop + chatListRef.current.clientHeight) > 0
+    setHasScrollChat(isScrollUp)
+  }
 
   const handleSendMessage = useCallback(() => {
     const message = textRef.current?.value;
@@ -58,7 +67,11 @@ const ChatContainer = () => {
     });
 
     textRef.current.value = '';
-    setTimeout(() => handleScrollToBottom(), 0);
+    setIsHideScrollbar(true)
+    setTimeout(() => {
+      handleScrollToBottom()
+      setIsHideScrollbar(false)
+    }, 0);
   }, [dispatch, userInfo, handleScrollToBottom]);
 
   const handleKeyUp = useCallback(
@@ -119,8 +132,8 @@ const ChatContainer = () => {
 
   return (
     <Grid h="100%" templateRows="repeat(10, 1fr)" borderRadius={6} overflow={'hidden'}>
-      <GridItem rowSpan={9} className="chat-list-wrap" ref={listWrapRef}>
-        <ul>
+      <GridItem rowSpan={9} className="chat-list-wrap" >
+        <ul ref={chatListRef} onScroll={handleScrollChat} className={cn({ "hide-scrollbar": isHideScrollbar })}>
           {chatList.map(({ isMine, nickName, message }, i) => (
             <li className={cn({ mine: isMine })} key={i}>
               <p className="nickname">{nickName}</p>
@@ -128,6 +141,16 @@ const ChatContainer = () => {
             </li>
           ))}
         </ul>
+        {hasScrollChat &&
+          <IconButton
+            aria-label="최신 대화보기"
+            size="md"
+            borderRadius={100}
+            colorScheme='teal'
+            icon={<ArrowDownIcon />}
+            onClick={handleScrollToBottom}
+          />
+        }
       </GridItem>
       <GridItem rowSpan={1}>
         <Flex h="100%" alignItems="center" p="10px">
