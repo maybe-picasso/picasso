@@ -11,9 +11,11 @@ import event from 'core/event';
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
   const { time } = useSelector(select.game.state);
+  const { correctUserList } = useSelector(select.gamePoint.state);
   const { isWaiting, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
+  const isAllUserCorrect = correctUserList.length > 0 && correctUserList.length === participants.length - 1;
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
@@ -38,6 +40,15 @@ const useGameHandler = () => {
       }
     }, 1000);
   }, [isPlaying, time, dispatch]);
+
+  // 전체 인원 조기 정답시 처리
+  useEffect(() => {
+    if (!isAllUserCorrect) {
+      return;
+    }
+
+    dispatch.game.complete();
+  }, [isAllUserCorrect, dispatch]);
 
   // 게임 시작시 그리기 클리어
   useEffect(() => {
