@@ -5,8 +5,6 @@ import {
   Stack,
   Input,
   Button,
-  RadioGroup,
-  Radio,
   Divider,
   Grid,
   GridItem,
@@ -34,9 +32,6 @@ interface Props {
 const GateContainer = ({ roomId }: Props) => {
   const randomIndex = getRandomNumber(PROFILE_CHARACTERS.length);
   const [profileIndex, setProfileIndex] = useState(randomIndex);
-  const [drawTime, setDrawTime] = useState('30');
-  const [round, setRound] = useState('10');
-
   const dispatch = useDispatch<Dispatch>();
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
@@ -140,39 +135,7 @@ const GateContainer = ({ roomId }: Props) => {
         </Stack>
 
         <Stack spacing={5} mt={50}>
-          <Heading as="h2" size="md">
-            게임 설정
-          </Heading>
-
           <Divider />
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-            <Heading as="h3" size="sm">
-              그리는 시간
-            </Heading>
-
-            <RadioGroup colorScheme="teal" onChange={setDrawTime} value={drawTime}>
-              <Stack direction="row" spacing={5}>
-                <Radio value="30">30초</Radio>
-                <Radio value="60">1분</Radio>
-                <Radio value="120">2분</Radio>
-              </Stack>
-            </RadioGroup>
-          </Grid>
-
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-            <Heading as="h3" size="sm">
-              라운드 수
-            </Heading>
-
-            <RadioGroup colorScheme="teal" onChange={setRound} value={round}>
-              <Stack direction="row" spacing={5}>
-                <Radio value="5">5</Radio>
-                <Radio value="10">10</Radio>
-                <Radio value="15">15</Radio>
-              </Stack>
-            </RadioGroup>
-          </Grid>
-
           <Button
             type="submit"
             rightIcon={<BsArrowRightCircleFill />}

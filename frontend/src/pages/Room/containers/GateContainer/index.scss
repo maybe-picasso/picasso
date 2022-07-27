@@ -4,10 +4,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   height: 100vh;
+  max-width: 100% !important;
+  @include primaryBackground();
 
   .chakra-form-control {
-    width: auto;
+    padding: 20px;
+    width: 380px;
+    border-radius: 10px;
+    background-color: #fff;
   }
 
   @include mobileDevice {
