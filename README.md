@@ -1,3 +1,6 @@
+[![Deploy Backend CI](https://github.com/maybe-picasso/picasso/actions/workflows/deploy-backend.yml/badge.svg)](https://github.com/maybe-picasso/picasso/actions/workflows/deploy-backend.yml)
+[![Deploy Frontend CI](https://github.com/maybe-picasso/picasso/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/maybe-picasso/picasso/actions/workflows/deploy-frontend.yml)
+
 # 👩‍🎨 피카소
 
 함께 만드는 피카소 프로젝트
