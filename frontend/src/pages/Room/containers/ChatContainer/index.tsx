@@ -147,6 +147,7 @@ const ChatContainer = () => {
             size="md"
             borderRadius={100}
             colorScheme='teal'
+            boxShadow='xl'
             icon={<ArrowDownIcon />}
             onClick={handleScrollToBottom}
           />
