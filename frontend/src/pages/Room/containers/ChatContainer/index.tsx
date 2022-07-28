@@ -32,7 +32,8 @@ const ChatContainer = () => {
 
   const handleScrollChat = () => {
     if (!chatListRef.current) return;
-    const isScrollUp = chatListRef.current.scrollHeight - (chatListRef.current.scrollTop + chatListRef.current.clientHeight) > 0
+    const { scrollHeight, scrollTop, clientHeight } = chatListRef.current;
+    const isScrollUp = scrollHeight !== (scrollTop + clientHeight);
     setHasScrollChat(isScrollUp)
   }
 
