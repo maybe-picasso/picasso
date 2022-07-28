@@ -42,7 +42,7 @@ const Room = () => {
 
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
-          <Grid h="100vh" templateRows="60px 1fr" bg="gray.100">
+          <Grid h="100vh" templateRows={{ base: "50px 1fr", lg: "60px 1fr" }} bg="gray.100">
             <GridItem bg="purple.400" className="head-section">
               <HeaderContainer />
             </GridItem>
@@ -53,7 +53,7 @@ const Room = () => {
                 h="100%"
                 gap={2}
                 padding={2}
-                templateRows={{ base: "auto 1fr 300px", lg: "1fr" }}
+                templateRows={{ base: "auto 1fr 330px", lg: "1fr" }}
                 templateColumns={{ base: "1fr", lg: "230px 1fr 280px" }}
                 gridAutoFlow="column"
                 justifyContent="center"
