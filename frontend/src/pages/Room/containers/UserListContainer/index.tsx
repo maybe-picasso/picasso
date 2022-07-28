@@ -11,35 +11,37 @@ const UserListContainer = () => {
   const { correctUserList } = useSelector(select.gamePoint.state);
 
   return (
-    <ul className="user-list">
-      {participants.map(({ userId, nickName, profileIndex, point = 0 }) => {
-        const currectUserInfo = correctUserList.find((user) => user.userId === userId);
-        const isPainter = painterId === userId;
+    <div className="user-list-container">
+      <ul className="user-list">
+        {participants.map(({ userId, nickName, profileIndex, point = 0 }) => {
+          const currectUserInfo = correctUserList.find((user) => user.userId === userId);
+          const isPainter = painterId === userId;
 
-        return (
-          <li key={userId}>
-            <Flex
-              className={cn('profile-wrap', { painter: isPainter })}
-              bg="white"
-              margin={2}
-              mb={4}
-              padding={2}
-              borderRadius={6}
-            >
-              <ProfileAvatar index={profileIndex} />
-              <Box ml="3" width="100%" overflow="hidden">
-                <Text className="nickname" fontWeight="bold">
-                  {nickName}
-                </Text>
-                <Badge className="point" borderRadius={4} colorScheme={currectUserInfo ? 'green' : 'gray'}>
-                  <span>{point}</span> 점
-                </Badge>
-              </Box>
-            </Flex>
-          </li>
-        );
-      })}
-    </ul>
+          return (
+            <li key={userId}>
+              <Flex
+                className={cn('profile-wrap', { painter: isPainter })}
+                bg="white"
+                margin={2}
+                mb={4}
+                padding={2}
+                borderRadius={6}
+              >
+                <ProfileAvatar index={profileIndex} />
+                <Box ml="3" width="100%" overflow="hidden">
+                  <Text className="nickname" fontWeight="bold">
+                    {nickName}
+                  </Text>
+                  <Badge className="point" borderRadius={4} colorScheme={currectUserInfo ? 'green' : 'gray'}>
+                    <span>{point}</span> 점
+                  </Badge>
+                </Box>
+              </Flex>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

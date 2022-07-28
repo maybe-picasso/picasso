@@ -42,31 +42,32 @@ const Room = () => {
 
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
-          <Grid h="100vh" templateRows="repeat(16, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
-            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400" className="head-section">
+          <Grid h="100vh" templateRows="60px 1fr" bg="gray.100">
+            <GridItem bg="purple.400" className="head-section">
               <HeaderContainer />
             </GridItem>
 
-            <GridItem rowSpan={{ base: 15 }} colSpan={{ base: 15 }} className="body-section">
+            <GridItem className="body-section">
               <Grid
                 w="100%"
                 h="100%"
                 gap={2}
                 padding={2}
-                templateRows="repeat(10, 1fr)"
+                templateRows={{ base: "auto 1fr 300px", lg: "1fr" }}
+                templateColumns={{ base: "1fr", lg: "230px 1fr 280px" }}
                 gridAutoFlow="column"
                 justifyContent="center"
               >
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 2 }} borderRadius={6} bg="gray.300" w="230px">
+                <GridItem borderRadius={6} bg={{ base: "", lg: "gray.300" }} >
                   <UserListContainer />
                   {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 10 }} borderRadius={6} bg="white">
+                <GridItem borderRadius={6} bg="white">
                   <GameContentContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
+                <GridItem >
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
                     <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
                       {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
