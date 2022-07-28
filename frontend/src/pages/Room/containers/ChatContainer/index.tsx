@@ -29,7 +29,6 @@ const ChatContainer = () => {
     $chatList.scrollTop = $chatList.scrollHeight;
   }, [chatListRef]);
 
-
   const handleScrollChat = () => {
     if (!chatListRef.current) return;
     const { scrollHeight, scrollTop, clientHeight } = chatListRef.current;
@@ -125,6 +124,11 @@ const ChatContainer = () => {
     },
     [dispatch, findParticipantInfo, handleScrollToBottom]
   );
+
+  useEffect(() => {
+    window.addEventListener('resize', handleScrollChat);
+    return () => window.removeEventListener('resize', handleScrollChat);
+  }, [])
 
   useEffect(() => {
     event.removeAllListeners(SocketMessageType.CHAT);
