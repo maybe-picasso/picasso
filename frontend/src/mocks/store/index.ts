@@ -58,6 +58,14 @@ export const 게임_대기화면: MockStore = {
   gamePoint: gamePointInitState,
 };
 
+export const 게임_유저목록로딩: MockStore = {
+  ...게임_대기화면,
+  room: {
+    ...게임_대기화면.room,
+    participants: [],
+  },
+};
+
 export const 게임_다음턴안내_출제자: MockStore = {
   ...게임_기본화면,
   game: {

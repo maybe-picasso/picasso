@@ -3,7 +3,7 @@ import { withRouter, withRedux } from '../../.storybook/decorators';
 import { Room } from 'pages';
 import {
   프로필설정,
-  게임_기본화면,
+  게임_유저목록로딩,
   게임_대기화면,
   게임_다음턴안내_출제자,
   게임_다음턴안내_플레이어,
@@ -29,6 +29,11 @@ const router = withRouter({
 export const GameProfileStory: StoryObj = {
   name: '프로필 설정',
   decorators: [router, withRedux(프로필설정)],
+};
+
+export const GameLoadingStory: StoryObj = {
+  name: '게임 진입 로딩',
+  decorators: [router, withRedux(게임_유저목록로딩)],
 };
 
 export const GameDefaultStory: StoryObj = {
