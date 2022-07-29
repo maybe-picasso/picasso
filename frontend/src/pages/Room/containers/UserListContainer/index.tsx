@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { select } from 'store';
 import { Flex, Box, Badge, Text } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 import { ProfileAvatar } from 'pages/Room/components';
 import cn from 'classnames';
 import './index.scss';
@@ -9,6 +10,18 @@ const UserListContainer = () => {
   const { participants } = useSelector(select.room.state);
   const { painterId } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
+
+  if (!participants.length) {
+    return (
+      <ul className="user-list">
+        {Array.from({ length: 1 }).map((_, index) => (
+          <li key={index}>
+            <Skeleton height="68px" borderRadius={6} startColor="gray.500" />
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <div className="user-list-container">
