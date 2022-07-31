@@ -11,8 +11,16 @@ const GameQuestion = ({ word, isBlind }: Props) => {
   }
 
   return (
-    <Box bg="green.400" minWidth="100px" textAlign="center" fontWeight={600} p={2} color="white" borderRadius="6">
-      {isBlind ? Array.from({ length: word.length }).fill(' O ') : word}
+    <Box
+      bg="green.400"
+      minWidth="100px"
+      textAlign="center"
+      fontWeight={600}
+      p="10px 20px"
+      color="white"
+      borderRadius="6"
+    >
+      {isBlind ? Array.from({ length: word.length }).fill(' _ ') : word}
     </Box>
   );
 };
