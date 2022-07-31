@@ -103,7 +103,7 @@ export const 게임_문제푸는사람: MockStore = {
 };
 
 export const 게임_정답자표시: MockStore = {
-  ...게임_현재페인터,
+  ...게임_기본화면,
   gamePoint: {
     ...게임_기본화면.gamePoint,
     correctUserList,
