@@ -54,19 +54,20 @@ const Room = () => {
                 gap={2}
                 padding={2}
                 templateRows="repeat(10, 1fr)"
-                gridAutoFlow="column"
+                templateColumns="repeat(10, 1fr)"
+                gridAutoFlow={{ base: "row", lg: "column" }}
                 justifyContent="center"
               >
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 2 }} borderRadius={6} bg="gray.300" w="230px">
+                <GridItem rowSpan={{ base: 1, lg: 10 }} colSpan={{ base: 10, lg: 2 }} borderRadius={6} bg="gray.300" minWidth="230px">
                   <UserListContainer />
                   {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 10 }} borderRadius={6} bg="white">
+                <GridItem rowSpan={{ base: 4, lg: 10 }} colSpan={{ base: 10, lg: 6 }} borderRadius={6} bg="white">
                   <GameContentContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 10 }} colSpan={{ base: 3 }} w="280px">
+                <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 2 }} minWidth="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
                     <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
                       {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}

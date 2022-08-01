@@ -6,11 +6,23 @@
   list-style: none;
   padding: 10px;
 
+  @include mobileDevice {
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+
   li {
     position: relative;
 
-    + li {
+    +li {
       margin-top: 10px;
+
+      @include mobileDevice {
+        margin: 0 0 0 4px;
+      }
     }
   }
 
@@ -20,6 +32,16 @@
     margin: 0;
     border: solid 2px transparent;
 
+    @include mobileDevice {
+      padding: 5px 5px 5px 30px;
+    }
+
+    .profile-avatar {
+      @include mobileDevice {
+        zoom: 0.7;
+      }
+    }
+
     &.painter {
       border-color: var(--chakra-colors-pink-300);
 
@@ -27,6 +49,10 @@
         zoom: 1.5;
         left: 4px;
         animation: avatarShake 0.4s infinite linear alternate;
+
+        @include mobileDevice {
+          zoom: 0.9;
+        }
       }
     }
 
@@ -34,6 +60,7 @@
       0% {
         transform: rotate(-8deg);
       }
+
       0% {
         transform: rotate(8deg);
       }
@@ -54,5 +81,9 @@
 
   .nickname {
     @include ellipsis();
+
+    @include mobileDevice {
+      font-size: 13px;
+    }
   }
 }
