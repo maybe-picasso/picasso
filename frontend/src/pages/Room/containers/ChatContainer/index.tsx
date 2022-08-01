@@ -33,8 +33,8 @@ const ChatContainer = () => {
     if (!chatListRef.current) return;
     const { scrollHeight, scrollTop, clientHeight } = chatListRef.current;
     const isScrollUp = scrollHeight !== Math.ceil(scrollTop + clientHeight);
-    setHasScrollChat(isScrollUp)
-  }
+    setHasScrollChat(isScrollUp);
+  };
 
   const handleSendMessage = useCallback(() => {
     const message = textRef.current?.value;
@@ -67,10 +67,10 @@ const ChatContainer = () => {
     });
 
     textRef.current.value = '';
-    setIsHideScrollbar(true)
+    setIsHideScrollbar(true);
     setTimeout(() => {
-      handleScrollToBottom()
-      setIsHideScrollbar(false)
+      handleScrollToBottom();
+      setIsHideScrollbar(false);
     }, 0);
   }, [dispatch, userInfo, handleScrollToBottom]);
 
@@ -119,16 +119,19 @@ const ChatContainer = () => {
           message,
         });
 
-        setTimeout(() => handleScrollToBottom(), 0);
+        // 위로 스크롤중이라면 상대방 메시지가 왔을때 스크롤 아래로 이동하는 액션 제외
+        if (!hasScrollChat) {
+          handleScrollToBottom();
+        }
       }
     },
-    [dispatch, findParticipantInfo, handleScrollToBottom]
+    [dispatch, findParticipantInfo, handleScrollToBottom, hasScrollChat]
   );
 
   useEffect(() => {
     window.addEventListener('resize', handleScrollChat);
     return () => window.removeEventListener('resize', handleScrollChat);
-  }, [])
+  }, []);
 
   useEffect(() => {
     event.removeAllListeners(SocketMessageType.CHAT);
@@ -137,8 +140,8 @@ const ChatContainer = () => {
 
   return (
     <Grid h="100%" templateRows="repeat(10, 1fr)" borderRadius={6} overflow={'hidden'}>
-      <GridItem rowSpan={9} className="chat-list-wrap" >
-        <ul ref={chatListRef} onScroll={handleScrollChat} className={cn({ "hide-scrollbar": isHideScrollbar })}>
+      <GridItem rowSpan={9} className="chat-list-wrap">
+        <ul ref={chatListRef} onScroll={handleScrollChat} className={cn({ 'hide-scrollbar': isHideScrollbar })}>
           {chatList.map(({ isMine, nickName, message }, i) => (
             <li className={cn({ mine: isMine })} key={i}>
               <p className="nickname">{nickName}</p>
@@ -146,17 +149,17 @@ const ChatContainer = () => {
             </li>
           ))}
         </ul>
-        {hasScrollChat &&
+        {hasScrollChat && (
           <IconButton
             aria-label="최신 대화보기"
             size="md"
             borderRadius={100}
-            colorScheme='teal'
-            boxShadow='xl'
+            colorScheme="teal"
+            boxShadow="xl"
             icon={<ArrowDownIcon />}
             onClick={handleScrollToBottom}
           />
-        }
+        )}
       </GridItem>
       <GridItem rowSpan={1}>
         <Flex h="100%" alignItems="center" p="10px">
