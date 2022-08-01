@@ -19,7 +19,7 @@ const CanvasContainer = () => {
 
   const isPainterMode = isMyTurn || isWaiting;
 
-  useEffect(() => {
+  const handleCanvasSize = () => {
     if (!canvasRef.current) {
       return;
     }
@@ -37,6 +37,7 @@ const CanvasContainer = () => {
       height: canvas.clientHeight,
     });
 
+
     if (!drawing) {
       drawing = new Drawing({
         canvas,
@@ -45,7 +46,17 @@ const CanvasContainer = () => {
     }
 
     drawing.enable();
-  }, []);
+    drawing.restoreDraw();
+  }
+
+
+  useEffect(() => {
+    handleCanvasSize();
+
+    window.addEventListener('resize', handleCanvasSize);
+    return () => window.removeEventListener('resize', handleCanvasSize);
+  }, [])
+
 
   useEffect(() => {
     if (isPainterMode) {
