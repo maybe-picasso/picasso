@@ -17,6 +17,13 @@
     height: 100vh;
     background-color: #fff;
   }
+
+  // 모바일디바이스에서 상태 숨김
+  .hide-status {
+    @include mobileDevice {
+      display: none;
+    }
+  }
 }
 
 .head-section {

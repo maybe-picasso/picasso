@@ -1,5 +1,6 @@
-import { Container, Grid, GridItem } from '@chakra-ui/react';
+import { Container, Grid, GridItem, useBreakpoint } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import cn from 'classnames';
 
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -69,10 +70,10 @@ const Room = () => {
 
                 <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 2 }} minWidth="280px">
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={150}>
+                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={{ base: 90, lg: 150 }} className={cn({ "hide-status": !(isMyTurn || isWaiting) })}>
                       {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
-                    <GridItem rowSpan={8} colSpan={3} borderRadius={6} bg="gray.300">
+                    <GridItem rowSpan={{ base: 10, lg: 8 }} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />
                     </GridItem>
                   </Grid>
