@@ -37,7 +37,6 @@ const CanvasContainer = () => {
       height: canvas.clientHeight,
     });
 
-
     if (!drawing) {
       drawing = new Drawing({
         canvas,
@@ -46,9 +45,7 @@ const CanvasContainer = () => {
     }
 
     drawing.enable();
-    drawing.restoreDraw();
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     if (isPainterMode) {

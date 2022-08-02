@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, useBreakpoint } from '@chakra-ui/react';
+import { Container, Grid, GridItem } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import cn from 'classnames';
 
@@ -55,22 +55,38 @@ const Room = () => {
                 gap={2}
                 padding={2}
                 templateRows="repeat(10, 1fr)"
-                templateColumns="repeat(10, 1fr)"
-                gridAutoFlow={{ base: "row", lg: "column" }}
+                // templateColumns={{ base: 'repeat(10, 1fr)', lg: 'auto' }}
+                gridAutoFlow={{ base: 'row', lg: 'column' }}
                 justifyContent="center"
               >
-                <GridItem rowSpan={{ base: 1, lg: 10 }} colSpan={{ base: 10, lg: 2 }} borderRadius={6} bg="gray.300" minWidth="230px">
+                <GridItem
+                  rowSpan={{ base: 1, lg: 10 }}
+                  colSpan={{ base: 10, lg: 2 }}
+                  borderRadius={6}
+                  bg="gray.300"
+                  minWidth="230px"
+                >
                   <UserListContainer />
                   {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 5, lg: 10 }} maxHeight={{ lg: "50vw" }} colSpan={{ base: 10, lg: 6 }} borderRadius={6} bg="white">
+                <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 10 }} borderRadius={6} bg="white">
                   <GameContentContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 4, lg: 10 }} colSpan={{ base: 10, lg: 2 }} minWidth="280px">
+                <GridItem
+                  rowSpan={{ base: 4, lg: 10 }}
+                  colSpan={{ base: 10, lg: 3 }}
+                  width={{ base: '100%', lg: '280px' }}
+                >
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={{ base: 90, lg: 150 }} className={cn({ "hide-status": !(isMyTurn || isWaiting) })}>
+                    <GridItem
+                      rowSpan={2}
+                      colSpan={3}
+                      bg="gray.100"
+                      minHeight={{ base: 90, lg: 150 }}
+                      className={cn({ 'hide-status': !(isMyTurn || isWaiting) })}
+                    >
                       {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={{ base: 10, lg: 8 }} colSpan={3} borderRadius={6} bg="gray.300">
