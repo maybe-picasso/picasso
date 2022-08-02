@@ -41,31 +41,40 @@ const ToolsContainer = () => {
   );
 
   return (
-    <Grid h="100%" p={{ base: 0, lg: "10px" }} >
+    <Grid
+      h="100%"
+      p={{ base: 0, lg: '10px 10px 0' }}
+      templateRows={{ base: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
+      templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(1, 1fr)' }}
+    >
+      <GridItem rowSpan={2} colSpan={1}>
+        <Grid
+          templateRows={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
+          templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(1, 1fr)' }}
+        >
+          <GridItem w="100%" rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, lg: 1 }} className="tool-type-wrap">
+            <Stack direction="row" spacing={2} align="center">
+              {Object.keys(DrawingTools).map((name) => (
+                <Button
+                  key={name}
+                  className={name}
+                  isActive={name === currentTool}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleDrawingTool(name as DrawingTools)}
+                >
+                  {name}
+                </Button>
+              ))}
+            </Stack>
+          </GridItem>
+          <GridItem rowSpan={{ base: 2, lg: 1 }} colSpan={{ base: 1, lg: 1 }}>
+            <PaletteSlider value={currentSize} onSliderChange={handleSlider} />
+          </GridItem>
+        </Grid>
+      </GridItem>
 
-      <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(2, 1fr)">
-        <GridItem w="100%" mb={3} rowSpan={{ base: 2, lg: 1 }} colSpan={{ base: 1, lg: 2 }} className="tool-type-wrap">
-          <Stack direction="row" spacing={2} align="center">
-            {Object.keys(DrawingTools).map((name) => (
-              <Button
-                key={name}
-                className={name}
-                isActive={name === currentTool}
-                variant="outline"
-                size="sm"
-                onClick={() => handleDrawingTool(name as DrawingTools)}
-              >
-                {name}
-              </Button>
-            ))}
-          </Stack>
-        </GridItem>
-        <GridItem rowSpan={{ base: 2, lg: 1 }} colSpan={{ base: 1, lg: 2 }} >
-          <PaletteSlider value={currentSize} onSliderChange={handleSlider} />
-        </GridItem>
-      </Grid>
-
-      <GridItem rowSpan={1} >
+      <GridItem rowSpan={1} colSpan={{ base: 2, lg: 1 }}>
         {COLORS.map((color) => (
           <PaletteColor key={color} color={color} selected={color === currentColor} onClick={handleColor} />
         ))}

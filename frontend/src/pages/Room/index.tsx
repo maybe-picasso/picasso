@@ -34,7 +34,7 @@ const Room = () => {
       <SocketContainer roomId={roomId} />
 
       {isJoined ? (
-        <Container p={0} maxW="100%" className="joined">
+        <Container p={0} maxW="100%" minW="375px" className="joined">
           <Grid h="100vh" templateRows="repeat(16, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
             <GridItem
               rowSpan={{ base: 1 }}
@@ -53,7 +53,6 @@ const Room = () => {
                 gap={2}
                 padding={2}
                 templateRows="repeat(10, 1fr)"
-                // templateColumns={{ base: 'repeat(10, 1fr)', lg: 'auto' }}
                 gridAutoFlow={{ base: 'row', lg: 'column' }}
                 justifyContent="center"
               >
