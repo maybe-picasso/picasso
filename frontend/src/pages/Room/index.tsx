@@ -1,5 +1,4 @@
 import { Container, Grid, GridItem } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
 import cn from 'classnames';
 
 import { useParams } from 'react-router-dom';
@@ -30,13 +29,6 @@ const Room = () => {
   useGameHandler();
   useGameSync();
 
-  createBreakpoints({
-    sm: '480px',
-    md: '768px',
-    lg: '1024px',
-    xl: '1280px',
-  });
-
   return (
     <PageTemplate id="room">
       <SocketContainer roomId={roomId} />
@@ -44,7 +36,13 @@ const Room = () => {
       {isJoined ? (
         <Container p={0} maxW="100%" className="joined">
           <Grid h="100vh" templateRows="repeat(16, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
-            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400" className="head-section">
+            <GridItem
+              rowSpan={{ base: 1 }}
+              colSpan={{ base: 15 }}
+              bg="purple.400"
+              className="head-section"
+              maxHeight={'60px'}
+            >
               <HeaderContainer />
             </GridItem>
 
