@@ -175,6 +175,7 @@ export class Drawing extends DrawingCore {
 
   clearAll() {
     this.clear();
+    this.drawCommandQueue = [];
     sendMessage({
       type: SocketMessageType.DRAWING,
       body: {
