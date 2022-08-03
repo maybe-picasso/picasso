@@ -1,5 +1,4 @@
-import { Container, Grid, GridItem, useBreakpoint } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { Container, Grid, GridItem } from '@chakra-ui/react';
 import cn from 'classnames';
 
 import { useParams } from 'react-router-dom';
@@ -30,21 +29,20 @@ const Room = () => {
   useGameHandler();
   useGameSync();
 
-  createBreakpoints({
-    sm: '480px',
-    md: '768px',
-    lg: '1024px',
-    xl: '1280px',
-  });
-
   return (
     <PageTemplate id="room">
       <SocketContainer roomId={roomId} />
 
       {isJoined ? (
-        <Container p={0} maxW="100%" className="joined">
+        <Container p={0} maxW="100%" minW="375px" className="joined">
           <Grid h="100vh" templateRows="repeat(16, 1fr)" templateColumns="repeat(15, 1fr)" bg="gray.100">
-            <GridItem rowSpan={{ base: 1 }} colSpan={{ base: 15 }} bg="purple.400" className="head-section">
+            <GridItem
+              rowSpan={{ base: 1 }}
+              colSpan={{ base: 15 }}
+              bg="purple.400"
+              className="head-section"
+              maxHeight={'60px'}
+            >
               <HeaderContainer />
             </GridItem>
 
@@ -55,22 +53,37 @@ const Room = () => {
                 gap={2}
                 padding={2}
                 templateRows="repeat(10, 1fr)"
-                templateColumns="repeat(10, 1fr)"
-                gridAutoFlow={{ base: "row", lg: "column" }}
+                gridAutoFlow={{ base: 'row', lg: 'column' }}
                 justifyContent="center"
               >
-                <GridItem rowSpan={{ base: 1, lg: 10 }} colSpan={{ base: 10, lg: 2 }} borderRadius={6} bg="gray.300" minWidth="230px">
+                <GridItem
+                  rowSpan={{ base: 1, lg: 10 }}
+                  colSpan={{ base: 10, lg: 2 }}
+                  borderRadius={6}
+                  bg="gray.300"
+                  minWidth="230px"
+                >
                   <UserListContainer />
                   {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 5, lg: 10 }} maxHeight={{ lg: "50vw" }} colSpan={{ base: 10, lg: 6 }} borderRadius={6} bg="white">
+                <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 5 }} borderRadius={6} bg="white">
                   <GameContentContainer />
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 4, lg: 10 }} colSpan={{ base: 10, lg: 2 }} minWidth="280px">
+                <GridItem
+                  rowSpan={{ base: 4, lg: 10 }}
+                  colSpan={{ base: 10, lg: 3 }}
+                  width={{ base: '100%', lg: '280px' }}
+                >
                   <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
-                    <GridItem rowSpan={2} colSpan={3} bg="gray.100" minHeight={{ base: 90, lg: 150 }} className={cn({ "hide-status": !(isMyTurn || isWaiting) })}>
+                    <GridItem
+                      rowSpan={2}
+                      colSpan={3}
+                      bg="gray.100"
+                      minHeight={{ base: 90, lg: 150 }}
+                      className={cn({ 'hide-status': !(isMyTurn || isWaiting) })}
+                    >
                       {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={{ base: 10, lg: 8 }} colSpan={3} borderRadius={6} bg="gray.300">

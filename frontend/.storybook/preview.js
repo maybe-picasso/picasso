@@ -1,3 +1,5 @@
+import { withTheme } from './decorators';
+
 import './style.scss';
 import '../src/styles/index.scss';
 
@@ -11,4 +13,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [];
+export const decorators = [withTheme()];
