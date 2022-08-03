@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { throttle } from 'lodash-es';
+import { throttle, sampleSize } from 'lodash-es';
 import randomWord from 'random-words';
+import { QUESTIONS } from 'constants/index';
 
 const REPEAT_HOLD_TIME = 1000;
 const THROTTLE_OPTIONS = {
@@ -26,6 +27,13 @@ export const getRandomRoomId = (count: number = 1): string => {
  */
 export const getRandomNumber = (max: number): number => {
   return Math.floor(Math.random() * max);
+};
+
+/**
+ * 랜덤 문제 배열 반환합니다.
+ */
+export const getRandomQuestions = (size = 10): string[] => {
+  return sampleSize(QUESTIONS, size);
 };
 
 /**
