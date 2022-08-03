@@ -67,7 +67,7 @@ const Room = () => {
                   {!isNodeProdcution && <DevLogContainer />}
                 </GridItem>
 
-                <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 10 }} borderRadius={6} bg="white">
+                <GridItem rowSpan={{ base: 5, lg: 10 }} colSpan={{ base: 10, lg: 5 }} borderRadius={6} bg="white">
                   <GameContentContainer />
                 </GridItem>
 
