@@ -1,30 +1,35 @@
 import * as workerTimers from 'worker-timers';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
-import { QUESTIONS } from 'constants/index';
 import { useGameStatus } from '../hooks';
 import { drawing } from 'pages/Room/containers/CanvasContainer';
+import { getRandomQuestions } from 'helpers/utils';
 import event from 'core/event';
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
-  const { time } = useSelector(select.game.state);
+  const { time, questions } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
   const { isWaiting, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
   const isAllUserCorrect = correctUserList.length > 0 && correctUserList.length === participants.length - 1;
+  const newQuestions = useRef(getRandomQuestions()).current;
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
     if (userCount >= 2 && isWaiting) {
-      dispatch.game.init({ questions: QUESTIONS });
-    } else if (userCount <= 1 && !isWaiting) {
-      dispatch.game.wait();
+      dispatch.game.init({});
+    } else if (userCount <= 1) {
+      if (isWaiting && !questions.length) {
+        dispatch.game.setQuestions(newQuestions);
+      } else {
+        dispatch.game.wait();
+      }
     }
-  }, [isWaiting, userCount, dispatch]);
+  }, [isWaiting, userCount, dispatch, questions, newQuestions]);
 
   // 게임 진행 시간별 핸들링
   useEffect(() => {
