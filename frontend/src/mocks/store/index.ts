@@ -8,8 +8,10 @@ import { RootState } from 'store';
 import { participants } from './room';
 import { correctUserList } from './gamePoint';
 import { chatList } from './chat';
-import { QUESTIONS } from 'constants/index';
+import { QUESTIONS as QUESTIONS_ORIGIANL } from 'constants/index';
 import { GameStatus } from 'types/enums';
+
+const QUESTIONS = QUESTIONS_ORIGIANL.slice(0, 9);
 
 export type MockStore = Pick<RootState, 'common' | 'room' | 'game' | 'gamePoint' | 'chat' | 'tools'>;
 

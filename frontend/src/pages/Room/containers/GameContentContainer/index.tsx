@@ -27,7 +27,8 @@ const GameContentContainer = () => {
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
 
   const { isWaiting, isStandByTurn, isComplete, isGameOver, isPlaying } = useGameStatus();
-  const painterName = usePainterInfo()?.nickName ?? '';
+  const { profileIndex: painterProfileIndex, nickName: painterNickName } = usePainterInfo();
+  const painterName = `${PROFILE_CHARACTERS[painterProfileIndex]} ${painterNickName}`;
   const isMyCorrect = useMyCorrect();
   const isMyTurn = useMyTurn();
   const word = isWaiting ? '한명 더 들어오면 시작 할 수 있어요!' : questions[round - 1];

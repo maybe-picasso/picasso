@@ -1,4 +1,6 @@
+@import '~styles/modules/mixin.scss';
 $size: 22px;
+$smallSize: 18px;
 
 .palette-card {
   position: relative;
@@ -9,6 +11,11 @@ $size: 22px;
   border-radius: 3px;
   cursor: pointer;
   border: solid 2px rgba(255, 255, 255, 0);
+
+  @include mobileDevice {
+    width: $smallSize;
+    height: $smallSize;
+  }
 
   &.selected {
     border-color: rgb(81, 92, 255);
