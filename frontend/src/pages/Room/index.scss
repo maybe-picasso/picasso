@@ -4,12 +4,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 1200px;
 
   .joined {
     background-color: #286381;
 
-    > div {
+    >div {
       min-height: 500px;
     }
   }
@@ -17,6 +16,13 @@
   .gate-container {
     height: 100vh;
     background-color: #fff;
+  }
+
+  // 모바일디바이스에서 상태 숨김
+  .hide-status {
+    @include mobileDevice {
+      display: none;
+    }
   }
 }
 
