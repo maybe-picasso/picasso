@@ -15,7 +15,7 @@ const NextTurnContent = ({ isMyTurn, word, painterName }: Props) => {
       {painterName}님 차례에요!
       <br />
       이번 문제는
-      <Text m={2} color="green.300" as="span" textDecoration="underline">
+      <Text m={2} color="green.300" as="span">
         {word}
       </Text>
       입니다!
@@ -24,7 +24,7 @@ const NextTurnContent = ({ isMyTurn, word, painterName }: Props) => {
 
   const GamerText = (
     <Text as="p" lineHeight={1.5}>
-      <Text m={2} color="green.300" as="span" textDecoration="underline">
+      <Text m={2} color="green.300" as="span">
         {painterName}
       </Text>
       님이 그림 그릴 차례입니다!
