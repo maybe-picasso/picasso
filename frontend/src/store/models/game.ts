@@ -12,6 +12,7 @@ export interface GameState {
   questions: string[];
   round: number;
   time: number;
+  readyUserIds: string[];
 }
 
 export const initialState: GameState = {
@@ -20,6 +21,7 @@ export const initialState: GameState = {
   questions: [],
   round: 1,
   time: 60,
+  readyUserIds: [],
 };
 
 const NEXT_ACTION_DELAY = 5000;
@@ -35,7 +37,10 @@ export const game = createModel<RootModel>()({
     isVisibleOverlayContent: () =>
       slice(
         ({ status }) =>
-          status === GameStatus.STANDBY_TURN || status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER
+          status === GameStatus.READY ||
+          status === GameStatus.STANDBY_TURN ||
+          status === GameStatus.COMPLETED ||
+          status === GameStatus.GAMEOVER
       ),
     currentQuestion: () => slice(({ questions, round }) => questions[round - 1]),
   }),

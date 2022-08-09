@@ -68,6 +68,15 @@ export const 게임_유저목록로딩: MockStore = {
   },
 };
 
+export const 게임_플레이어_준비: MockStore = {
+  ...게임_기본화면,
+  game: {
+    ...게임_기본화면.game,
+    status: GameStatus.READY,
+    readyUserIds: [게임_기본화면.room.participants[0].userId, 게임_기본화면.room.participants[1].userId],
+  },
+};
+
 export const 게임_다음턴안내_출제자: MockStore = {
   ...게임_기본화면,
   game: {

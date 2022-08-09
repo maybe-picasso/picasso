@@ -5,6 +5,7 @@ import {
   GameQuestion,
   GameRound,
   GameTimer,
+  ReadyContent,
   NextTurnContent,
   CompleteContent,
   GameOverContent,
@@ -21,12 +22,12 @@ const jsConfetti = new JSConfetti();
 
 const GameContentContainer = () => {
   const { participants, userInfo } = useSelector(select.room.state);
-  const { time, questions, round } = useSelector(select.game.state);
+  const { time, questions, round, readyUserIds } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
 
-  const { isWaiting, isStandByTurn, isComplete, isGameOver, isPlaying } = useGameStatus();
+  const { isWaiting, isReady, isStandByTurn, isComplete, isGameOver, isPlaying } = useGameStatus();
   const { profileIndex: painterProfileIndex, nickName: painterNickName } = usePainterInfo();
   const painterName = `${PROFILE_CHARACTERS[painterProfileIndex]} ${painterNickName}`;
   const isMyCorrect = useMyCorrect();
@@ -56,6 +57,7 @@ const GameContentContainer = () => {
 
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">
+            {isReady && <ReadyContent userList={participants} readyUserIds={readyUserIds} />}
             {isStandByTurn && <NextTurnContent isMyTurn={isMyTurn} word={word} painterName={painterName} />}
             {isComplete && <CompleteContent userList={participants} word={word} />}
             {isGameOver && <GameOverContent userList={participants} />}
