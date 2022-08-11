@@ -24,7 +24,7 @@ import './index.scss';
 const Room = () => {
   const { roomId = '' } = useParams();
   const { isJoined } = useSelector(select.room.state);
-  const { isWaiting } = useGameStatus();
+  const { isWaiting, isReady } = useGameStatus();
   const isMyTurn = useMyTurn();
   useGameHandler();
   useGameSync();
@@ -84,7 +84,7 @@ const Room = () => {
                       minHeight={{ base: 90, lg: 150 }}
                       className={cn({ 'hide-status': !(isMyTurn || isWaiting) })}
                     >
-                      {isMyTurn || isWaiting ? <ToolsContainer /> : <GameStatusContainer />}
+                      {isMyTurn || isWaiting || isReady ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
                     <GridItem rowSpan={{ base: 10, lg: 8 }} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />

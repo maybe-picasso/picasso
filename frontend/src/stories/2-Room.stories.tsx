@@ -43,7 +43,7 @@ export const GameDefaultStory: StoryObj = {
 };
 
 export const GameReadyStory: StoryObj = {
-  name: '게임 플레이어 준비',
+  name: '게임 시작 준비',
   decorators: [router, withRedux(게임_플레이어_준비)],
 };
 

@@ -1,3 +1,4 @@
+export { default as useFirstUser } from './useFirstUser';
 export { default as useGameHandler } from './useGameHandler';
 export { default as useGameStatus } from './useGameStatus';
 export { default as useGameSync } from './useGameSync';

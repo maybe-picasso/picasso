@@ -7,11 +7,12 @@ import './index.scss';
 interface Props {
   userList: Picasso.UserInfo[];
   readyUserIds: string[];
+  onReadyClick: () => void;
 }
 
-const ReadyContent = ({ userList, readyUserIds }: Props) => {
+const ReadyContent = ({ userList, readyUserIds, onReadyClick }: Props) => {
   return (
-    <ResultLayer title={<>모두 준비되면 시작됩니다!</>}>
+    <ResultLayer title={<>모두 준비되면 시작합니다!</>}>
       <ul className="result-score">
         {userList.map(({ nickName, userId, profileIndex }) => {
           const isReady = readyUserIds.some((id) => id === userId);
@@ -23,16 +24,18 @@ const ReadyContent = ({ userList, readyUserIds }: Props) => {
                   {nickName}
                 </Text>
               </div>
-              <Badge colorScheme={isReady ? 'green' : 'gray'} p="5px 10px" fontSize={14}>
-                <span>{isReady ? '준비완료' : '준비'}</span>
-              </Badge>
+              {isReady && (
+                <Badge colorScheme={isReady ? 'green' : 'gray'} p="5px 10px" fontSize={14}>
+                  <span>준비완료</span>
+                </Badge>
+              )}
             </li>
           );
         })}
       </ul>
 
       <Center>
-        <Button>준비</Button>
+        <Button onClick={onReadyClick}>준비완료</Button>
       </Center>
     </ResultLayer>
   );

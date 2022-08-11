@@ -78,6 +78,9 @@ export const game = createModel<RootModel>()({
     wait() {
       dispatch.game.setStatus(GameStatus.WAITING);
     },
+    ready() {
+      dispatch.game.setStatus(GameStatus.READY);
+    },
     standBy() {
       dispatch.game.setStatus(GameStatus.STANDBY_TURN);
 

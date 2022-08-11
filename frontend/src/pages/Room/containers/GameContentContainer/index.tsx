@@ -32,8 +32,12 @@ const GameContentContainer = () => {
   const painterName = `${PROFILE_CHARACTERS[painterProfileIndex]} ${painterNickName}`;
   const isMyCorrect = useMyCorrect();
   const isMyTurn = useMyTurn();
-  const word = isWaiting ? '한명 더 들어오면 시작 할 수 있어요!' : questions[round - 1];
-  const isBlind = !isWaiting && !isMyTurn && !isCurrectUser;
+  const word = isWaiting
+    ? '한명 더 들어오면 시작 할 수 있어요!'
+    : isReady
+    ? '곧 게임이 시작됩니다'
+    : questions[round - 1];
+  const isBlind = !isWaiting && !isReady && !isMyTurn && !isCurrectUser;
 
   useEffect(() => {
     if (isPlaying && isMyCorrect) {
@@ -57,7 +61,9 @@ const GameContentContainer = () => {
 
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">
-            {isReady && <ReadyContent userList={participants} readyUserIds={readyUserIds} />}
+            {isReady && (
+              <ReadyContent userList={participants} readyUserIds={readyUserIds} onReadyClick={() => alert('ready')} />
+            )}
             {isStandByTurn && <NextTurnContent isMyTurn={isMyTurn} word={word} painterName={painterName} />}
             {isComplete && <CompleteContent userList={participants} word={word} />}
             {isGameOver && <GameOverContent userList={participants} />}
