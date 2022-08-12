@@ -17,11 +17,11 @@ export interface GameState {
 
 export const initialState: GameState = {
   status: GameStatus.WAITING,
+  readyUserIds: [],
   painterId: null,
   questions: [],
   round: 1,
   time: 60,
-  readyUserIds: [],
 };
 
 const NEXT_ACTION_DELAY = 5000;
@@ -64,6 +64,13 @@ export const game = createModel<RootModel>()({
     setStatus(state, payload: GameStatus) {
       state.status = payload;
       return state;
+    },
+    toggleReadyUser(state, userId: string) {
+      if (state.readyUserIds.includes(userId)) {
+        state.readyUserIds = state.readyUserIds.filter((thisId) => thisId !== userId);
+      } else {
+        state.readyUserIds.push(userId);
+      }
     },
   },
   effects: (dispatch) => ({

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Flex } from '@chakra-ui/react';
 import JSConfetti from 'js-confetti';
 import {
@@ -13,14 +13,15 @@ import {
 import { CanvasContainer } from '../../containers';
 import { PROFILE_CHARACTERS } from 'constants/index';
 
-import { useSelector } from 'react-redux';
-import { select } from 'store';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dispatch, select } from 'store';
 import { useMyTurn, usePainterInfo, useGameStatus, useMyCorrect } from '../../hooks';
 import './index.scss';
 
 const jsConfetti = new JSConfetti();
 
 const GameContentContainer = () => {
+  const dispatch = useDispatch<Dispatch>();
   const { participants, userInfo } = useSelector(select.room.state);
   const { time, questions, round, readyUserIds } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
@@ -38,6 +39,14 @@ const GameContentContainer = () => {
     ? '곧 게임이 시작됩니다'
     : questions[round - 1];
   const isBlind = !isWaiting && !isReady && !isMyTurn && !isCurrectUser;
+  const isReadyMe = readyUserIds.includes(userInfo?.userId ?? '');
+
+  const handleReadyClick = useCallback(() => {
+    if (!userInfo?.userId) {
+      return;
+    }
+    dispatch.game.toggleReadyUser(userInfo.userId);
+  }, [dispatch, userInfo]);
 
   useEffect(() => {
     if (isPlaying && isMyCorrect) {
@@ -62,7 +71,12 @@ const GameContentContainer = () => {
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">
             {isReady && (
-              <ReadyContent userList={participants} readyUserIds={readyUserIds} onReadyClick={() => alert('ready')} />
+              <ReadyContent
+                userList={participants}
+                readyUserIds={readyUserIds}
+                isReadyMe={isReadyMe}
+                onReadyClick={handleReadyClick}
+              />
             )}
             {isStandByTurn && <NextTurnContent isMyTurn={isMyTurn} word={word} painterName={painterName} />}
             {isComplete && <CompleteContent userList={participants} word={word} />}

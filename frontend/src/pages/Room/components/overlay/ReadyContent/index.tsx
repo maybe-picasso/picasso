@@ -7,10 +7,11 @@ import './index.scss';
 interface Props {
   userList: Picasso.UserInfo[];
   readyUserIds: string[];
+  isReadyMe: boolean;
   onReadyClick: () => void;
 }
 
-const ReadyContent = ({ userList, readyUserIds, onReadyClick }: Props) => {
+const ReadyContent = ({ userList, readyUserIds, isReadyMe, onReadyClick }: Props) => {
   return (
     <ResultLayer title={<>모두 준비되면 시작합니다!</>}>
       <ul className="result-score">
@@ -35,7 +36,7 @@ const ReadyContent = ({ userList, readyUserIds, onReadyClick }: Props) => {
       </ul>
 
       <Center>
-        <Button onClick={onReadyClick}>준비완료</Button>
+        <Button onClick={onReadyClick}>{isReadyMe ? '취소' : '준비완료'}</Button>
       </Center>
     </ResultLayer>
   );
