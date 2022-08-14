@@ -2,6 +2,7 @@ export enum SocketMessageType {
   CHAT = 'CHAT',
   DRAWING = 'DRAWING',
   CORRECT_USER = 'CORRECT_USER',
+  READY_PLAYER = 'READY_PLAYER',
   SYNC_GAME_STATUS = 'SYNC_GAME_STATUS',
 }
 
@@ -21,8 +22,8 @@ export enum DrawingStatus {
 }
 
 export enum GameStatus {
-  WAITING = 'WAITING', // 참여자 대기
-  READY = 'READY', // 참여자 준비
+  WAITING_PLAYER = 'WAITING_PLAYER', // 참여자 대기
+  WAITING_READY = 'WAITING_READY', // 시작 준비 현황
   STANDBY_TURN = 'STANDBY_TURN', // 문제 준비 상태
   PLAYING = 'PLAYING', // 게임 진행중
   COMPLETED = 'COMPLETED', // 한 단어 완료

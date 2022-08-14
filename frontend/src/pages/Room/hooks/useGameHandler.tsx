@@ -3,37 +3,36 @@ import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
-import { useGameStatus, useFirstUser } from '../hooks';
+import { useGameStatus } from '../hooks';
 import { drawing } from 'pages/Room/containers/CanvasContainer';
 import { getRandomQuestions } from 'helpers/utils';
 import event from 'core/event';
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
-  const { time, questions } = useSelector(select.game.state);
+  const { time, questions, readyUserIdList } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
-  const { isWaiting, isPlaying } = useGameStatus();
-  const { isFirstUser } = useFirstUser();
+  const { isWaitingPlayer, isWaitingReady, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
   const isAllUserCorrect = correctUserList.length > 0 && correctUserList.length === participants.length - 1;
   const newQuestions = useRef(getRandomQuestions()).current;
-
-  console.log('isFirstUser :>> ', isFirstUser);
+  const isAllReady = userCount === readyUserIdList.length;
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
-    if (userCount >= 2 && isWaiting) {
-      // dispatch.game.init({});
+    if (userCount >= 2 && isWaitingPlayer) {
       dispatch.game.ready();
+    } else if (isWaitingReady && isAllReady) {
+      dispatch.game.init({});
     } else if (userCount <= 1) {
-      if (isWaiting && !questions.length) {
+      if (isWaitingPlayer && !questions.length) {
         dispatch.game.setQuestions(newQuestions);
       } else {
         dispatch.game.wait();
       }
     }
-  }, [dispatch, isWaiting, userCount, questions, newQuestions]);
+  }, [dispatch, isWaitingPlayer, isWaitingReady, isAllReady, userCount, questions, newQuestions]);
 
   // 게임 진행 시간별 핸들링
   useEffect(() => {

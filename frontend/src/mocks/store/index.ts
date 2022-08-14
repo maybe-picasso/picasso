@@ -55,7 +55,7 @@ export const 게임_대기화면: MockStore = {
   },
   game: {
     ...게임_기본화면.game,
-    status: GameStatus.WAITING,
+    status: GameStatus.WAITING_PLAYER,
   },
   gamePoint: gamePointInitState,
 };
@@ -72,8 +72,8 @@ export const 게임_플레이어_준비: MockStore = {
   ...게임_기본화면,
   game: {
     ...게임_기본화면.game,
-    status: GameStatus.READY,
-    readyUserIds: [게임_기본화면.room.participants[0].userId, 게임_기본화면.room.participants[1].userId],
+    status: GameStatus.WAITING_READY,
+    readyUserIdList: [게임_기본화면.room.participants[0].userId, 게임_기본화면.room.participants[1].userId],
   },
 };
 

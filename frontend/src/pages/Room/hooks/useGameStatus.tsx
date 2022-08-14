@@ -6,8 +6,8 @@ const useGameStatus = () => {
   const { status } = useSelector(select.game.state);
 
   return {
-    isWaiting: status === GameStatus.WAITING,
-    isReady: status === GameStatus.READY,
+    isWaitingPlayer: status === GameStatus.WAITING_PLAYER,
+    isWaitingReady: status === GameStatus.WAITING_READY,
     isStandByTurn: status === GameStatus.STANDBY_TURN,
     isPlaying: status === GameStatus.PLAYING,
     isComplete: status === GameStatus.COMPLETED,

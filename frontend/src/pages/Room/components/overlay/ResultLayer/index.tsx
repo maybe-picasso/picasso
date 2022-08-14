@@ -21,7 +21,7 @@ const ResultLayer = ({ children, title, bgColor = 'white' }: Props) => {
         {title}
       </Heading>
       {children && (
-        <Box bgColor={bgColor} width={370} minHeight={200} borderRadius={6} padding={6} marginX="auto">
+        <Box bgColor={bgColor} minWidth={370} minHeight={200} borderRadius={6} padding={6} marginX="auto">
           {children}
         </Box>
       )}
