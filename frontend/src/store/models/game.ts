@@ -8,6 +8,7 @@ import { SocketMessageType } from 'types/enums';
 
 export interface GameState {
   status: GameStatus;
+  readyUserIdList: string[];
   painterId: string | null;
   questions: string[];
   round: number;
@@ -15,7 +16,8 @@ export interface GameState {
 }
 
 export const initialState: GameState = {
-  status: GameStatus.WAITING,
+  status: GameStatus.WAITING_PLAYER,
+  readyUserIdList: [],
   painterId: null,
   questions: [],
   round: 1,
@@ -35,7 +37,10 @@ export const game = createModel<RootModel>()({
     isVisibleOverlayContent: () =>
       slice(
         ({ status }) =>
-          status === GameStatus.STANDBY_TURN || status === GameStatus.COMPLETED || status === GameStatus.GAMEOVER
+          status === GameStatus.WAITING_READY ||
+          status === GameStatus.STANDBY_TURN ||
+          status === GameStatus.COMPLETED ||
+          status === GameStatus.GAMEOVER
       ),
     currentQuestion: () => slice(({ questions, round }) => questions[round - 1]),
   }),
@@ -60,6 +65,17 @@ export const game = createModel<RootModel>()({
       state.status = payload;
       return state;
     },
+    setReadyUserIdList(state, idList: string[]) {
+      state.readyUserIdList = idList;
+      return state;
+    },
+    toggleReadyUser(state, { userId, forceValue }: { userId: string; forceValue?: boolean }) {
+      if (state.readyUserIdList.includes(userId) || forceValue === false) {
+        state.readyUserIdList = state.readyUserIdList.filter((thisId) => thisId !== userId);
+      } else {
+        state.readyUserIdList.push(userId);
+      }
+    },
   },
   effects: (dispatch) => ({
     init(_, rootState) {
@@ -71,7 +87,10 @@ export const game = createModel<RootModel>()({
       dispatch.game.setPainterId(participants[0].userId);
     },
     wait() {
-      dispatch.game.setStatus(GameStatus.WAITING);
+      dispatch.game.setStatus(GameStatus.WAITING_PLAYER);
+    },
+    ready() {
+      dispatch.game.setStatus(GameStatus.WAITING_READY);
     },
     standBy() {
       dispatch.game.setStatus(GameStatus.STANDBY_TURN);

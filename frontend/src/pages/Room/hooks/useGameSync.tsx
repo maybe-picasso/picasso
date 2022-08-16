@@ -2,27 +2,30 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
-import { useGameStatus, useMyTurn } from '../hooks';
+import { useGameStatus, useMyTurn, useFirstUser } from '../hooks';
 import { sendMessage } from 'core/socket';
 import event from 'core/event';
 
+/**
+ * 입장한 유저 게임 진행 상태 싱크
+ */
 const useGameSync = () => {
-  const { participants } = useSelector(select.room.state);
-  const { time, painterId, status, round, questions } = useSelector(select.game.state);
-  const { isWaiting } = useGameStatus();
+  const { readyUserIdList, time, painterId, status, round, questions } = useSelector(select.game.state);
+  const { isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const isMyTurn = useMyTurn();
+  const isFirstUser = useFirstUser();
 
-  // 입장한 유저 게임 진행 상태 싱크
   useEffect(() => {
     event.removeAllListeners('join');
     event.on('join', (data) => {
       console.log('[디버깅] join :>> ', data);
-      if ((!isWaiting && isMyTurn) || participants.length === 1) {
+      if (isMyTurn || (!isPlaying && isFirstUser)) {
         sendMessage({
           type: SocketMessageType.SYNC_GAME_STATUS,
           to: data.userInfo.userId,
           body: {
+            readyUserIdList,
             questions,
             painterId,
             status,
@@ -32,14 +35,15 @@ const useGameSync = () => {
         });
       }
     });
-  }, [isWaiting, isMyTurn, participants, questions, painterId, round, time, status]);
+  }, [isPlaying, isMyTurn, isFirstUser, readyUserIdList, questions, painterId, round, time, status]);
 
   useEffect(() => {
     event.removeAllListeners(SocketMessageType.SYNC_GAME_STATUS);
     event.on(SocketMessageType.SYNC_GAME_STATUS, ({ body }) => {
       console.log('[디버깅] SYNC_GAME_STATUS :>> ', body);
-      const { questions, status, painterId, round, time } = body;
+      const { readyUserIdList, questions, status, painterId, round, time } = body;
 
+      dispatch.game.setReadyUserIdList(readyUserIdList);
       dispatch.game.setQuestions(questions);
       dispatch.game.setPainterId(painterId);
       dispatch.game.setTime(time);

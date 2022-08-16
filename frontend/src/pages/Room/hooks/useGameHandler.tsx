@@ -10,26 +10,29 @@ import event from 'core/event';
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);
-  const { time, questions } = useSelector(select.game.state);
+  const { time, questions, readyUserIdList } = useSelector(select.game.state);
   const { correctUserList } = useSelector(select.gamePoint.state);
-  const { isWaiting, isPlaying } = useGameStatus();
+  const { isWaitingPlayer, isWaitingReady, isPlaying } = useGameStatus();
   const dispatch = useDispatch<Dispatch>();
   const userCount = participants.length;
   const isAllUserCorrect = correctUserList.length > 0 && correctUserList.length === participants.length - 1;
   const newQuestions = useRef(getRandomQuestions()).current;
+  const isAllReady = userCount === readyUserIdList.length;
 
   // 참여 인원별 게임 상태 핸들링
   useEffect(() => {
-    if (userCount >= 2 && isWaiting) {
+    if (userCount >= 2 && isWaitingPlayer) {
+      dispatch.game.ready();
+    } else if (isWaitingReady && isAllReady) {
       dispatch.game.init({});
     } else if (userCount <= 1) {
-      if (isWaiting && !questions.length) {
+      if (isWaitingPlayer && !questions.length) {
         dispatch.game.setQuestions(newQuestions);
       } else {
         dispatch.game.wait();
       }
     }
-  }, [isWaiting, userCount, dispatch, questions, newQuestions]);
+  }, [dispatch, isWaitingPlayer, isWaitingReady, isAllReady, userCount, questions, newQuestions]);
 
   // 게임 진행 시간별 핸들링
   useEffect(() => {
