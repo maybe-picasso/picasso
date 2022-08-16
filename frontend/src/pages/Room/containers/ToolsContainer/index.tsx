@@ -10,6 +10,8 @@ import { drawing } from '../CanvasContainer';
 
 import './index.scss';
 
+const BRUSH_MAX_SIZE = 30;
+
 const ToolsContainer = () => {
   const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
   const dispatch = useDispatch<Dispatch>();
@@ -68,8 +70,16 @@ const ToolsContainer = () => {
               ))}
             </Stack>
           </GridItem>
-          <GridItem rowSpan={{ base: 2, lg: 1 }} colSpan={{ base: 1, lg: 1 }}>
-            <PaletteSlider value={currentSize} onSliderChange={handleSlider} />
+          <GridItem className="brush-control" rowSpan={{ base: 2, lg: 1 }} colSpan={{ base: 1, lg: 1 }}>
+            <div className="brush-size" style={{ width: BRUSH_MAX_SIZE, height: BRUSH_MAX_SIZE }}>
+              <span
+                style={{
+                  backgroundColor: currentColor,
+                  transform: `scale(${0.2 + currentSize / (BRUSH_MAX_SIZE / 1.7)})`,
+                }}
+              />
+            </div>
+            <PaletteSlider value={currentSize} onSliderChange={handleSlider} max={BRUSH_MAX_SIZE} />
           </GridItem>
         </Grid>
       </GridItem>
