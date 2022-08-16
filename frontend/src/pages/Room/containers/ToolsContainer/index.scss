@@ -62,3 +62,26 @@
     }
   }
 }
+
+.brush-control {
+  display: flex;
+  align-items: center;
+
+  .brush-size {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+
+    span {
+      display: inline-block;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      transform-origin: center;
+    }
+  }
+}
