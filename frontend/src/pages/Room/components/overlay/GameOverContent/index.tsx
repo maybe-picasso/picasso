@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
+import { orderBy } from 'lodash-es';
 import { Text, Badge } from '@chakra-ui/react';
 import cn from 'classnames';
 import confetti from 'canvas-confetti';
 
 import { ProfileAvatar } from 'pages/Room/components';
-import { useSelector } from 'react-redux';
-import { select } from 'store';
-
 import ResultLayer from '../ResultLayer';
 
 import './index.scss';
@@ -16,7 +14,7 @@ interface Props {
 }
 
 const GameOverContent = ({ userList }: Props) => {
-  const { correctUserList } = useSelector(select.gamePoint.state);
+  const userScoreList = orderBy(userList, 'point', 'desc');
 
   useEffect(() => {
     confetti({
@@ -29,11 +27,11 @@ const GameOverContent = ({ userList }: Props) => {
   return (
     <ResultLayer title="🎉 순위를 발표합니다!">
       <ul className="result-score">
-        {userList.map(({ nickName, userId, profileIndex }, index) => {
-          const currectUserInfo = correctUserList.find((user) => user.userId === userId);
+        {userScoreList.map(({ nickName, userId, profileIndex, point }, index) => {
           const isFirstUser = index === 0;
           const isSecondUser = index === 1;
           const isThirdUser = index === 2;
+          const isTop3 = isFirstUser || isSecondUser || isThirdUser;
 
           return (
             <li key={userId} className={cn({ winner: isFirstUser })}>
@@ -49,8 +47,8 @@ const GameOverContent = ({ userList }: Props) => {
                   {nickName} {isFirstUser && '🎉'}
                 </Text>
               </div>
-              <Badge className="rank-score" colorScheme="gray">
-                <span>{currectUserInfo?.point ?? 0}</span> 점
+              <Badge className="rank-score" colorScheme={isTop3 ? 'green' : 'gray'}>
+                <span>{point}</span> 점
               </Badge>
             </li>
           );
