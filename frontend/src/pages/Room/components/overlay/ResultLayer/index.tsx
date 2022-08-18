@@ -6,6 +6,7 @@ import './index.scss';
 interface Props {
   children?: React.ReactNode;
   title: string | React.ReactNode;
+  bgColor?: string;
 }
 
 const variants = {
@@ -13,14 +14,14 @@ const variants = {
   visible: { opacity: 1, y: 0, scale: 1 },
 };
 
-const ResultLayer = ({ children, title }: Props) => {
+const ResultLayer = ({ children, title, bgColor = 'white' }: Props) => {
   return (
     <motion.div initial="initial" animate="visible" variants={variants} transition={{ duration: 0.3 }}>
       <Heading mb={5} color="white" textAlign="center">
         {title}
       </Heading>
       {children && (
-        <Box bgColor="white" width={370} minHeight={200} borderRadius={6} padding={6} marginX="auto">
+        <Box bgColor={bgColor} minWidth={370} minHeight={200} borderRadius={6} padding={6} marginX="auto">
           {children}
         </Box>
       )}

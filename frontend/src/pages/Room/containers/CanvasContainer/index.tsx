@@ -14,10 +14,9 @@ const CanvasContainer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const { currentColor, currentTool, currentSize } = useSelector(select.tools.state);
-  const { isWaiting } = useGameStatus();
+  const { isWaitingPlayer } = useGameStatus();
   const isMyTurn = useMyTurn();
-
-  const isPainterMode = isMyTurn || isWaiting;
+  const isPainterMode = isMyTurn || isWaitingPlayer;
 
   useEffect(() => {
     if (!canvasRef.current) {

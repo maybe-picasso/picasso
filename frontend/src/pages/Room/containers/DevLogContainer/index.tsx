@@ -28,7 +28,7 @@ const DevLogContainer = () => {
         </li>
         <li>
           <strong>Question</strong>
-          <span>{status === GameStatus.WAITING ? '대기중' : currentQuestion}</span>
+          <span>{status === GameStatus.WAITING_PLAYER ? '대기중' : currentQuestion}</span>
         </li>
       </ul>
     </div>

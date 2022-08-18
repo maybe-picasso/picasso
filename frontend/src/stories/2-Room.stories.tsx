@@ -5,6 +5,7 @@ import {
   프로필설정,
   게임_유저목록로딩,
   게임_대기화면,
+  게임_플레이어_준비,
   게임_다음턴안내_출제자,
   게임_다음턴안내_플레이어,
   게임_현재페인터,
@@ -39,6 +40,11 @@ export const GameLoadingStory: StoryObj = {
 export const GameDefaultStory: StoryObj = {
   name: '게임 대기 화면',
   decorators: [router, withRedux(게임_대기화면)],
+};
+
+export const GameReadyStory: StoryObj = {
+  name: '게임 시작 준비',
+  decorators: [router, withRedux(게임_플레이어_준비)],
 };
 
 export const GameNextMyTurnStory: StoryObj = {
