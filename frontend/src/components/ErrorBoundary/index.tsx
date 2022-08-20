@@ -1,4 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
+import { Box, Button, Code } from '@chakra-ui/react';
+import './index.scss';
 
 interface Props {
   error: Error;
@@ -7,10 +9,15 @@ interface Props {
 
 export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
   return (
-    <div role="alert">
-      <p>Oh No Error:</p>
-      <pre>{error.message}</pre>
-      <button onClick={resetErrorBoundary}>Try again</button>
+    <div className="error-fallback" role="alert">
+      <h1>😱</h1>
+      <p>Oh No error: {error.message}</p>
+      <Box m="10px 0 30px">
+        <Code p="10px">{error.stack}</Code>
+      </Box>
+      <Button colorScheme="blue" variant="outline" onClick={resetErrorBoundary}>
+        Try again
+      </Button>
     </div>
   );
 };
