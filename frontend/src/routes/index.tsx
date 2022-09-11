@@ -1,17 +1,20 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from '@loadable/component';
+import PageFallback from 'components/PageFallback';
 import PATHS from './paths';
-
-import { Spinner } from '@chakra-ui/react';
 
 const Home = lazy(() => import('pages/Home'));
 const Room = lazy(() => import('pages/Room'));
 const About = lazy(() => import('pages/About'));
 
 const AppRoutes = () => {
+  useEffect(() => {
+    Room.preload();
+  }, []);
+
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<PageFallback />}>
       <Routes>
         <Route path={PATHS.HOME} element={<Home />} />
         <Route path={PATHS.ROOM} element={<Room />} />

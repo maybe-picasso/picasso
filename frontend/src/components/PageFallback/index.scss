@@ -1,0 +1,6 @@
+@import '~styles/modules/mixin.scss';
+
+.page-fallback {
+  @include primaryBackground();
+  height: 100vh;
+}
