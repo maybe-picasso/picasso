@@ -43,7 +43,7 @@ export const gamePoint = createModel<RootModel>()({
       const ranking = correctUserList.length + 1;
       const rankingPoint = RANK_POINT_BASE[ranking < 4 ? ranking : 99];
       const participantsPoint = participants.length * 10;
-      const point = time * rankingPoint + participantsPoint;
+      const point = Math.round(time * rankingPoint + participantsPoint);
 
       // 현재 라운드 포인트 정보 추가
       dispatch.gamePoint.addCorrectUserInfo({
