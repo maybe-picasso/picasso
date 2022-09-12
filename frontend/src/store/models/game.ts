@@ -85,6 +85,7 @@ export const game = createModel<RootModel>()({
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
       dispatch.game.setPainterId(participants[0].userId);
+      dispatch.game.setReadyUserIdList([]);
     },
     wait() {
       dispatch.game.setStatus(GameStatus.WAITING_PLAYER);
