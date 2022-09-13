@@ -79,7 +79,8 @@ const useGameHandler = () => {
     event.removeAllListeners('leave');
     event.on('leave', (data) => {
       if (data.userInfo.userId === painterId) {
-        dispatch.game.setTime(0);
+        dispatch.game.breakaway();
+        // TODO: 그리기중인 ooo님이 나가셨습니다.
       }
     });
   }, [dispatch, painterId]);
