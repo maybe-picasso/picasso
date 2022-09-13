@@ -79,8 +79,13 @@ const useGameHandler = () => {
     event.removeAllListeners('leave');
     event.on('leave', (data) => {
       if (data.userInfo.userId === painterId) {
+        const nickName = data.userInfo.nickName;
         dispatch.game.breakaway();
-        // TODO: 그리기중인 ooo님이 나가셨습니다.
+        dispatch.chat.addChat({
+          isSystem: true,
+          message: `그리기중 ${nickName}님이 나갔습니다.\n곧 다음 차례가 시작됩니다.`,
+          timestamp: new Date().getTime(),
+        });
       }
     });
   }, [dispatch, painterId]);

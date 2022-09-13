@@ -142,8 +142,8 @@ const ChatContainer = () => {
     <Grid h="100%" templateRows="repeat(10, 1fr)" borderRadius={6} overflow={'hidden'}>
       <GridItem rowSpan={9} className="chat-list-wrap">
         <ul ref={chatListRef} onScroll={handleScrollChat} className={cn({ 'hide-scrollbar': isHideScrollbar })}>
-          {chatList.map(({ isMine, nickName, message }, i) => (
-            <li className={cn({ mine: isMine })} key={i}>
+          {chatList.map(({ nickName, message, isMine, isSystem }, i) => (
+            <li className={cn({ mine: isMine, system: isSystem })} key={i}>
               <p className="nickname">{nickName}</p>
               <p className="body">{message}</p>
             </li>

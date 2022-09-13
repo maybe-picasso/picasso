@@ -40,4 +40,11 @@ export const chatList = [
     userId: participants[2].userId,
     nickName: participants[2].nickName,
   },
+  {
+    isSystem: true,
+    message: '그리기중 ooo님이 나갔습니다.\n곧 다음 차례가 시작됩니다.',
+    timestamp: 1651629985278,
+    userId: '',
+    nickName: '',
+  },
 ];
