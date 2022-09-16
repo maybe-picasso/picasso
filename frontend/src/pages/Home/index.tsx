@@ -32,7 +32,7 @@ const Home = () => {
             const selected = selectedIndex === index;
             const className = `${selected ? 'active' : ''}`;
             return (
-              <li>
+              <li key={name}>
                 <button type="button" className={className} onClick={() => handleItemClick(index)}>
                   <span className="name">{name}</span>
                   {selected && <span className="icon">🔮</span>}
