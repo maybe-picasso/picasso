@@ -13,6 +13,7 @@ export interface GameState {
   questions: string[];
   round: number;
   time: number;
+  isBreakaway: boolean; // 문제 출제자 중도 이탈 여부
 }
 
 export const initialState: GameState = {
@@ -22,6 +23,7 @@ export const initialState: GameState = {
   questions: [],
   round: 1,
   time: 60,
+  isBreakaway: false,
 };
 
 const NEXT_ACTION_DELAY = 5000;
@@ -65,6 +67,10 @@ export const game = createModel<RootModel>()({
       state.status = payload;
       return state;
     },
+    setBreakaway(state, payload: boolean) {
+      state.isBreakaway = payload;
+      return state;
+    },
     setReadyUserIdList(state, idList: string[]) {
       state.readyUserIdList = idList;
       return state;
@@ -85,6 +91,7 @@ export const game = createModel<RootModel>()({
       dispatch.game.setRound(initialState.round);
       dispatch.game.setTime(initialState.time);
       dispatch.game.setPainterId(participants[0].userId);
+      dispatch.game.setReadyUserIdList([]);
     },
     wait() {
       dispatch.game.setStatus(GameStatus.WAITING_PLAYER);
@@ -117,15 +124,19 @@ export const game = createModel<RootModel>()({
     nextQuestion(_, rootState) {
       const { game, room } = rootState;
       const { participants } = room;
+      const userLength = participants.length;
       const nextRound = game.round + 1;
       const nextPainterIndex = nextRound - 1;
       const nextPainterId =
-        participants[nextPainterIndex]?.userId ??
-        participants[(nextPainterIndex - participants.length) % participants.length].userId; // 사용자 수보다 라운드가 커질때 순차 탐색 연산 처리
+        participants[nextPainterIndex]?.userId ?? participants[(nextPainterIndex - userLength) % userLength].userId; // 사용자 수보다 라운드가 커질때 순차 탐색 연산 처리
 
       if (nextRound > game.questions.length) {
         dispatch.game.finish();
         return;
+      }
+
+      if (game.isBreakaway) {
+        dispatch.game.setBreakaway(false);
       }
 
       dispatch.game.standBy();
@@ -158,6 +169,11 @@ export const game = createModel<RootModel>()({
           },
         });
       }
+    },
+    breakaway() {
+      // 현재 페인터 나갔을때 처리
+      dispatch.game.setTime(0);
+      dispatch.game.setBreakaway(true);
     },
   }),
 });
