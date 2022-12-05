@@ -1,5 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export enum Provider {
   GOOGLE = 'google',
@@ -7,9 +9,7 @@ export enum Provider {
 
 @Injectable()
 export class AuthService {
-  // private readonly JWT_SECRET_KEY = 'VERY_SECRET_KEY'; // <- replace this with your secret key
-  private readonly JWT_SECRET_KEY =
-    'F6FxJJsv+Vvrjiypovn6+fw/V1Eg6dtgxSMv8TlPux91j7Rrk5r/8g6HaliRtf7AuJjES3VgiEqJPHCrZSb2kwTQ7Bc62LjtMZAtoHTc3BGr2YoK1Zv3gmIo5rup+ITyB3zcWdZwRJQsGPPGk5My6ZnTFS3ZHaOz6tnHeDkThuZeAOEVPNQlFu2sMrWqq3Nzi2xRHP2PizBE9FXiOkQ3E9wg2BJDko79enlBmsbjD85TSg3gshw/Z4Hp0zw9KHPcsOjFXfqiD6V86eQdKZEcmrxQ+NIBnRKhqTUW6/9y5jg0V4CQHAKAS0r2luhNOhRooGkIXkfltI2+HLh7rugo5A==';
+  private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
   constructor(/*private readonly usersService: UsersService*/) {
     //
