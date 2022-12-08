@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { SocketGateway } from './app.socket';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MoviesModule } from './movies/movies.module';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, MoviesModule],
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost:27017/picasso'),
+    AuthModule,
+    UsersModule,
+    MoviesModule,
+    CatsModule,
+  ],
   controllers: [AppController],
   providers: [SocketGateway],
 })
