@@ -1,5 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Profile } from 'passport-google-oauth20';
 import { sign } from 'jsonwebtoken';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/schemas/user.schema';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,18 +14,23 @@ export enum Provider {
 export class AuthService {
   private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-  constructor(/*private readonly usersService: UsersService*/) {
-    //
-  }
+  constructor(private readonly usersService: UsersService) {}
 
-  async validateOAuthLogin(thirdPartyId: string, provider: Provider): Promise<string> {
+  async validateOAuthLogin(profile: Profile, provider: Provider): Promise<string> {
     try {
-      // You can add some registration logic here,
-      // to register the user using their thirdPartyId (in this case their googleId)
-      // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
+      const thirdPartyId = profile.id;
+      let user: User = await this.usersService.findOne(thirdPartyId);
 
-      // if (!user)
-      // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
+      if (!user) {
+        const userInfo = {
+          userId: profile.id,
+          displayName: profile.displayName,
+          email: profile._json.email,
+          profileUrl: profile._json.picture,
+          locale: profile._json.locale,
+        };
+        user = await this.usersService.register(userInfo);
+      }
 
       const payload = {
         thirdPartyId,
