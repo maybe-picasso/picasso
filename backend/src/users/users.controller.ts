@@ -1,6 +1,7 @@
-import { UsersService } from './users.service';
-import { Controller, Delete, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Patch, Param, Body, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { UsersService } from './users.service';
+import { User } from './schemas/user.schema';
 
 @Controller('users')
 export class UsersController {
@@ -12,23 +13,24 @@ export class UsersController {
     return req.user;
   }
 
-  @Get()
-  getAll() {
-    return this.users.getAll();
-  }
-
   @Get('/:id')
-  getOne(@Param('id') id: string) {
-    return `This is getOne() ${id}`;
+  findOne(@Param('id') id: string) {
+    return this.users.findOne(id);
   }
 
-  @Post()
-  create() {
-    return 'This is create()';
+  @Get()
+  async findAll() {
+    const result = await this.users.findAll();
+    return result;
+  }
+
+  @Patch('/:id')
+  update(@Param('id') id: string, @Body() data: Partial<User>) {
+    return this.users.update(id, data);
   }
 
   @Delete('/:id')
   remove(@Param('id') id: string) {
-    return `This is delete() ${id}`;
+    return this.users.remove(id);
   }
 }

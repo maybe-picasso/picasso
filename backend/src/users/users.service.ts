@@ -13,11 +13,26 @@ export class UsersService {
     return newUser.save();
   }
 
-  async findOne(id: string): Promise<User> {
-    return this.userModel.findOne({ userId: id }).exec();
+  async remove(id: string) {
+    const removedData = await this.userModel.findByIdAndRemove({ _id: id }).exec();
+    return removedData;
   }
 
-  getAll(): string {
-    return 'this is getAll()';
+  async update(id: string, data: any): Promise<User> {
+    const user = await this.findOne(id);
+    const newData = {
+      ...user,
+      ...data,
+    };
+    console.log('확인 newData :>> ', newData);
+    return this.userModel.findOne({ _id: id }).exec();
+  }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
+
+  async findOne(id: string): Promise<User> {
+    return this.userModel.findOne({ _id: id }).exec();
   }
 }

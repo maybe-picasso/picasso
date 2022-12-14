@@ -13,16 +13,16 @@ export class CatsService {
     return newCat.save();
   }
 
+  async delete(id: string) {
+    const deletedCat = await this.catModel.findByIdAndRemove({ _id: id }).exec();
+    return deletedCat;
+  }
+
   async findAll(): Promise<Cat[]> {
     return this.catModel.find().exec();
   }
 
   async findOne(id: string): Promise<Cat> {
     return this.catModel.findOne({ _id: id }).exec();
-  }
-
-  async delete(id: string) {
-    const deletedCat = await this.catModel.findByIdAndRemove({ _id: id }).exec();
-    return deletedCat;
   }
 }

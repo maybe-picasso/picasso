@@ -19,6 +19,18 @@ export class User {
 
   @Prop()
   locale: string;
+
+  @Prop()
+  registerType: string;
+
+  @Prop()
+  avatar: number[];
+
+  @Prop()
+  score: number;
+
+  @Prop()
+  lastLoginDate: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

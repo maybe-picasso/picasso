@@ -14,12 +14,12 @@ export enum Provider {
 export class AuthService {
   private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly users: UsersService) {}
 
   async validateOAuthLogin(profile: Profile, provider: Provider): Promise<string> {
     try {
       const thirdPartyId = profile.id;
-      let user: User = await this.usersService.findOne(thirdPartyId);
+      let user: User = await this.users.findOne(thirdPartyId);
 
       if (!user) {
         const userInfo = {
@@ -28,8 +28,12 @@ export class AuthService {
           email: profile._json.email,
           profileUrl: profile._json.picture,
           locale: profile._json.locale,
+          registerType: provider,
+          lastLoginDate: new Date().getTime(),
+          avatar: [],
+          score: 0,
         };
-        user = await this.usersService.register(userInfo);
+        user = await this.users.register(userInfo);
       }
 
       const payload = {

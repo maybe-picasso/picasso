@@ -20,7 +20,8 @@
 ## reactions
 
 - canvasId
--
+- userId
+- reactionType
 
 ## comments
 
