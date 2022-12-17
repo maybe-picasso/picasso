@@ -8,31 +8,24 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async register(data: RegisterUserDto): Promise<User> {
+  register(data: RegisterUserDto): Promise<User> {
     const newUser = new this.userModel(data);
     return newUser.save();
   }
 
-  async remove(id: string) {
-    const removedData = await this.userModel.findByIdAndRemove({ _id: id }).exec();
-    return removedData;
+  remove(userId: string) {
+    return this.userModel.findOneAndRemove({ userId }).exec();
   }
 
-  async update(id: string, data: any): Promise<User> {
-    const user = await this.findOne(id);
-    const newData = {
-      ...user,
-      ...data,
-    };
-    console.log('확인 newData :>> ', newData);
-    return this.userModel.findOne({ _id: id }).exec();
+  update(userId: string, data: Partial<User>) {
+    return this.userModel.findOneAndUpdate({ userId }, data).exec();
   }
 
-  async findAll(): Promise<User[]> {
+  findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
 
-  async findOne(id: string): Promise<User> {
-    return this.userModel.findOne({ _id: id }).exec();
+  findOne(userId: string): Promise<User> {
+    return this.userModel.findOne({ userId }).exec();
   }
 }

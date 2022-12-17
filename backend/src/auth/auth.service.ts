@@ -3,6 +3,7 @@ import { Profile } from 'passport-google-oauth20';
 import { sign } from 'jsonwebtoken';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/schemas/user.schema';
+import { RegisterUserDto } from '../users/dto/register-user.dto';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -18,11 +19,11 @@ export class AuthService {
 
   async validateOAuthLogin(profile: Profile, provider: Provider): Promise<string> {
     try {
-      const thirdPartyId = profile.id;
+      const thirdPartyId: string = profile.id;
       let user: User = await this.users.findOne(thirdPartyId);
 
       if (!user) {
-        const userInfo = {
+        const userInfo: RegisterUserDto = {
           userId: profile.id,
           displayName: profile.displayName,
           email: profile._json.email,

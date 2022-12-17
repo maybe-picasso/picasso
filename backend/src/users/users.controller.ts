@@ -19,9 +19,8 @@ export class UsersController {
   }
 
   @Get()
-  async findAll() {
-    const result = await this.users.findAll();
-    return result;
+  findAll() {
+    return this.users.findAll();
   }
 
   @Patch('/:id')
