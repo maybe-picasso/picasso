@@ -14,6 +14,7 @@ export enum Provider {
 @Injectable()
 export class AuthService {
   private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+  private readonly JWT_SESSION_TIME = 3600 * 3; // 3600초, 1시간
 
   constructor(private readonly users: UsersService) {}
 
@@ -42,7 +43,7 @@ export class AuthService {
         provider,
       };
 
-      const jwt: string = sign(payload, this.JWT_SECRET_KEY, { expiresIn: 3600 }); // 3600초, 1시간
+      const jwt: string = sign(payload, this.JWT_SECRET_KEY, { expiresIn: this.JWT_SESSION_TIME });
       return jwt;
     } catch (err) {
       throw new InternalServerErrorException('validateOAuthLogin', err.message);

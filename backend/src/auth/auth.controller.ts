@@ -15,15 +15,9 @@ export class AuthController {
     // handles the Google OAuth2 callback
     const jwt: string = req.user.jwt;
     if (jwt) {
-      res.redirect('http://localhost:4200/login/success/' + jwt);
+      res.redirect(`http://localhost:4000/#/auth/${jwt}`);
     } else {
-      res.redirect('http://localhost:4200/login/failure');
+      res.redirect(`http://localhost:4000/#/auth`);
     }
-  }
-
-  @Get('protected')
-  @UseGuards(AuthGuard('jwt'))
-  protectedResource() {
-    return 'JWT is working!';
   }
 }
