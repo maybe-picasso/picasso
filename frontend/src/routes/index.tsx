@@ -7,6 +7,7 @@ import PATHS from './paths';
 const Home = lazy(() => import('pages/Home'));
 const Room = lazy(() => import('pages/Room'));
 const About = lazy(() => import('pages/About'));
+const Auth = lazy(() => import('pages/Auth'));
 
 const AppRoutes = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path={PATHS.HOME} element={<Home />} />
         <Route path={PATHS.ROOM} element={<Room />} />
+        <Route path={PATHS.AUTH} element={<Auth />} />
         <Route path={PATHS.ABOUT} element={<About />} />
       </Routes>
     </Suspense>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Button, Heading, Stack, Divider, Badge } from '@chakra-ui/react';
-import { BsArrowRightCircleFill } from 'react-icons/bs';
+import { BsArrowRightCircleFill, BsGoogle } from 'react-icons/bs';
 import { ROOM_LIST } from 'constants/index';
 import PATHS from 'routes/paths';
 import './index.scss';
@@ -16,6 +16,10 @@ const Home = () => {
 
   const handleEnter = () => {
     navigate(`/room/${ROOM_LIST[selectedIndex].name}`);
+  };
+
+  const handleLogin = () => {
+    window.location.href = 'http://localhost:3000/auth/google';
   };
 
   return (
@@ -56,6 +60,10 @@ const Home = () => {
           </Button>
         </Stack>
       </Container>
+
+      <Button type="button" colorScheme="red" size="lg" variant="solid" rightIcon={<BsGoogle />} onClick={handleLogin}>
+        Google 로그인
+      </Button>
 
       <footer>
         <Link to={PATHS.ABOUT}>About us</Link>

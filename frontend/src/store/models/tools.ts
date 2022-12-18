@@ -1,8 +1,8 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
-import { COLORS, DEFAULT_LINE_SIZE, LOCAL_STORAGE } from 'constants/index';
+import { COLORS, DEFAULT_LINE_SIZE } from 'constants/index';
 import { DrawingTools } from 'types/enums';
-import { getStorage, setStorage } from 'helpers/storage';
+import { getStorage, setStorage, LOCAL_STORAGE } from 'helpers/storage';
 
 export interface ToolsState {
   currentTool: DrawingTools;

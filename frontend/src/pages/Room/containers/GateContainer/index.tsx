@@ -19,8 +19,8 @@ import { useMotion } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
 import { getUuid, getRandomNumber } from 'helpers/utils';
-import { setStorage, getStorage } from 'helpers/storage';
-import { PROFILE_CHARACTERS, LOCAL_STORAGE } from 'constants/index';
+import { setStorage, getStorage, LOCAL_STORAGE } from 'helpers/storage';
+import { PROFILE_CHARACTERS } from 'constants/index';
 import socket from 'core/socket';
 
 import './index.scss';
