@@ -10,7 +10,9 @@ export class UsersController {
   @Get('profile')
   @UseGuards(AuthGuard('jwt'))
   getProfile(@Request() req) {
-    return req.user;
+    const user = req.user;
+    const { thirdPartyId } = user;
+    return this.findOne(thirdPartyId);
   }
 
   @Get('/:id')
