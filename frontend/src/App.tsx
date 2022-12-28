@@ -1,19 +1,13 @@
 import { Provider } from 'react-redux';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ChakraProvider } from '@chakra-ui/react';
 import { store } from './store';
 import { theme } from './theme';
+import { queryClient } from 'queries/config';
+
 import AppRoutes from 'routes';
 import ErrorBoundary, { ErrorFallback, errorHandler } from 'components/ErrorBoundary';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 0,
-    },
-  },
-});
 
 const App = () => {
   return (
