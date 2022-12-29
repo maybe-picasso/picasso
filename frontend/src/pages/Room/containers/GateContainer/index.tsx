@@ -20,8 +20,10 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'store';
 import { getUuid, getRandomNumber } from 'helpers/utils';
 import { setStorage, getStorage, LOCAL_STORAGE } from 'helpers/storage';
+import { useUserInfoQuery } from 'queries';
 import { PROFILE_CHARACTERS } from 'constants/index';
 import socket from 'core/socket';
+import LoginProfileContainer from 'pages/Home/containers/LoginProfileContainer';
 
 import './index.scss';
 
@@ -36,7 +38,8 @@ const GateContainer = ({ roomId }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
   const isNextDisabled = useMemo(() => profileIndex === PROFILE_CHARACTERS.length - 1, [profileIndex]);
-  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || '';
+  const { data: userInfo } = useUserInfoQuery();
+  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || userInfo.displayName || '';
 
   // 프로필 설정 애니메이션
   const { controls } = useMotion({ deps: [profileIndex] });
@@ -86,6 +89,7 @@ const GateContainer = ({ roomId }: Props) => {
   return (
     <Container alignContent="center" className="gate-container">
       <FormControl>
+        <LoginProfileContainer />
         <Stack spacing={5}>
           <Heading as="h1" size="xl">
             프로필 설정

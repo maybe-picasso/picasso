@@ -10,13 +10,10 @@
   @include primaryBackground();
 
   .chakra-form-control {
+    position: relative;
     padding: 20px;
     width: 380px;
     border-radius: 10px;
     background-color: #fff;
-  }
-
-  @include mobileDevice {
-    justify-content: flex-start;
   }
 }

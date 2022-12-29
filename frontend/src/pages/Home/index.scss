@@ -20,12 +20,14 @@
 
     h1 {
       position: absolute;
-      top: -80px;
+      top: -65px;
       left: 0;
       @include logoFont();
 
       .badge {
-        margin: 0 0 -12px 10px;
+        position: absolute;
+        top: -2px;
+        right: 60px;
       }
     }
 

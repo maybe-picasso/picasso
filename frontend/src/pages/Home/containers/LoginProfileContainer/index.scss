@@ -1,0 +1,41 @@
+@import '~styles/modules/mixin.scss';
+
+.login-profile {
+  position: absolute;
+  top: -56px;
+  right: 0;
+
+  button {
+    position: relative;
+    padding: 5px 50px 5px 10px;
+    border-radius: 16px;
+    background-color: #fff;
+    max-width: 140px;
+    min-width: 120px;
+
+    p {
+      color: rgb(80, 80, 80);
+      @include ellipsis();
+    }
+  }
+
+  .circle {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: -4px;
+    right: 0;
+    border-radius: 50%;
+    background-color: #dc4e41;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .chakra-avatar {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
