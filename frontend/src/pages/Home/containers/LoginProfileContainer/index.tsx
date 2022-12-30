@@ -1,12 +1,12 @@
 import { BsGoogle } from 'react-icons/bs';
 
-import { Avatar, Spinner } from '@chakra-ui/react';
+import { Avatar } from '@chakra-ui/react';
 import { LOCAL_STORAGE, deleteStorage } from 'helpers/storage';
 import { useUserInfoQuery } from 'queries';
 import './index.scss';
 
 const LoginProfileContainer = () => {
-  const { isLoading, data: userInfo } = useUserInfoQuery();
+  const { data: userInfo } = useUserInfoQuery();
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:3000/auth/google';
@@ -19,9 +19,7 @@ const LoginProfileContainer = () => {
 
   return (
     <div className="login-profile">
-      {isLoading ? (
-        <Spinner />
-      ) : userInfo ? (
+      {userInfo ? (
         <button type="button" onClick={handleLogout} title={userInfo.displayName}>
           <p>{userInfo.displayName}</p>
           <span className="circle">
