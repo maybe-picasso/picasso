@@ -76,9 +76,9 @@ const Room = () => {
                   colSpan={{ base: 10, lg: 3 }}
                   width={{ base: '100%', lg: '280px' }}
                 >
-                  <Grid h="100%" templateRows="repeat(10, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
+                  <Grid h="100%" templateRows="repeat(12, 1fr)" templateColumns="repeat(3, 1fr)" gap={2}>
                     <GridItem
-                      rowSpan={2}
+                      rowSpan={3}
                       colSpan={3}
                       bg="gray.100"
                       minHeight={{ base: 90, lg: 150 }}
@@ -86,7 +86,7 @@ const Room = () => {
                     >
                       {isMyTurn || isWaitingPlayer || isWaitingReady ? <ToolsContainer /> : <GameStatusContainer />}
                     </GridItem>
-                    <GridItem rowSpan={{ base: 10, lg: 8 }} colSpan={3} borderRadius={6} bg="gray.300">
+                    <GridItem rowSpan={{ base: 12, lg: 9 }} colSpan={3} borderRadius={6} bg="gray.300">
                       <ChatContainer />
                     </GridItem>
                   </Grid>
