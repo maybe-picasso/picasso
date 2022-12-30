@@ -39,7 +39,7 @@ const GateContainer = ({ roomId }: Props) => {
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
   const isNextDisabled = useMemo(() => profileIndex === PROFILE_CHARACTERS.length - 1, [profileIndex]);
   const { data: userInfo } = useUserInfoQuery();
-  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || userInfo.displayName || '';
+  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || userInfo?.displayName || '';
 
   // 프로필 설정 애니메이션
   const { controls } = useMotion({ deps: [profileIndex] });
