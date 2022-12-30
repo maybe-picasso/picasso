@@ -1,4 +1,4 @@
-import { withTheme } from './decorators';
+import { withTheme, withReactQuery } from './decorators';
 
 import './style.scss';
 import '../src/styles/index.scss';
@@ -13,4 +13,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [withTheme()];
+export const decorators = [withTheme(), withReactQuery()];
