@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { withRouter, withRedux } from '../../.storybook/decorators';
+import { withRouter, withRedux, withMockServer } from '../../.storybook/decorators';
 import { Room } from 'pages';
 import {
   프로필설정,
@@ -18,6 +18,8 @@ import {
 } from 'mocks/store';
 import PATHS from 'routes/paths';
 
+import getUserInfo from 'mocks/apis/getUserInfo.json';
+
 export default {
   title: 'Room',
   render: () => <Room />,
@@ -29,7 +31,16 @@ const router = withRouter({
 
 export const GameProfileStory: StoryObj = {
   name: '프로필 설정',
-  decorators: [router, withRedux(프로필설정)],
+  decorators: [
+    router,
+    withRedux(프로필설정),
+    withMockServer([
+      {
+        mockJson: getUserInfo,
+        key: 'normal',
+      },
+    ]),
+  ],
 };
 
 export const GameLoadingStory: StoryObj = {

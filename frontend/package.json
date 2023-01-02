@@ -70,6 +70,7 @@
     "@types/three": "^0.139.0",
     "@types/uuid": "^8.3.3",
     "gh-pages": "^4.0.0",
+    "msw": "^0.49.2",
     "react-app-rewired": "^2.2.1",
     "webpack-bundle-analyzer": "^4.6.1"
   },
@@ -109,5 +110,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
