@@ -1,5 +1,5 @@
-import io from 'socket.io-client';
 import { isNodeProdcution } from 'helpers/env';
+import io from 'socket.io-client';
 
 const SOCKET_SERVER = isNodeProdcution ? 'wss://maybe-picasso.herokuapp.com' : 'ws://localhost:3000';
 

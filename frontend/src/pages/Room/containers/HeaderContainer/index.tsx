@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
-import { Flex, Spacer, Heading, IconButton } from '@chakra-ui/react';
 import { IoExitOutline } from 'react-icons/io5';
+import { Flex, Heading, IconButton,Spacer } from '@chakra-ui/react';
+
 import './index.scss';
 
 const HeaderContainer = () => {

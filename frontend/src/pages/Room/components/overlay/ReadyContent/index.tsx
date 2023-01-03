@@ -1,5 +1,6 @@
-import { Text, Badge, Button, Center, Divider } from '@chakra-ui/react';
 import { ProfileAvatar } from 'pages/Room/components';
+import { Badge, Button, Center, Divider,Text } from '@chakra-ui/react';
+
 import ResultLayer from '../ResultLayer';
 
 import './index.scss';

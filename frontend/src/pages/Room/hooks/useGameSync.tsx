@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import event from 'core/event';
+import { sendMessage } from 'core/socket';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
-import { useGameStatus, useMyTurn, useFirstUser } from '../hooks';
-import { sendMessage } from 'core/socket';
-import event from 'core/event';
+
+import { useFirstUser, useGameStatus, useMyTurn } from '../hooks';
 
 /**
  * 입장한 유저 게임 진행 상태 싱크

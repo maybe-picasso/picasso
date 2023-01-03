@@ -1,11 +1,12 @@
-import { useRef, useState, useEffect } from 'react';
-import cn from 'classnames';
-
+import { useEffect,useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { select } from 'store';
-import { useMyTurn, useGameStatus } from '../../hooks';
+import cn from 'classnames';
 import { Drawing } from 'core/drawing';
+import { select } from 'store';
 import { DrawingTools } from 'types/enums';
+
+import { useGameStatus,useMyTurn } from '../../hooks';
+
 import './index.scss';
 
 export let drawing: Drawing;

@@ -1,15 +1,16 @@
-import { initialState as commonInitState } from 'store/models/common';
-import { initialState as roomInitState } from 'store/models/room';
+import { QUESTIONS as QUESTIONS_ORIGIANL } from 'constants/index';
+import { RootState } from 'store';
 import { initialState as chatInitState } from 'store/models/chat';
-import { initialState as toolsInitState } from 'store/models/tools';
+import { initialState as commonInitState } from 'store/models/common';
 import { initialState as gameInitState } from 'store/models/game';
 import { initialState as gamePointInitState } from 'store/models/gamePoint';
-import { RootState } from 'store';
-import { participants } from './room';
-import { correctUserList } from './gamePoint';
-import { chatList } from './chat';
-import { QUESTIONS as QUESTIONS_ORIGIANL } from 'constants/index';
+import { initialState as roomInitState } from 'store/models/room';
+import { initialState as toolsInitState } from 'store/models/tools';
 import { GameStatus } from 'types/enums';
+
+import { chatList } from './chat';
+import { correctUserList } from './gamePoint';
+import { participants } from './room';
 
 const QUESTIONS = QUESTIONS_ORIGIANL.slice(0, 9);
 

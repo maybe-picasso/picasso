@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 import { Button } from '@chakra-ui/react';
-import { Canvas } from '@react-three/fiber';
 import { TrackballControls } from '@react-three/drei'; //7.0.1 써 에러x
+import { Canvas } from '@react-three/fiber';
 
-import Typo3D from './components/Typo3D';
-import Image3D from './components/Image3D';
-import Earth from './components/Earth';
 import CameraControl from './components/CameraControl';
+import Earth from './components/Earth';
+import Image3D from './components/Image3D';
+import Typo3D from './components/Typo3D';
 
 import './index.scss';
 

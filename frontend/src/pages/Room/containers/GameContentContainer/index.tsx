@@ -1,25 +1,24 @@
-import { useEffect, useCallback } from 'react';
-import { Flex } from '@chakra-ui/react';
+import { useCallback,useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import { PROFILE_CHARACTERS } from 'constants/index';
+import event from 'core/event';
+import { sendMessage } from 'core/socket';
 import JSConfetti from 'js-confetti';
+import { Dispatch, select } from 'store';
+import { SocketMessageType } from 'types/enums';
+import { Flex } from '@chakra-ui/react';
+
 import {
+  CompleteContent,
+  GameOverContent,
   GameQuestion,
   GameRound,
   GameTimer,
-  ReadyContent,
   NextTurnContent,
-  CompleteContent,
-  GameOverContent,
+  ReadyContent,
 } from '../../components';
 import { CanvasContainer } from '../../containers';
-import { PROFILE_CHARACTERS } from 'constants/index';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { Dispatch, select } from 'store';
-import { useMyTurn, usePainterInfo, useGameStatus, useMyCorrect } from '../../hooks';
-
-import event from 'core/event';
-import { sendMessage } from 'core/socket';
-import { SocketMessageType } from 'types/enums';
+import { useGameStatus, useMyCorrect,useMyTurn, usePainterInfo } from '../../hooks';
 
 import './index.scss';
 

@@ -1,5 +1,5 @@
-import { Box, Heading } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { Box, Heading } from '@chakra-ui/react';
 
 import './index.scss';
 

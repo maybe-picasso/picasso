@@ -1,9 +1,10 @@
 import { Provider } from 'react-redux';
+import ErrorBoundary, { ErrorFallback, errorHandler } from 'components/ErrorBoundary';
+import AppRoutes from 'routes';
 import { ChakraProvider } from '@chakra-ui/react';
+
 import { store } from './store';
 import { theme } from './theme';
-import AppRoutes from 'routes';
-import ErrorBoundary, { ErrorFallback, errorHandler } from 'components/ErrorBoundary';
 
 const App = () => {
   return (

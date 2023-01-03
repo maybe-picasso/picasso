@@ -1,7 +1,7 @@
 import { useRef } from 'react';
+import { Mesh } from 'three';
 import { Sphere, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
 interface Props {
   radius: number;
   position?: [number, number, number];

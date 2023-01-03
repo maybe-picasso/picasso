@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { withRouter } from '../../.storybook/decorators';
-import { Home, About } from 'pages';
+import { About,Home } from 'pages';
 import PATHS from 'routes/paths';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { withRouter } from '../../.storybook/decorators';
 
 export default {
   title: 'Home',

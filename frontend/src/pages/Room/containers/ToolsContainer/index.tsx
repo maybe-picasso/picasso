@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import { Grid, GridItem, Button, Stack } from '@chakra-ui/react';
-import { PaletteSlider, PaletteColor } from 'pages/Room/components';
+import { useDispatch,useSelector } from 'react-redux';
 import { COLORS } from 'constants/index';
-import { DrawingTools } from 'types/enums';
-
-import { useSelector, useDispatch } from 'react-redux';
+import { PaletteColor,PaletteSlider } from 'pages/Room/components';
 import { Dispatch, select } from 'store';
+import { DrawingTools } from 'types/enums';
+import { Button, Grid, GridItem, Stack } from '@chakra-ui/react';
+
 import { drawing } from '../CanvasContainer';
 
 import './index.scss';

@@ -1,4 +1,5 @@
 import { createModel } from '@rematch/core';
+
 import { RootModel } from './';
 
 export interface CommonState {

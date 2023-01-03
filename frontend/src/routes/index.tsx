@@ -1,7 +1,8 @@
 import { Suspense, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { lazy } from '@loadable/component';
+import { Route,Routes } from 'react-router-dom';
 import PageFallback from 'components/PageFallback';
+import { lazy } from '@loadable/component';
+
 import PATHS from './paths';
 
 const Home = lazy(() => import('pages/Home'));

@@ -1,12 +1,13 @@
-import * as workerTimers from 'worker-timers';
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
+import event from 'core/event';
+import { getRandomQuestions } from 'helpers/utils';
+import { drawing } from 'pages/Room/containers/CanvasContainer';
 import { Dispatch, select } from 'store';
 import { SocketMessageType } from 'types/enums';
+import * as workerTimers from 'worker-timers';
+
 import { useGameStatus } from '../hooks';
-import { drawing } from 'pages/Room/containers/CanvasContainer';
-import { getRandomQuestions } from 'helpers/utils';
-import event from 'core/event';
 
 const useGameHandler = () => {
   const { participants } = useSelector(select.room.state);

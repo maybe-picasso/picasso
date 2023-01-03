@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Dispatch, select } from 'store';
-
-import { Flex, Grid, GridItem, IconButton, InputGroup, Input, InputRightElement } from '@chakra-ui/react';
-import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons';
-
-import { sendMessage } from 'core/socket';
-import { SocketMessageType } from 'types/enums';
-import event from 'core/event';
+import { useDispatch,useSelector } from 'react-redux';
 import cn from 'classnames';
+import event from 'core/event';
+import { sendMessage } from 'core/socket';
+import { Dispatch, select } from 'store';
+import { SocketMessageType } from 'types/enums';
+import { ArrowDownIcon,ArrowUpIcon } from '@chakra-ui/icons';
+import { Flex, Grid, GridItem, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+
 import './index.scss';
 
 const ChatContainer = () => {

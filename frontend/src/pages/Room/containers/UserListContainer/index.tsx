@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { select } from 'store';
-import { Flex, Box, Badge, Text } from '@chakra-ui/react';
-import { Skeleton } from '@chakra-ui/react';
-import { ProfileAvatar } from 'pages/Room/components';
 import cn from 'classnames';
+import { ProfileAvatar } from 'pages/Room/components';
+import { select } from 'store';
+import { Badge, Box, Flex, Text } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
+
 import './index.scss';
 
 const UserListContainer = () => {

@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import { select } from 'store';
-import { usePainterInfo } from '../../hooks';
 import { GameStatus } from 'types/enums';
+
+import { usePainterInfo } from '../../hooks';
+
 import './index.scss';
 
 const DevLogContainer = () => {

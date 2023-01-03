@@ -1,7 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
-import { throttle, sampleSize } from 'lodash-es';
-import randomWord from 'random-words';
 import { QUESTIONS } from 'constants/index';
+import { sampleSize,throttle } from 'lodash-es';
+import randomWord from 'random-words';
+import { v4 as uuidv4 } from 'uuid';
 
 const REPEAT_HOLD_TIME = 1000;
 const THROTTLE_OPTIONS = {
