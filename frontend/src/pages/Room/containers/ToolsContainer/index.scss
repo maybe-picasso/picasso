@@ -1,4 +1,4 @@
-@import '~styles/modules/mixin.scss';
+@import '~@/styles/modules/mixin.scss';
 
 .tool-type-wrap {
   button {
@@ -45,19 +45,19 @@
 
   .PEN {
     &::after {
-      mask: url('~assets/img/brush.svg') no-repeat 50% 50%;
+      mask: url('~@/assets/img/brush.svg') no-repeat 50% 50%;
     }
   }
 
   .ERASER {
     &::after {
-      mask: url('~assets/img/eraser.svg') no-repeat 50% 50%;
+      mask: url('~@/assets/img/eraser.svg') no-repeat 50% 50%;
     }
   }
 
   .CLEAR_ALL {
     &::after {
-      mask: url('~assets/img/trash-can.svg') no-repeat 50% 50%;
+      mask: url('~@/assets/img/trash-can.svg') no-repeat 50% 50%;
       mask-size: 80%;
     }
   }

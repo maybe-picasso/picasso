@@ -1,13 +1,12 @@
-import { QUESTIONS as QUESTIONS_ORIGIANL } from 'constants/index';
-import { RootState } from 'store';
-import { initialState as chatInitState } from 'store/models/chat';
-import { initialState as commonInitState } from 'store/models/common';
-import { initialState as gameInitState } from 'store/models/game';
-import { initialState as gamePointInitState } from 'store/models/gamePoint';
-import { initialState as roomInitState } from 'store/models/room';
-import { initialState as toolsInitState } from 'store/models/tools';
-import { GameStatus } from 'types/enums';
-
+import { QUESTIONS as QUESTIONS_ORIGIANL } from '@/constants';
+import { RootState } from '@/store';
+import { initialState as chatInitState } from '@/store/models/chat';
+import { initialState as commonInitState } from '@/store/models/common';
+import { initialState as gameInitState } from '@/store/models/game';
+import { initialState as gamePointInitState } from '@/store/models/gamePoint';
+import { initialState as roomInitState } from '@/store/models/room';
+import { initialState as toolsInitState } from '@/store/models/tools';
+import { GameStatus } from '@/types/enums';
 import { chatList } from './chat';
 import { correctUserList } from './gamePoint';
 import { participants } from './room';

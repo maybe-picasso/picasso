@@ -1,14 +1,8 @@
-import { useCallback, useMemo, useRef,useState } from 'react';
-import { BsArrowLeft, BsArrowRight,BsArrowRightCircleFill } from 'react-icons/bs';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { BsArrowLeft, BsArrowRight, BsArrowRightCircleFill } from 'react-icons/bs';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import { useDispatch } from 'react-redux';
-import { LOCAL_STORAGE,PROFILE_CHARACTERS } from 'constants/index';
-import socket from 'core/socket';
 import { motion } from 'framer-motion';
-import { getStorage,setStorage } from 'helpers/storage';
-import { getRandomNumber,getUuid } from 'helpers/utils';
-import { useMotion } from 'hooks';
-import { Dispatch } from 'store';
 import {
   Button,
   Container,
@@ -22,6 +16,13 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+
+import { LOCAL_STORAGE, PROFILE_CHARACTERS } from '@/constants';
+import socket from '@/core/socket';
+import { getStorage, setStorage } from '@/helpers/storage';
+import { getRandomNumber, getUuid } from '@/helpers/utils';
+import { useMotion } from '@/hooks';
+import { Dispatch } from '@/store';
 
 import './index.scss';
 

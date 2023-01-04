@@ -1,4 +1,4 @@
-import { PROFILE_CHARACTERS } from 'constants/index';
+import { PROFILE_CHARACTERS } from '@/constants';
 
 import './index.scss';
 

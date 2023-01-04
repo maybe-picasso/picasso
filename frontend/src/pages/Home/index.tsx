@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
-import { Link,useNavigate } from 'react-router-dom';
-import { ROOM_LIST } from 'constants/index';
-import PATHS from 'routes/paths';
-import { Badge,Button, Container, Divider, Heading, Stack } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Badge, Button, Container, Divider, Heading, Stack } from '@chakra-ui/react';
+
+import { ROOM_LIST } from '@/constants/index';
+import PATHS from '@/routes/paths';
 
 import './index.scss';
 

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import tickTock from 'assets/sound/tick-tock.mp3';
 import useSound from 'use-sound';
 import { Box, Text } from '@chakra-ui/react';
+
+import tickTock from '@/assets/sound/tick-tock.mp3';
 
 import './index.scss';
 

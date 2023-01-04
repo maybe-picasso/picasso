@@ -6,10 +6,10 @@
   aspect-ratio: 4 / 3;
 
   &.pen:hover {
-    cursor: url('~assets/img/brush.svg') 0 30, pointer;
+    cursor: url('~@/assets/img/brush.svg') 0 30, pointer;
   }
 
   &.eraser:hover {
-    cursor: url('~assets/img/eraser.svg') 0 30, pointer;
+    cursor: url('~@/assets/img/eraser.svg') 0 30, pointer;
   }
 }

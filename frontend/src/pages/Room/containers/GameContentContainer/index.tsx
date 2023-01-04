@@ -1,13 +1,13 @@
-import { useCallback,useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import { PROFILE_CHARACTERS } from 'constants/index';
-import event from 'core/event';
-import { sendMessage } from 'core/socket';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import JSConfetti from 'js-confetti';
-import { Dispatch, select } from 'store';
-import { SocketMessageType } from 'types/enums';
 import { Flex } from '@chakra-ui/react';
 
+import { PROFILE_CHARACTERS } from '@/constants';
+import event from '@/core/event';
+import { sendMessage } from '@/core/socket';
+import { Dispatch, select } from '@/store';
+import { SocketMessageType } from '@/types/enums';
 import {
   CompleteContent,
   GameOverContent,
@@ -18,7 +18,7 @@ import {
   ReadyContent,
 } from '../../components';
 import { CanvasContainer } from '../../containers';
-import { useGameStatus, useMyCorrect,useMyTurn, usePainterInfo } from '../../hooks';
+import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo } from '../../hooks';
 
 import './index.scss';
 

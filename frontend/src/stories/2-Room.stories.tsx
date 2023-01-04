@@ -1,3 +1,5 @@
+import { Meta, StoryObj } from '@storybook/react';
+
 import {
   게임_다음턴안내_출제자,
   게임_다음턴안내_플레이어,
@@ -12,12 +14,10 @@ import {
   게임_플레이어_준비,
   게임_현재페인터,
   프로필설정,
-} from 'mocks/store';
-import { Room } from 'pages';
-import PATHS from 'routes/paths';
-import { Meta, StoryObj } from '@storybook/react';
-
-import { withRedux,withRouter } from '../../.storybook/decorators';
+} from '@/mocks/store';
+import { Room } from '@/pages';
+import PATHS from '@/routes/paths';
+import { withRedux, withRouter } from '../../.storybook/decorators';
 
 export default {
   title: 'Room',

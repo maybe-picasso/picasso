@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
-import { select } from 'store';
+
+import { select } from '@/store';
 
 const useMyCorrect = () => {
   const { userInfo } = useSelector(select.room.state);

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import event from 'core/event';
-import { sendMessage } from 'core/socket';
-import { Dispatch, select } from 'store';
-import { SocketMessageType } from 'types/enums';
 
+import event from '@/core/event';
+import { sendMessage } from '@/core/socket';
+import { Dispatch, select } from '@/store';
+import { SocketMessageType } from '@/types/enums';
 import { useFirstUser, useGameStatus, useMyTurn } from '../hooks';
 
 /**

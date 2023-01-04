@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import cn from 'classnames';
 import { orderBy } from 'lodash-es';
-import { ProfileAvatar } from 'pages/Room/components';
-import { Badge,Text } from '@chakra-ui/react';
+import { Badge, Text } from '@chakra-ui/react';
 
+import { ProfileAvatar } from '@/pages/Room/components';
 import ResultLayer from '../ResultLayer';
 
 import './index.scss';

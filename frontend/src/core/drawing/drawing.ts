@@ -1,7 +1,6 @@
-import event from 'core/event';
-import { sendMessage } from 'core/socket';
-import { DrawingStatus, SocketMessageType } from 'types/enums';
-
+import event from '@/core/event';
+import { sendMessage } from '@/core/socket';
+import { DrawingStatus, SocketMessageType } from '@/types/enums';
 import { DrawingConstructorParams, DrawingCore, DrawParams } from './drawing-core';
 
 type MouseEventHandler = (e: MouseEvent) => void;

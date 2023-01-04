@@ -1,6 +1,6 @@
-import { PROFILE_CHARACTERS } from 'constants/index';
-import { Center, Text,VStack } from '@chakra-ui/react';
+import { Center, Text, VStack } from '@chakra-ui/react';
 
+import { PROFILE_CHARACTERS } from '@/constants';
 import { usePainterInfo } from '../../hooks';
 
 const GameStatusContainer = () => {

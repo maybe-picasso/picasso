@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
-import PageTemplate from 'components/PageTemplate';
-import { isNodeProdcution } from 'helpers/env';
-import { select } from 'store';
 import { Container, Grid, GridItem } from '@chakra-ui/react';
 
+import PageTemplate from '@/components/PageTemplate';
+import { isNodeProdcution } from '@/helpers/env';
+import { select } from '@/store';
 import {
   ChatContainer,
   DevLogContainer,

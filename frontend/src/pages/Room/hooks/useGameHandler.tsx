@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import event from 'core/event';
-import { getRandomQuestions } from 'helpers/utils';
-import { drawing } from 'pages/Room/containers/CanvasContainer';
-import { Dispatch, select } from 'store';
-import { SocketMessageType } from 'types/enums';
+import { useDispatch, useSelector } from 'react-redux';
 import * as workerTimers from 'worker-timers';
 
+import event from '@/core/event';
+import { getRandomQuestions } from '@/helpers/utils';
+import { drawing } from '@/pages/Room/containers/CanvasContainer';
+import { Dispatch, select } from '@/store';
+import { SocketMessageType } from '@/types/enums';
 import { useGameStatus } from '../hooks';
 
 const useGameHandler = () => {

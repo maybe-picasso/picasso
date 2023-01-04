@@ -1,10 +1,10 @@
-import { sendMessage } from 'core/socket';
-import { compare } from 'helpers/utils';
-import { GameStatus } from 'types/enums';
-import { SocketMessageType } from 'types/enums';
 import * as workerTimers from 'worker-timers';
 import { createModel } from '@rematch/core';
 
+import { sendMessage } from '@/core/socket';
+import { compare } from '@/helpers/utils';
+import { GameStatus } from '@/types/enums';
+import { SocketMessageType } from '@/types/enums';
 import { RootModel } from './';
 
 export interface GameState {

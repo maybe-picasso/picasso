@@ -1,4 +1,4 @@
-import { DrawingTools } from 'types/enums';
+import { DrawingTools } from '@/types/enums';
 
 const DEFAULT_MODE = DrawingTools.PEN;
 const DEFAULT_COLOR = 'black';

@@ -1,4 +1,4 @@
-@import '~styles/modules/mixin.scss';
+@import '~@/styles/modules/mixin.scss';
 
 #room {
   display: flex;
@@ -8,7 +8,7 @@
   .joined {
     background-color: #286381;
 
-    >div {
+    > div {
       min-height: 500px;
     }
   }

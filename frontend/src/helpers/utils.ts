@@ -1,7 +1,8 @@
-import { QUESTIONS } from 'constants/index';
-import { sampleSize,throttle } from 'lodash-es';
+import { sampleSize, throttle } from 'lodash-es';
 import randomWord from 'random-words';
 import { v4 as uuidv4 } from 'uuid';
+
+import { QUESTIONS } from '@/constants';
 
 const REPEAT_HOLD_TIME = 1000;
 const THROTTLE_OPTIONS = {

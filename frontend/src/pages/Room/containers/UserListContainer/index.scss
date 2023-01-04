@@ -1,4 +1,4 @@
-@import '~styles/modules/mixin.scss';
+@import '~@/styles/modules/mixin.scss';
 
 .user-list {
   height: 100%;
@@ -13,11 +13,10 @@
     padding: 0 4px;
   }
 
-
   li {
     position: relative;
 
-    +li {
+    + li {
       margin-top: 10px;
 
       @include mobileDevice {

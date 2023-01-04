@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
-import event from 'core/event';
-import { sendMessage } from 'core/socket';
-import { Dispatch, select } from 'store';
-import { SocketMessageType } from 'types/enums';
-import { ArrowDownIcon,ArrowUpIcon } from '@chakra-ui/icons';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { Flex, Grid, GridItem, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+
+import event from '@/core/event';
+import { sendMessage } from '@/core/socket';
+import { Dispatch, select } from '@/store';
+import { SocketMessageType } from '@/types/enums';
 
 import './index.scss';
 
