@@ -1,5 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { Box, Button, Code } from '@chakra-ui/react';
+
 import './index.scss';
 
 interface Props {

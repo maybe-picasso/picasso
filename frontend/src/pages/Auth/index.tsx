@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
-import { setStorage, LOCAL_STORAGE } from 'helpers/storage';
-import PATHS from 'routes/paths';
+
+import { LOCAL_STORAGE, setStorage } from '@/helpers/storage';
+import PATHS from '@/routes/paths';
 
 import './index.scss';
 

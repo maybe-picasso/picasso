@@ -1,8 +1,9 @@
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { Color } from 'three';
-import { useRef } from 'react';
 import { Sphere, Stars, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+
 import Clouds from '../Clouds';
 
 interface Props {

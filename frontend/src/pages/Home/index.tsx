@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Container, Button, Heading, Stack, Divider, Badge } from '@chakra-ui/react';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
-import { ROOM_LIST } from 'constants/index';
-import PATHS from 'routes/paths';
-import LoginProfileContainer from './containers/LoginProfileContainer';
+import { Link, useNavigate } from 'react-router-dom';
+import { Badge, Button, Container, Divider, Heading, Stack } from '@chakra-ui/react';
+
+import { ROOM_LIST } from '@/constants';
+import LoginProfileContainer from '@/pages/Home/containers/LoginProfileContainer';
+import PATHS from '@/routes/paths';
+
 import './index.scss';
 
 const Home = () => {

@@ -1,12 +1,14 @@
 import { BsGoogle } from 'react-icons/bs';
-
 import { Avatar } from '@chakra-ui/react';
-import { LOCAL_STORAGE, deleteStorage } from 'helpers/storage';
-import { useUserInfoQuery } from 'queries';
+
+import { deleteStorage, LOCAL_STORAGE } from '@/helpers/storage';
+import { useUserInfoQuery } from '@/queries';
+
 import './index.scss';
 
 const LoginProfileContainer = () => {
   const { data: userInfo } = useUserInfoQuery();
+  console.log('확인 userInfo :>> ', userInfo);
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:3000/auth/google';

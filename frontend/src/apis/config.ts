@@ -1,6 +1,7 @@
 import axios from 'axios';
+
+import { getStorage, LOCAL_STORAGE } from '@/helpers/storage';
 import { API_BASE } from './urls';
-import { getStorage, LOCAL_STORAGE } from 'helpers/storage';
 
 const AUTH_TOKEN = getStorage(LOCAL_STORAGE.TOKEN);
 

@@ -1,13 +1,14 @@
 import { Suspense, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { lazy } from '@loadable/component';
-import PageFallback from 'components/PageFallback';
+
+import PageFallback from '@/components/PageFallback';
 import PATHS from './paths';
 
-const Home = lazy(() => import('pages/Home'));
-const Room = lazy(() => import('pages/Room'));
-const About = lazy(() => import('pages/About'));
-const Auth = lazy(() => import('pages/Auth'));
+const Auth = lazy(() => import('@/pages/Auth'));
+const Home = lazy(() => import('@/pages/Home'));
+const Room = lazy(() => import('@/pages/Room'));
+const About = lazy(() => import('@/pages/About'));
 
 const AppRoutes = () => {
   useEffect(() => {

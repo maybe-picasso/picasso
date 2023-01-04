@@ -1,24 +1,24 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { withRouter, withRedux, withMockServer } from '../../.storybook/decorators';
-import { Room } from 'pages';
+
+import getUserInfo from '@/mocks/apis/getUserInfo.json';
 import {
-  프로필설정,
-  게임_유저목록로딩,
-  게임_대기화면,
-  게임_플레이어_준비,
   게임_다음턴안내_출제자,
   게임_다음턴안내_플레이어,
-  게임_현재페인터,
-  게임_문제푸는사람,
-  게임_서둘러,
-  게임_정답자표시,
+  게임_대기화면,
   게임_라운드완료,
   게임_마지막라운드,
+  게임_문제푸는사람,
+  게임_서둘러,
+  게임_유저목록로딩,
+  게임_정답자표시,
   게임_종료,
-} from 'mocks/store';
-import PATHS from 'routes/paths';
-
-import getUserInfo from 'mocks/apis/getUserInfo.json';
+  게임_플레이어_준비,
+  게임_현재페인터,
+  프로필설정,
+} from '@/mocks/store';
+import { Room } from '@/pages';
+import PATHS from '@/routes/paths';
+import { withMockServer, withRedux, withRouter } from '../../.storybook/decorators';
 
 export default {
   title: 'Room',

@@ -1,9 +1,10 @@
 import { Models } from '@rematch/core';
+
+import { chat } from './chat';
 import { common } from './common';
-import { room } from './room';
 import { game } from './game';
 import { gamePoint } from './gamePoint';
-import { chat } from './chat';
+import { room } from './room';
 import { tools } from './tools';
 
 export interface RootModel extends Models<RootModel> {

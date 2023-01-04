@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { withRouter, withMockServer } from '../../.storybook/decorators';
-import { Home, About } from 'pages';
-import PATHS from 'routes/paths';
 
-import getUserInfo from 'mocks/apis/getUserInfo.json';
+import getUserInfo from '@/mocks/apis/getUserInfo.json';
+import { About, Home } from '@/pages';
+import PATHS from '@/routes/paths';
+import { withMockServer, withRouter } from '../../.storybook/decorators';
 
 export default {
   title: 'Home',

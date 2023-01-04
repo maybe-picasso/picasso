@@ -1,4 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
+
 import './index.scss';
 
 interface Props {

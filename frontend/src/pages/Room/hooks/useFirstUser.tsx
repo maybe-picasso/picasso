@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { head } from 'lodash-es';
-import { select } from 'store';
+
+import { select } from '@/store';
 
 const useFirstUser = () => {
   const { participants, userInfo } = useSelector(select.room.state);

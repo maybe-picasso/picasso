@@ -1,6 +1,7 @@
-import { Box } from '@chakra-ui/react';
-import { CheckIcon } from '@chakra-ui/icons';
 import cn from 'classnames';
+import { CheckIcon } from '@chakra-ui/icons';
+import { Box } from '@chakra-ui/react';
+
 import './index.scss';
 
 interface Props {

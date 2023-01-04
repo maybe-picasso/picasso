@@ -4,17 +4,10 @@ import { AppController } from './app.controller';
 import { SocketGateway } from './app.socket';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { MoviesModule } from './movies/movies.module';
 import { CatsModule } from './cats/cats.module';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/picasso'),
-    AuthModule,
-    UsersModule,
-    MoviesModule,
-    CatsModule,
-  ],
+  imports: [MongooseModule.forRoot('mongodb://localhost:27017/picasso'), AuthModule, UsersModule, CatsModule],
   controllers: [AppController],
   providers: [SocketGateway],
 })

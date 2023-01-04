@@ -1,8 +1,9 @@
-import { Box, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import useSound from 'use-sound';
+import { Box, Text } from '@chakra-ui/react';
 
-import tickTock from 'assets/sound/tick-tock.mp3';
+import tickTock from '@/assets/sound/tick-tock.mp3';
+
 import './index.scss';
 
 interface Props {

@@ -1,7 +1,7 @@
-import { useRef, useMemo, useEffect } from 'react';
-import { extend, useLoader } from '@react-three/fiber';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { useEffect,useMemo, useRef } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { extend, useLoader } from '@react-three/fiber';
 extend({ TextGeometry });
 
 const fontsrc = 'fonts/Jua_Regular-picaso.json';
