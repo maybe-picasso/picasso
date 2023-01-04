@@ -14,9 +14,7 @@ module.exports = {
               // Packages `react` related packages come first.
               ['^react', '^\\w', '^@?\\w'],
               // Internal packages, Side effect imports.
-              ['^(@)(/.*|$)', '^\\u0000'],
-              // Other relative imports. Put same-folder imports and `.` last.
-              ['^.'],
+              ['^(@/*)(/.*|$)', '^.'],
               // Style imports.
               ['^.+\\.?(css)$'],
             ],
