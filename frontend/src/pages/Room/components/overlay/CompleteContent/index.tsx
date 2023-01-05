@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
-import { select } from 'store';
-import { Text, Badge } from '@chakra-ui/react';
-import { ProfileAvatar } from 'pages/Room/components';
+import { Badge, Text } from '@chakra-ui/react';
+
+import { ProfileAvatar } from '@/pages/Room/components';
+import { select } from '@/store';
 import ResultLayer from '../ResultLayer';
 
 import './index.scss';

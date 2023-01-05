@@ -1,5 +1,6 @@
-import { Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react';
-import { DEFAULT_LINE_SIZE } from 'constants/index';
+import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from '@chakra-ui/react';
+
+import { DEFAULT_LINE_SIZE } from '@/constants';
 
 interface Props {
   value?: number;

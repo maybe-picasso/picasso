@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { orderBy } from 'lodash-es';
-import { Text, Badge } from '@chakra-ui/react';
-import cn from 'classnames';
 import confetti from 'canvas-confetti';
+import cn from 'classnames';
+import { orderBy } from 'lodash-es';
+import { Badge, Text } from '@chakra-ui/react';
 
-import { ProfileAvatar } from 'pages/Room/components';
+import { ProfileAvatar } from '@/pages/Room/components';
 import ResultLayer from '../ResultLayer';
 
 import './index.scss';

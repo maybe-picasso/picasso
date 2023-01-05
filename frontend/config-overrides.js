@@ -1,6 +1,12 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { alias, configPaths } = require('react-app-rewire-alias');
+const aliasMap = configPaths('./tsconfig.paths.json');
 
-function updateConfig(config) {
+function updateBaseConfig(config) {
+  return alias(aliasMap)(config);
+}
+
+function updateProdConfig(config) {
   return {
     ...config,
     optimization: {
@@ -15,9 +21,9 @@ function updateConfig(config) {
 module.exports = {
   webpack: function (config, env) {
     if (env === 'production') {
-      return updateConfig(config);
+      return updateProdConfig(updateBaseConfig(config));
     }
 
-    return config;
+    return updateBaseConfig(config);
   },
 };

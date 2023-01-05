@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Dispatch, select } from 'store';
-import { isStorybook } from 'helpers/env';
+import { useDispatch, useSelector } from 'react-redux';
 
-import socket, { setupBaseInfo } from 'core/socket';
-import event from 'core/event';
+import event from '@/core/event';
+import socket, { setupBaseInfo } from '@/core/socket';
+import { isStorybook } from '@/helpers/env';
+import { Dispatch, select } from '@/store';
 
 const SocketContainer = ({ roomId }: { roomId: string }) => {
   const { userInfo } = useSelector(select.room.state);

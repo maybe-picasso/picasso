@@ -1,7 +1,7 @@
-import * as THREE from 'three';
 import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 import { useTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 
 interface Props {
   position?: [number, number, number];

@@ -1,27 +1,28 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { BsArrowLeft, BsArrowRight, BsArrowRightCircleFill } from 'react-icons/bs';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import {
-  Container,
-  Heading,
-  Stack,
-  Input,
   Button,
+  Container,
   Divider,
+  FormControl,
   Grid,
   GridItem,
+  Heading,
   IconButton,
+  Input,
+  Stack,
   Text,
-  FormControl,
 } from '@chakra-ui/react';
-import { BsArrowRightCircleFill, BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
-import { motion } from 'framer-motion';
-import { useMotion } from 'hooks';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'store';
-import { getUuid, getRandomNumber } from 'helpers/utils';
-import { setStorage, getStorage } from 'helpers/storage';
-import { PROFILE_CHARACTERS, LOCAL_STORAGE } from 'constants/index';
-import socket from 'core/socket';
+
+import { LOCAL_STORAGE, PROFILE_CHARACTERS } from '@/constants';
+import socket from '@/core/socket';
+import { getStorage, setStorage } from '@/helpers/storage';
+import { getRandomNumber, getUuid } from '@/helpers/utils';
+import { useMotion } from '@/hooks';
+import { Dispatch } from '@/store';
 
 import './index.scss';
 
