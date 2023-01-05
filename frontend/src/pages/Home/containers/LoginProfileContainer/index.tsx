@@ -23,7 +23,7 @@ const LoginProfileContainer = () => {
     <div className="login-profile">
       {userInfo ? (
         <button type="button" onClick={handleLogout} title={userInfo.displayName}>
-          <p>{userInfo.displayName}</p>
+          <p>{userInfo.name}</p>
           <span className="circle">
             <Avatar src={userInfo.profileUrl} />
           </span>

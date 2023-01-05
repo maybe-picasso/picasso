@@ -12,7 +12,7 @@ export class User {
   email: string;
 
   @Prop()
-  displayName: string;
+  name: string;
 
   @Prop()
   profileUrl: string;

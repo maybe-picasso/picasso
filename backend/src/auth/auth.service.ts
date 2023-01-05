@@ -26,7 +26,7 @@ export class AuthService {
       if (!user) {
         const userInfo: RegisterUserDto = {
           userId: profile.id,
-          displayName: profile.displayName,
+          name: profile._json.name,
           email: profile._json.email,
           profileUrl: profile._json.picture,
           locale: profile._json.locale,
