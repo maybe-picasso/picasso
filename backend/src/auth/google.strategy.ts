@@ -7,8 +7,6 @@ dotenv.config();
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
-console.log('확인 google.strategy :>> ', GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET);
-
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private readonly authService: AuthService) {

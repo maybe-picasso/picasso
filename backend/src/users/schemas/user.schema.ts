@@ -27,7 +27,7 @@ export class User {
   avatar: number[];
 
   @Prop()
-  score: number;
+  point: number;
 
   @Prop()
   lastLoginDate: number;

@@ -7,7 +7,7 @@ export class RegisterUserDto {
   registerType: string; // oauth 서비스 | 자체 가입 (추후)
   lastLoginDate: number;
   avatar: number[];
-  score: number;
+  point: number;
 }
 
 // {

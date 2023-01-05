@@ -33,7 +33,7 @@ export class AuthService {
           registerType: provider,
           lastLoginDate: new Date().getTime(),
           avatar: [],
-          score: 0,
+          point: 0,
         };
         user = await this.users.register(userInfo);
       }
