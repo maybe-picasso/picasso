@@ -38,4 +38,14 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.users.remove(id);
   }
+
+  @Patch('/:id/point')
+  @UseGuards(AuthGuard('jwt'))
+  async addPoint(@Param('id') id: string, @Body() data: Pick<User, 'point'>) {
+    const userInfo = await this.findOne(id);
+    const newPoint = userInfo.point + data.point;
+    return this.update(id, {
+      point: newPoint,
+    });
+  }
 }
