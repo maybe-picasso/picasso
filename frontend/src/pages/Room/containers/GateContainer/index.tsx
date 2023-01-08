@@ -39,8 +39,8 @@ const GateContainer = ({ roomId }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
   const isNextDisabled = useMemo(() => profileIndex === PROFILE_CHARACTERS.length - 1, [profileIndex]);
-  const { data: userInfo } = useUserInfoQuery();
-  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || userInfo?.displayName || '';
+  const { data: loginedUserInfo } = useUserInfoQuery();
+  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || loginedUserInfo?.name || '';
 
   // 프로필 설정 애니메이션
   const { controls } = useMotion({ deps: [profileIndex] });
@@ -66,16 +66,18 @@ const GateContainer = ({ roomId }: Props) => {
     }
 
     const userInfo: Picasso.UserInfo = {
-      userId: getUuid(),
+      userId: loginedUserInfo?.userId ?? getUuid(),
       nickName,
       profileIndex,
+      point: 0,
+      isLogined: !!loginedUserInfo,
     };
 
     socket.emit('join', { roomId, userInfo });
     dispatch.room.setUserInfo(userInfo);
     dispatch.room.setJoinedState(true);
     setStorage(LOCAL_STORAGE.NICK_NAME, nickName);
-  }, [dispatch, roomId, profileIndex, inputRef]);
+  }, [dispatch, roomId, profileIndex, inputRef, loginedUserInfo]);
 
   const handleKeyDown = useCallback(
     (e) => {

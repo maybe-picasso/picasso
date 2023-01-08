@@ -5,6 +5,7 @@ export const participants = [
     nickName: 'Waiki',
     profileIndex: 9,
     point: 520,
+    isLogined: true,
   },
   {
     clientId: 'BxnB8CWFhIUVSbTjAAm5',
@@ -12,6 +13,7 @@ export const participants = [
     nickName: 'Ella',
     profileIndex: 1,
     point: 350,
+    isLogined: false,
   },
   {
     clientId: 'CxnB8CWFhIUVSbTjAAm5',
@@ -19,6 +21,7 @@ export const participants = [
     nickName: 'Murky',
     profileIndex: 13,
     point: 650,
+    isLogined: false,
   },
   {
     clientId: 'DxnB8CWFhIUVSbTjAAm5',
@@ -26,6 +29,7 @@ export const participants = [
     nickName: 'Coka',
     profileIndex: 10,
     point: 60,
+    isLogined: false,
   },
   {
     clientId: 'ExnB8CWFhIUVSbTjAAm5',
@@ -33,5 +37,6 @@ export const participants = [
     nickName: 'Cola~~~~~~~~~',
     profileIndex: 20,
     point: 20,
+    isLogined: false,
   },
 ];

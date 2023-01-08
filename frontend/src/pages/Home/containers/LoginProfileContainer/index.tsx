@@ -8,7 +8,7 @@ import './index.scss';
 
 const LoginProfileContainer = () => {
   const { data: userInfo } = useUserInfoQuery();
-  console.log('확인 userInfo :>> ', userInfo);
+  const { name, profileUrl } = userInfo ?? {};
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:3000/auth/google';
@@ -22,10 +22,10 @@ const LoginProfileContainer = () => {
   return (
     <div className="login-profile">
       {userInfo ? (
-        <button type="button" onClick={handleLogout} title={userInfo.displayName}>
-          <p>{userInfo.name}</p>
+        <button type="button" onClick={handleLogout} title={name}>
+          <p>{name}</p>
           <span className="circle">
-            <Avatar src={userInfo.profileUrl} />
+            <Avatar src={profileUrl} />
           </span>
         </button>
       ) : (

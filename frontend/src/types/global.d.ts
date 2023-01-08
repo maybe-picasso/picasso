@@ -38,7 +38,8 @@ declare global {
       userId: string;
       nickName: string;
       profileIndex: number;
-      point?: number;
+      point: number;
+      isLogined: boolean;
     }
 
     interface CorrectUserInfo {
@@ -46,5 +47,19 @@ declare global {
       point: number;
       time: number;
     }
+
+    interface UserInfoResponse {
+      userId: string;
+      email: string;
+      name: string;
+      profileUrl: string;
+      locale: string;
+      registerType: string;
+      avatar: number[];
+      point: number;
+      lastLoginDate: number;
+    }
+
+    interface UserInfoRequest extends Partial<UserInfoResponse> {}
   }
 }

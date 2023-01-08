@@ -1,5 +1,6 @@
 import { createModel } from '@rematch/core';
 
+import { addUserPoint } from '@/apis/users';
 import { RootModel } from './';
 
 export interface GamePointState {
@@ -39,7 +40,7 @@ export const gamePoint = createModel<RootModel>()({
     correctUser({ userId }, rootState) {
       const { room, game, gamePoint } = rootState;
       const { correctUserList } = gamePoint;
-      const { participants } = room;
+      const { participants, userInfo } = room;
       const { time } = game;
       const ranking = correctUserList.length + 1;
       const rankingPoint = RANK_POINT_BASE[ranking < 4 ? ranking : 99];
@@ -54,11 +55,20 @@ export const gamePoint = createModel<RootModel>()({
       });
 
       // 사용자의 기존 포인트 정보에 추가
-      // TODO: 서버 API로 대체 예정
       dispatch.room.updateUserPoint({
         userId,
         roundPoint: point,
       });
+
+      // 서버에 포인트 저장
+      if (userInfo?.isLogined && userInfo.userId === userId) {
+        addUserPoint({
+          userId,
+          data: {
+            point,
+          },
+        });
+      }
     },
   }),
 });

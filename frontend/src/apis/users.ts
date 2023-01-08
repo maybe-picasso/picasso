@@ -5,6 +5,15 @@ export const getUserInfo = () => {
   return request.get(API_URL.USER_INFO);
 };
 
-export const updateUserInfo = (userId: string, data: Record<string, any>) => {
-  return request.patch(`${API_URL.USERS}/${userId}`, data);
+export interface UpdateUserInfoParams {
+  userId: string;
+  data: Picasso.UserInfoRequest;
+}
+
+export const updateUserInfo = ({ userId, data }: UpdateUserInfoParams) => {
+  return request.patch<Picasso.UserInfoResponse>(`${API_URL.USERS}/${userId}`, data);
+};
+
+export const addUserPoint = ({ userId, data }: UpdateUserInfoParams) => {
+  return request.patch<Picasso.UserInfoResponse>(`${API_URL.USERS}/${userId}/point`, data);
 };
