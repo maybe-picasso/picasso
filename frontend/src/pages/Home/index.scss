@@ -33,7 +33,7 @@
 
     ul {
       padding: 0 2px;
-      height: calc(100% - 69px);
+      height: calc(100% - 89px);
       list-style: none;
       overflow-x: hidden;
       overflow-y: auto;
@@ -76,6 +76,18 @@
       font-size: 16px;
       &:hover {
         text-decoration: underline;
+      }
+    }
+  }
+
+  .chakra-tabs {
+    height: 100%;
+
+    &__tab-panels {
+      height: 100%;
+      & > div {
+        height: 100%;
+        padding: 20px 0;
       }
     }
   }

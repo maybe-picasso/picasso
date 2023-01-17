@@ -19,7 +19,7 @@ const Auth = () => {
     }
 
     setStorage(LOCAL_STORAGE.TOKEN, token);
-    navigate(PATHS.HOME);
+    window.location.href = PATHS.HOME;
   }, [token, navigate]);
 
   return (
