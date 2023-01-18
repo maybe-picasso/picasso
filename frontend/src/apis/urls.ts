@@ -1,4 +1,6 @@
-export const API_BASE = 'http://localhost:3000';
+import { apiServer } from '@/helpers/env';
+
+export const API_BASE = apiServer;
 
 export const API_URL = {
   USERS: `/users`,

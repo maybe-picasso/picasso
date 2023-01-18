@@ -1,8 +1,9 @@
+import { apiServer } from '@/helpers/env';
 import { deleteStorage, LOCAL_STORAGE } from '@/helpers/storage';
 
 export const useAuth = () => {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = `${apiServer}/auth/google`;
   };
 
   const handleLogout = () => {
