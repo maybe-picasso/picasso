@@ -7,7 +7,7 @@ import { useUserInfoQuery } from '@/queries';
 const MyInfoContainer = () => {
   const { data: userInfo } = useUserInfoQuery();
   const { handleLogin, handleLogout } = useAuth();
-  const { name, email, point, lastLoginDate } = userInfo ?? {};
+  const { name, email, point, registerDate } = userInfo ?? {};
 
   return (
     <>
@@ -25,7 +25,7 @@ const MyInfoContainer = () => {
               </Tr>
               <Tr>
                 <Td>가입일</Td>
-                <Td>{lastLoginDate && format(lastLoginDate, 'yyyy년 M월 d일')}</Td>
+                <Td>{registerDate && format(registerDate, 'yyyy년 M월 d일')}</Td>
               </Tr>
               <Tr>
                 <Td>포인트</Td>

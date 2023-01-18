@@ -24,13 +24,16 @@ export class User {
   registerType: string;
 
   @Prop()
+  registerDate: number;
+
+  @Prop()
+  lastLoginDate: number;
+
+  @Prop()
   avatar: number[];
 
   @Prop()
   point: number;
-
-  @Prop()
-  lastLoginDate: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

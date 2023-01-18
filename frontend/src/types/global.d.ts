@@ -55,9 +55,10 @@ declare global {
       profileUrl: string;
       locale: string;
       registerType: string;
+      registerDate: number;
+      lastLoginDate: number;
       avatar: number[];
       point: number;
-      lastLoginDate: number;
     }
 
     interface UserInfoRequest extends Partial<UserInfoResponse> {}

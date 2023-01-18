@@ -21,17 +21,20 @@ export class AuthService {
   async validateOAuthLogin(profile: Profile, provider: Provider): Promise<string> {
     try {
       const thirdPartyId: string = profile.id;
+      const timestamp = new Date().getTime();
       let user: User = await this.users.findOne(thirdPartyId);
 
       if (!user) {
+        const { name, email, picture: profileUrl, locale } = profile._json;
         const userInfo: RegisterUserDto = {
+          name,
+          email,
+          profileUrl,
+          locale,
           userId: profile.id,
-          name: profile._json.name,
-          email: profile._json.email,
-          profileUrl: profile._json.picture,
-          locale: profile._json.locale,
           registerType: provider,
-          lastLoginDate: new Date().getTime(),
+          registerDate: timestamp,
+          lastLoginDate: timestamp,
           avatar: [],
           point: 0,
         };
