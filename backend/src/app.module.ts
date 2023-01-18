@@ -5,8 +5,10 @@ import { SocketGateway } from './app.socket';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
+const { DB_HOST } = process.env;
+
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost:27017/picasso'), AuthModule, UsersModule],
+  imports: [MongooseModule.forRoot(`${DB_HOST}/picasso`), AuthModule, UsersModule],
   controllers: [AppController],
   providers: [SocketGateway],
 })
