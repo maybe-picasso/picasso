@@ -4,8 +4,8 @@ import { sign } from 'jsonwebtoken';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/schemas/user.schema';
 import { RegisterUserDto } from '../users/dto/register-user.dto';
-import * as dotenv from 'dotenv';
-dotenv.config();
+
+const { JWT_SECRET_KEY } = process.env;
 
 export enum Provider {
   GOOGLE = 'google',
@@ -13,7 +13,7 @@ export enum Provider {
 
 @Injectable()
 export class AuthService {
-  private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+  private readonly JWT_SECRET_KEY = JWT_SECRET_KEY;
   private readonly JWT_SESSION_TIME = 3600 * 3; // 3600초, 1시간
 
   constructor(private readonly users: UsersService) {}
