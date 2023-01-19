@@ -17,11 +17,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { LOCAL_STORAGE, PROFILE_CHARACTERS } from '@/constants';
+import { PROFILE_CHARACTERS } from '@/constants';
 import socket from '@/core/socket';
-import { getStorage, setStorage } from '@/helpers/storage';
+import { getStorage, LOCAL_STORAGE, setStorage } from '@/helpers/storage';
 import { getRandomNumber, getUuid } from '@/helpers/utils';
 import { useMotion } from '@/hooks';
+import LoginProfileContainer from '@/pages/Home/containers/LoginProfileContainer';
+import { useUserInfoQuery } from '@/queries';
 import { Dispatch } from '@/store';
 
 import './index.scss';
@@ -37,7 +39,8 @@ const GateContainer = ({ roomId }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const isPrevDisabled = useMemo(() => profileIndex === 0, [profileIndex]);
   const isNextDisabled = useMemo(() => profileIndex === PROFILE_CHARACTERS.length - 1, [profileIndex]);
-  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || '';
+  const { data: loginedUserInfo } = useUserInfoQuery();
+  const defaultNickName = getStorage(LOCAL_STORAGE.NICK_NAME) || loginedUserInfo?.name || '';
 
   // 프로필 설정 애니메이션
   const { controls } = useMotion({ deps: [profileIndex] });
@@ -63,16 +66,18 @@ const GateContainer = ({ roomId }: Props) => {
     }
 
     const userInfo: Picasso.UserInfo = {
-      userId: getUuid(),
+      userId: loginedUserInfo?.userId ?? getUuid(),
       nickName,
       profileIndex,
+      point: 0,
+      isLogined: !!loginedUserInfo,
     };
 
     socket.emit('join', { roomId, userInfo });
     dispatch.room.setUserInfo(userInfo);
     dispatch.room.setJoinedState(true);
     setStorage(LOCAL_STORAGE.NICK_NAME, nickName);
-  }, [dispatch, roomId, profileIndex, inputRef]);
+  }, [dispatch, roomId, profileIndex, inputRef, loginedUserInfo]);
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -87,6 +92,7 @@ const GateContainer = ({ roomId }: Props) => {
   return (
     <Container alignContent="center" className="gate-container">
       <FormControl>
+        <LoginProfileContainer />
         <Stack spacing={5}>
           <Heading as="h1" size="xl">
             프로필 설정

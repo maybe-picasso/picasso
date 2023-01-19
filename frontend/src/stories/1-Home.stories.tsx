@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import getUserInfo from '@/mocks/apis/getUserInfo.json';
 import { About, Home } from '@/pages';
 import PATHS from '@/routes/paths';
-import { withRouter } from '../../.storybook/decorators';
+import { withMockServer, withRouter } from '../../.storybook/decorators';
 
 export default {
   title: 'Home',
@@ -11,7 +12,15 @@ export default {
 export const DefaultStory: StoryObj = {
   name: '홈 메인',
   render: () => <Home />,
-  decorators: [withRouter({ url: PATHS.HOME })],
+  decorators: [
+    withRouter({ url: PATHS.HOME }),
+    withMockServer([
+      {
+        mockJson: getUserInfo,
+        key: 'normal',
+      },
+    ]),
+  ],
 };
 
 export const AboutStory: StoryObj = {

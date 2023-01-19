@@ -5,7 +5,7 @@ interface Props {
   deps?: React.DependencyList;
 }
 
-const useMotion = ({ deps = [] }: Props) => {
+export const useMotion = ({ deps = [] }: Props) => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const useMotion = ({ deps = [] }: Props) => {
 
   return { controls };
 };
-
-export default useMotion;

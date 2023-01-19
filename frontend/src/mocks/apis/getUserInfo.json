@@ -1,0 +1,24 @@
+{
+  "name": "getUserInfo",
+  "url": "http://localhost:3000/users/profile",
+  "method": "get",
+  "response": {
+    "normal": {
+      "status": 200,
+      "data": {
+        "_id": "639eb8a8fa4ca679160e1192",
+        "userId": "107249667742323933144",
+        "email": "dodortus@gmail.com",
+        "displayName": "JS Park",
+        "profileUrl": "https://lh3.googleusercontent.com/a/AEdFTp5OpOTMXvJ9DQiAfhGQY_FhUn1VXUAVjUqgmqsLA8w=s96-c",
+        "locale": "ko",
+        "registerType": "google",
+        "registerDate": 1671346344011,
+        "lastLoginDate": 1671346344011,
+        "avatar": [],
+        "score": 0,
+        "__v": 0
+      }
+    }
+  }
+}

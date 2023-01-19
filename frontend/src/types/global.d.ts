@@ -1,4 +1,4 @@
-import { DrawingStatus,SocketMessageType } from './enums';
+import { DrawingStatus, SocketMessageType } from './enums';
 
 declare global {
   namespace Picasso {
@@ -38,7 +38,8 @@ declare global {
       userId: string;
       nickName: string;
       profileIndex: number;
-      point?: number;
+      point: number;
+      isLogined: boolean;
     }
 
     interface CorrectUserInfo {
@@ -46,5 +47,20 @@ declare global {
       point: number;
       time: number;
     }
+
+    interface UserInfoResponse {
+      userId: string;
+      email: string;
+      name: string;
+      profileUrl: string;
+      locale: string;
+      registerType: string;
+      registerDate: number;
+      lastLoginDate: number;
+      avatar: number[];
+      point: number;
+    }
+
+    interface UserInfoRequest extends Partial<UserInfoResponse> {}
   }
 }

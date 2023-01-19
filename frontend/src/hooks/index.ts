@@ -1,1 +1,2 @@
-export { default as useMotion } from './useMotion';
+export * from './useAuth';
+export * from './useMotion';

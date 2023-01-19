@@ -1,3 +1,9 @@
+export const LOCAL_STORAGE = {
+  NICK_NAME: 'nickName',
+  DRAWING_TOOLS: 'drawingTools',
+  TOKEN: 'token',
+};
+
 /**
  * 로컬스토리지 쓰기
  * @param key

@@ -1,13 +1,11 @@
 import io from 'socket.io-client';
 
-import { isNodeProdcution } from '@/helpers/env';
-
-const SOCKET_SERVER = isNodeProdcution ? 'wss://maybe-picasso.herokuapp.com' : 'ws://localhost:3000';
+import { socketServer } from '@/helpers/env';
 
 let roomId: string;
 let senderId: string;
 
-export const socket = io(SOCKET_SERVER, {
+export const socket = io(socketServer, {
   transports: ['websocket'],
 });
 

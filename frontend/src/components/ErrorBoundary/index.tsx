@@ -9,6 +9,8 @@ interface Props {
 }
 
 export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
+  console.log('확인 ErrorFallback :>> ', error);
+
   return (
     <div className="error-fallback" role="alert">
       <h1>😱</h1>
@@ -24,7 +26,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => {
 };
 
 export const errorHandler = (error: Error, info: { componentStack: string }) => {
-  console.info('error :>> ', error, info);
+  console.info('확인 errorHandler :>> ', error, info);
 };
 
 export default ErrorBoundary;

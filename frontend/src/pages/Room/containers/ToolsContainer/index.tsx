@@ -54,7 +54,13 @@ const ToolsContainer = () => {
           templateRows={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
           templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(1, 1fr)' }}
         >
-          <GridItem w="100%" rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, lg: 1 }} className="tool-type-wrap">
+          <GridItem
+            w="100%"
+            mb={{ lg: '10px' }}
+            rowSpan={{ base: 1, lg: 2 }}
+            colSpan={{ base: 1, lg: 1 }}
+            className="tool-type-wrap"
+          >
             <Stack direction="row" spacing={2} align="center">
               {Object.keys(DrawingTools).map((name) => (
                 <Button
