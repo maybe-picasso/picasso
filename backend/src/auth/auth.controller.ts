@@ -15,7 +15,7 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   googleLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
-    const redirectPath = `${CLIENT_HOST}/#/auth`;
+    const redirectPath = `${CLIENT_HOST}/picasso/#/auth`;
 
     if (jwt) {
       res.redirect(`${redirectPath}/${jwt}`);
