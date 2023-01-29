@@ -18,7 +18,7 @@ import {
   ReadyContent,
 } from '../../components';
 import { CanvasContainer } from '../../containers';
-import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo } from '../../hooks';
+import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo, useSounds } from '../../hooks';
 
 import './index.scss';
 
@@ -34,6 +34,7 @@ const GameContentContainer = () => {
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
 
+  const { playCorrectSound, playCompleteSound, playGameOverSound } = useSounds();
   const { isWaitingPlayer, isWaitingReady, isStandByTurn, isComplete, isGameOver, isPlaying } = useGameStatus();
   const { profileIndex: painterProfileIndex, nickName: painterNickName } = usePainterInfo();
   const painterName = `${PROFILE_CHARACTERS[painterProfileIndex]} ${painterNickName}`;
@@ -76,12 +77,25 @@ const GameContentContainer = () => {
 
   useEffect(() => {
     if (isPlaying && isMyCorrect) {
+      playCorrectSound();
       const myProfileEmoji = PROFILE_CHARACTERS[userInfo?.profileIndex ?? 0];
       jsConfetti.addConfetti({
         emojis: [myProfileEmoji, word, '⭐', '🌈', '✌', '✅'],
       });
     }
-  }, [isPlaying, isMyCorrect, userInfo, word]);
+  }, [isPlaying, isMyCorrect, userInfo, word, playCorrectSound]);
+
+  useEffect(() => {
+    if (isComplete) {
+      playCompleteSound();
+      return;
+    }
+
+    if (isGameOver) {
+      playGameOverSound();
+      return;
+    }
+  }, [isComplete, isGameOver, playCompleteSound, playGameOverSound]);
 
   return (
     <div className="game-content-container">

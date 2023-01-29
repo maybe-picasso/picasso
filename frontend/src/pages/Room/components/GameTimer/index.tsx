@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useSound from 'use-sound';
 import { Box, Text } from '@chakra-ui/react';
 
-import tickTock from '@/assets/sound/tick-tock.mp3';
+import tickTock from '@/assets/sound/삐비동.mp3';
 
 import './index.scss';
 
@@ -17,15 +17,14 @@ const GameTimer = ({ timeCount = 60, isWaitingPlayer }: Props) => {
   const isTimeout = timeCount === 0;
 
   const [play, { stop }] = useSound(tickTock, {
-    playbackRate: 2,
-    interrupt: true,
+    onend: () => {
+      console.info('Sound ended!');
+    },
   });
 
   useEffect(() => {
     if (isNeedSpeedUp && !isTimeout) {
-      play({
-        forceSoundEnabled: true,
-      });
+      play();
     } else {
       stop();
     }
