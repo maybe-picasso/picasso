@@ -1,37 +1,26 @@
 import { useEffect } from 'react';
-import useSound from 'use-sound';
 import { Box, Text } from '@chakra-ui/react';
 
-import tickTock from '@/assets/sound/삐비동.mp3';
-
 import './index.scss';
+
+const TIME_TO_SPEED_UP = 10;
+const TIME_OUT = 0;
 
 interface Props {
   timeCount?: number;
   isWaitingPlayer: boolean;
+  onTimerAlarm?: () => void;
 }
 
-const GameTimer = ({ timeCount = 60, isWaitingPlayer }: Props) => {
-  // 10초 미만시 강조 컬러
-  const isNeedSpeedUp = timeCount < 10;
-  const isTimeout = timeCount === 0;
-
-  const [play, { stop }] = useSound(tickTock, {
-    onend: () => {
-      console.info('Sound ended!');
-    },
-  });
+const GameTimer = ({ timeCount = 60, isWaitingPlayer, onTimerAlarm }: Props) => {
+  const isNeedSpeedUp = timeCount <= TIME_TO_SPEED_UP;
+  const isTimeout = timeCount === TIME_OUT;
 
   useEffect(() => {
     if (isNeedSpeedUp && !isTimeout) {
-      play();
-    } else {
-      stop();
+      onTimerAlarm?.();
     }
-    return () => {
-      stop();
-    };
-  }, [isNeedSpeedUp, isTimeout, play, stop]);
+  }, [isNeedSpeedUp, isTimeout, onTimerAlarm]);
 
   return (
     <Box className="game-timer">
