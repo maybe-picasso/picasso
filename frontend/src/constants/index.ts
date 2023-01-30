@@ -50,6 +50,7 @@ export const PROFILE_CHARACTERS = [
 export const LOCAL_STORAGE = {
   NICK_NAME: 'nickName',
   DRAWING_TOOLS: 'drawingTools',
+  SOUND_ENABLED: 'soundEnabled',
 };
 
 export const MEMBER_PROFILES: string[] = [

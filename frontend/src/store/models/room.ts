@@ -1,12 +1,17 @@
 import { createModel } from '@rematch/core';
 
+import { LOCAL_STORAGE } from '@/constants';
+import { getStorage, setStorage } from '@/helpers/storage';
 import { RootModel } from './';
+
+const soundEnabled = getStorage(LOCAL_STORAGE.SOUND_ENABLED) ?? true;
 
 export interface RoomState {
   isConnectedSocket: boolean;
   isJoined: boolean;
   userInfo: Picasso.UserInfo | null;
   participants: Picasso.UserInfo[];
+  soundEnabled: boolean;
 }
 
 export const initialState: RoomState = {
@@ -14,6 +19,7 @@ export const initialState: RoomState = {
   isJoined: false,
   userInfo: null,
   participants: [],
+  soundEnabled,
 };
 
 export const room = createModel<RootModel>()({
@@ -32,6 +38,11 @@ export const room = createModel<RootModel>()({
     },
     setUserInfo(state, payload: Picasso.UserInfo) {
       state.userInfo = payload;
+      return state;
+    },
+    toggleSound(state) {
+      state.soundEnabled = !state.soundEnabled;
+      setStorage(LOCAL_STORAGE.SOUND_ENABLED, state.soundEnabled);
       return state;
     },
     updateParticipants(state, payload: Picasso.UserInfo[]) {
