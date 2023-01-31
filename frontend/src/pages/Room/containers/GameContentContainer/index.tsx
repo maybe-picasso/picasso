@@ -18,7 +18,7 @@ import {
   ReadyContent,
 } from '../../components';
 import { CanvasContainer } from '../../containers';
-import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo } from '../../hooks';
+import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo, useSounds } from '../../hooks';
 
 import './index.scss';
 
@@ -34,6 +34,7 @@ const GameContentContainer = () => {
   const isVisibleOverlayContent = useSelector(select.game.isVisibleOverlayContent);
   const isCurrectUser = correctUserList.find((user) => user.userId === userInfo?.userId);
 
+  const { playCorrectSound, playCompleteSound, playGameOverSound, playTurnSound, playTimeSound } = useSounds();
   const { isWaitingPlayer, isWaitingReady, isStandByTurn, isComplete, isGameOver, isPlaying } = useGameStatus();
   const { profileIndex: painterProfileIndex, nickName: painterNickName } = usePainterInfo();
   const painterName = `${PROFILE_CHARACTERS[painterProfileIndex]} ${painterNickName}`;
@@ -76,17 +77,35 @@ const GameContentContainer = () => {
 
   useEffect(() => {
     if (isPlaying && isMyCorrect) {
+      playCorrectSound();
       const myProfileEmoji = PROFILE_CHARACTERS[userInfo?.profileIndex ?? 0];
       jsConfetti.addConfetti({
         emojis: [myProfileEmoji, word, '⭐', '🌈', '✌', '✅'],
       });
     }
-  }, [isPlaying, isMyCorrect, userInfo, word]);
+  }, [isPlaying, isMyCorrect, userInfo, word, playCorrectSound]);
+
+  useEffect(() => {
+    if (isStandByTurn) {
+      playTurnSound();
+      return;
+    }
+
+    if (isComplete) {
+      playCompleteSound();
+      return;
+    }
+
+    if (isGameOver) {
+      playGameOverSound();
+      return;
+    }
+  }, [isStandByTurn, isComplete, isGameOver, playTurnSound, playCompleteSound, playGameOverSound]);
 
   return (
     <div className="game-content-container">
       <Flex className="header" justifyContent="space-between">
-        <GameTimer timeCount={time} isWaitingPlayer={isWaitingPlayer} />
+        <GameTimer timeCount={time} isWaitingPlayer={isWaitingPlayer} onTimerAlarm={playTimeSound} />
         <GameQuestion word={word} isBlind={isBlind} />
         <GameRound round={round} totalRound={questions.length} isWaitingPlayer={isWaitingPlayer} />
       </Flex>
