@@ -1,0 +1,12 @@
+@import '~@/styles/modules/mixin.scss';
+
+.reaction-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: aqua;
+
+  ul {
+    list-style: none;
+  }
+}

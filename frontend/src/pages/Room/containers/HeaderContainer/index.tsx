@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Flex, Heading, IconButton, Spacer } from '@chakra-ui/react';
 
 import { useSounds } from '@/pages/Room/hooks';
-import { Dispatch } from '@/store';
-import { select } from '@/store';
+import { Dispatch, select } from '@/store';
 
 import './index.scss';
 
