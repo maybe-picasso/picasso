@@ -1,5 +1,6 @@
 export enum SocketMessageType {
   CHAT = 'CHAT',
+  REACTION = 'REACTION',
   DRAWING = 'DRAWING',
   CORRECT_USER = 'CORRECT_USER',
   READY_PLAYER = 'READY_PLAYER',
