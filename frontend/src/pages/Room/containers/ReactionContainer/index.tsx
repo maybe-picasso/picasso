@@ -1,5 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames'
+import { Center } from '@chakra-ui/react';
 
 import event from '@/core/event';
 import { sendMessage } from '@/core/socket';
@@ -8,10 +11,20 @@ import { SocketMessageType } from '@/types/enums';
 
 import './index.scss';
 
+const REACTION_EMOJIS = [
+  '💖',
+  '👍',
+  '😆',
+  '😲',
+  '🤔',
+  '👎',
+  '😱',
+]
 const ReactionContainer = () => {
   const { reactionList } = useSelector(select.reaction.state);
   const { userInfo } = useSelector(select.room.state);
   const dispatch = useDispatch<Dispatch>();
+  const [isShowPanel, setIsShowPanel] = useState(false);
 
   // 리액션 클릭시 정보 스토어 저장 및 소켓에 정보 전달
   const sendReaction = useCallback(
@@ -35,6 +48,9 @@ const ReactionContainer = () => {
         ...body,
         userId,
       });
+
+
+
     },
     [dispatch, userInfo]
   );
@@ -54,6 +70,10 @@ const ReactionContainer = () => {
     [dispatch]
   );
 
+  const handleReactionPanel = () => {
+    setIsShowPanel(isShowPanel => !isShowPanel)
+  }
+
   useEffect(() => {
     event.removeAllListeners(SocketMessageType.REACTION);
     event.on(SocketMessageType.REACTION, onReaction);
@@ -61,19 +81,31 @@ const ReactionContainer = () => {
 
   return (
     <div className="reaction-wrap">
+      <Center className={cn('cta-reaction-panel', { show: isShowPanel })} w='50px' h='50px' bg="gray.200" borderRadius='50%'>
+        <button type="button" onClick={handleReactionPanel}>
+          💖
+        </button>
+      </Center>
+
       <ul>
-        {reactionList.map(({ type, nickName }) => {
+        {reactionList.map(({ type, nickName }, index) => {
           return (
-            <li>
-              <span>{nickName}</span>
-              <span>({type})</span>
+            <li key={`${nickName}-${index}`}>
+              <strong>{type}</strong>
+              <Center bg="gray.100" className='user-name'>
+                {nickName}
+              </Center>
             </li>
           );
         })}
       </ul>
-      <div>
-        <button onClick={() => sendReaction('TYPE_A')}>리엑션 버튼 TYPE_A</button>
-      </div>
+
+      <Center className={cn('cta-reaction', { show: isShowPanel })} bg="gray.200" h="50px" p={"5px 15px"} borderRadius={30}>
+        {REACTION_EMOJIS.map((emoji, index) => {
+          return <button type="button" key={index} onClick={() => sendReaction(emoji)}>{emoji}</button>
+        })}
+        <button type="button" className='cta-close-panel' onClick={handleReactionPanel}><AiFillCloseCircle /></button>
+      </Center >
     </div>
   );
 };

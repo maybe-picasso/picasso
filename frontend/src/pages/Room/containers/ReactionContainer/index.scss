@@ -2,11 +2,134 @@
 
 .reaction-wrap {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: aqua;
+  bottom: 10px;
+  right: 10px;
+
+  .cta-reaction-panel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: .4s ease-out;
+
+    &.show {
+      opacity: 0;
+    }
+  }
 
   ul {
     list-style: none;
+    pointer-events: none;
+
+    li {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      animation: moveUpMotion 4s forwards ease-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 15px;
+
+      strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        width: 60px;
+        font-size: 36px;
+        animation: emojiScale .6s infinite alternate ease-out;
+      }
+
+      .user-name {
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 20px;
+        padding: 3px 7px;
+      }
+
+      &:nth-child(3n + 1) {
+        left: calc(50% - 30px);
+
+        strong {
+          animation: emojiShake .4s infinite alternate ease-out;
+        }
+      }
+
+      &:nth-child(3n + 2) {
+        left: inherit;
+        right: 0;
+      }
+
+    }
+
+    @keyframes moveUpMotion {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-400px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes emojiShake {
+      0% {
+        transform: rotate(-7deg);
+      }
+
+      100% {
+        transform: rotate(7deg);
+      }
+    }
+
+    @keyframes emojiScale {
+      0% {
+        transform: scale(1.25);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+
+  }
+
+  .cta-reaction {
+    position: relative;
+    transform: translateX(120%);
+    transition: .4s ease-out;
+    opacity: 0;
+
+    &.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .cta-close-panel {
+      color: #a8b8cb;
+      font-size: 20px;
+    }
+
+    button {
+      font-size: 25px;
+
+      +button {
+        margin-left: 10px;
+      }
+    }
+
+
   }
 }
