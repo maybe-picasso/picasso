@@ -17,7 +17,7 @@ import {
   NextTurnContent,
   ReadyContent,
 } from '../../components';
-import { CanvasContainer } from '../../containers';
+import { CanvasContainer, ReactionContainer } from '../../containers';
 import { useGameStatus, useMyCorrect, useMyTurn, usePainterInfo, useSounds } from '../../hooks';
 
 import './index.scss';
@@ -112,6 +112,7 @@ const GameContentContainer = () => {
 
       <Flex className="body" justifyContent="center" alignItems="center">
         <CanvasContainer />
+        <ReactionContainer />
 
         {isVisibleOverlayContent && (
           <Flex className="overlay-wrap" justifyContent="center" alignItems="center">

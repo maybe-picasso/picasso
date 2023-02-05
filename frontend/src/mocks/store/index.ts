@@ -4,16 +4,18 @@ import { initialState as chatInitState } from '@/store/models/chat';
 import { initialState as commonInitState } from '@/store/models/common';
 import { initialState as gameInitState } from '@/store/models/game';
 import { initialState as gamePointInitState } from '@/store/models/gamePoint';
+import { initialState as reactionInitState } from '@/store/models/reaction';
 import { initialState as roomInitState } from '@/store/models/room';
 import { initialState as toolsInitState } from '@/store/models/tools';
 import { GameStatus } from '@/types/enums';
 import { chatList } from './chat';
 import { correctUserList } from './gamePoint';
+import { reactionList } from './reaction';
 import { participants } from './room';
 
 const QUESTIONS = QUESTIONS_ORIGIANL.slice(0, 9);
 
-export type MockStore = Pick<RootState, 'common' | 'room' | 'game' | 'gamePoint' | 'chat' | 'tools'>;
+export type MockStore = Pick<RootState, 'common' | 'room' | 'game' | 'gamePoint' | 'chat' | 'tools' | 'reaction'>;
 
 export const 프로필설정: MockStore = {
   common: commonInitState,
@@ -22,6 +24,7 @@ export const 프로필설정: MockStore = {
   gamePoint: gamePointInitState,
   chat: chatInitState,
   tools: toolsInitState,
+  reaction: reactionInitState,
 };
 
 export const 게임_기본화면: MockStore = {
@@ -45,6 +48,7 @@ export const 게임_기본화면: MockStore = {
     chatList,
   },
   tools: toolsInitState,
+  reaction: reactionInitState,
 };
 
 export const 게임_대기화면: MockStore = {
@@ -111,6 +115,9 @@ export const 게임_문제푸는사람: MockStore = {
     painterId: participants[1].userId,
   },
   gamePoint: gamePointInitState,
+  reaction: {
+    reactionList,
+  },
 };
 
 export const 게임_정답자표시: MockStore = {

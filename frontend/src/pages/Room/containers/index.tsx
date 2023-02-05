@@ -8,3 +8,4 @@ export { default as HeaderContainer } from './HeaderContainer';
 export { default as SocketContainer } from './SocketContainer';
 export { default as ToolsContainer } from './ToolsContainer';
 export { default as UserListContainer } from './UserListContainer';
+export { default as ReactionContainer } from './ReactionContainer';
