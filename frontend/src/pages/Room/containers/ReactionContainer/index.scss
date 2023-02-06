@@ -95,11 +95,11 @@
 
     @keyframes emojiScale {
       0% {
-        transform: scale(1.25);
+        transform: scale(1);
       }
 
       100% {
-        transform: scale(1);
+        transform: scale(1.25);
       }
     }
 
@@ -127,6 +127,10 @@
 
       +button {
         margin-left: 10px;
+      }
+
+      &:hover {
+        animation: emojiScale .25s 2 alternate ease-out;
       }
     }
 
