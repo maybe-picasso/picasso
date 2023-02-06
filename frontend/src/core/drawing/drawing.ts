@@ -4,6 +4,7 @@ import { DrawingStatus, SocketMessageType } from '@/types/enums';
 import { DrawingConstructorParams, DrawingCore, DrawParams } from './drawing-core';
 
 type MouseEventHandler = (e: MouseEvent) => void;
+type TouchEventHandler = (e: TouchEvent) => void;
 type KeyboardEventHandler = (e: KeyboardEvent) => void;
 
 export class Drawing extends DrawingCore {
@@ -18,6 +19,9 @@ export class Drawing extends DrawingCore {
   private mouseDownHandler: MouseEventHandler | null = null;
   private mouseMoveHandler: MouseEventHandler | null = null;
   private mouseUpHandler: MouseEventHandler | null = null;
+  private touchStartHandler: TouchEventHandler | null = null;
+  private touchMoveHandler: TouchEventHandler | null = null;
+  private touchEndHandler: TouchEventHandler | null = null;
   private keyDownHandler: KeyboardEventHandler | null = null;
 
   constructor(params: DrawingConstructorParams) {
@@ -26,15 +30,19 @@ export class Drawing extends DrawingCore {
   }
 
   init() {
-    this.mouseDownHandler = this.onMouseDown.bind(this);
-    this.mouseMoveHandler = this.onMouseMove.bind(this);
-    this.mouseUpHandler = this.onMouseUp.bind(this);
+    this.mouseDownHandler = this.onStartEvent.bind(this);
+    this.mouseMoveHandler = this.onMoveEvent.bind(this);
+    this.mouseUpHandler = this.onEndEvent.bind(this);
+    this.touchStartHandler = this.onStartEvent.bind(this);
+    this.touchMoveHandler = this.onMoveEvent.bind(this);
+    this.touchEndHandler = this.onEndEvent.bind(this);
+
     this.keyDownHandler = this.onKeyDown.bind(this);
     this.bindSocketEventHandler();
   }
 
-  onMouseDown(e: MouseEvent) {
-    console.log('onMouseDown :>> ', e);
+  onStartEvent(e: MouseEvent | TouchEvent) {
+    console.log('onStartEvent :>> ', e);
     this.isDragging = true;
     this.canvasSize = this.getCanvasSize();
     this.startPoint = this.getPoint(e);
@@ -57,7 +65,8 @@ export class Drawing extends DrawingCore {
     });
   }
 
-  onMouseMove(e: MouseEvent) {
+  onMoveEvent(e: MouseEvent | TouchEvent) {
+    console.log('onMoveEvent :>> ', e);
     if (!this.isDragging) {
       return;
     }
@@ -145,8 +154,8 @@ export class Drawing extends DrawingCore {
     });
   }
 
-  onMouseUp(e: MouseEvent) {
-    console.log('onMouseUp :>> ', e);
+  onEndEvent(e: MouseEvent | TouchEvent) {
+    console.log('onEndEvent :>> ', e);
     this.isDragging = false;
     this.end();
     this.drawCommandQueue.push(this.currentDrawCommand);
@@ -191,6 +200,7 @@ export class Drawing extends DrawingCore {
 
     this.enabled = true;
     this.bindMouseEventHandler();
+    this.bindTouchEventHandler();
     this.bindKeyboardEventHandler();
   }
 
@@ -201,11 +211,13 @@ export class Drawing extends DrawingCore {
 
     this.enabled = false;
     this.unbindMouseEventHandler();
+    this.unbindTouchEventHandler();
     this.unbindKeyboardEventHandler();
   }
 
   dispose() {
     this.unbindMouseEventHandler();
+    this.unbindTouchEventHandler();
     this.unbindKeyboardEventHandler();
     this.mouseDownHandler = null;
     this.mouseMoveHandler = null;
@@ -221,6 +233,16 @@ export class Drawing extends DrawingCore {
     this.canvas.addEventListener('mousedown', this.mouseDownHandler);
     this.canvas.addEventListener('mousemove', this.mouseMoveHandler);
     this.canvas.addEventListener('mouseup', this.mouseUpHandler);
+  }
+
+  bindTouchEventHandler() {
+    if (!(this.touchStartHandler && this.touchMoveHandler && this.touchEndHandler)) {
+      return;
+    }
+
+    this.canvas.addEventListener('touchstart', this.touchStartHandler);
+    this.canvas.addEventListener('touchmove', this.touchMoveHandler);
+    this.canvas.addEventListener('touchend', this.touchEndHandler);
   }
 
   bindKeyboardEventHandler() {
@@ -239,6 +261,16 @@ export class Drawing extends DrawingCore {
     this.canvas.removeEventListener('mousedown', this.mouseDownHandler);
     this.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
     this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
+  }
+
+  unbindTouchEventHandler() {
+    if (!(this.touchStartHandler && this.touchMoveHandler && this.touchEndHandler)) {
+      return;
+    }
+
+    this.canvas.removeEventListener('touchstart', this.touchStartHandler);
+    this.canvas.removeEventListener('touchmove', this.touchMoveHandler);
+    this.canvas.removeEventListener('touchend', this.touchEndHandler);
   }
 
   unbindKeyboardEventHandler() {

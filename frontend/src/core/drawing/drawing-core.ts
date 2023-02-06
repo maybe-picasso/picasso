@@ -35,11 +35,20 @@ export class DrawingCore {
   public config: Config;
   public startPoint: Cursor = { x: 0, y: 0 };
   public currentPoint: Cursor = { x: 0, y: 0 };
-  public getPoint(e: MouseEvent) {
-    return {
-      x: e.offsetX,
-      y: e.offsetY,
-    };
+  public getPoint(e: MouseEvent | TouchEvent) {
+    if (e instanceof TouchEvent) {
+      const { clientX, clientY } = e.touches[0];
+      const { left, top } = this.canvas.getBoundingClientRect(); // 터치이벤트 경우 canvas offset 좌표 보정 필요
+      return {
+        x: clientX - left,
+        y: clientY - top,
+      };
+    } else {
+      return {
+        x: e.offsetX,
+        y: e.offsetY,
+      };
+    }
   }
 
   constructor({ canvas, context, config }: DrawingConstructorParams) {

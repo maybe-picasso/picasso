@@ -1,4 +1,4 @@
-import { DrawingStatus,SocketMessageType } from './enums';
+import { DrawingStatus, SocketMessageType } from './enums';
 
 declare global {
   namespace Picasso {
