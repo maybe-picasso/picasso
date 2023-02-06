@@ -81,11 +81,6 @@ const ReactionContainer = () => {
 
   return (
     <div className="reaction-wrap">
-      <Center className={cn('cta-reaction-panel', { show: isShowPanel })} w='50px' h='50px' bg="gray.200" borderRadius='50%'>
-        <button type="button" onClick={handleReactionPanel}>
-          💖
-        </button>
-      </Center>
 
       <ul>
         {reactionList.map(({ type, nickName }, index) => {
@@ -100,9 +95,10 @@ const ReactionContainer = () => {
         })}
       </ul>
 
-      <Center className={cn('cta-reaction', { show: isShowPanel })} bg="gray.200" h="50px" p={"5px 15px"} borderRadius={30}>
+      <Center className={cn('reaction-panel', { show: isShowPanel })} bg="gray.200" h="50px" p={"5px 15px"} borderRadius={30}>
         {REACTION_EMOJIS.map((emoji, index) => {
-          return <button type="button" key={index} onClick={() => sendReaction(emoji)}>{emoji}</button>
+          const isToggleButton = index === 0;
+          return <button type="button" key={index} onClick={isToggleButton && isShowPanel ? handleReactionPanel : () => sendReaction(emoji)}>{emoji}</button>
         })}
         <button type="button" className='cta-close-panel' onClick={handleReactionPanel}><AiFillCloseCircle /></button>
       </Center >

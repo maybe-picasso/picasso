@@ -4,6 +4,7 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+  width: 300px;
 
   .cta-reaction-panel {
     position: absolute;
@@ -106,15 +107,23 @@
 
   }
 
-  .cta-reaction {
+  .reaction-panel {
     position: relative;
-    transform: translateX(120%);
-    transition: .4s ease-out;
-    opacity: 0;
+    transition: .3s ease-out;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 300px;
+    margin-left: auto;
 
     &.show {
-      transform: translateX(0);
+      width: 50px;
       opacity: 1;
+
+      button:first-child {
+        transform: translateX(-2px);
+      }
     }
 
     .cta-close-panel {
@@ -123,15 +132,24 @@
     }
 
     button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 100%;
       font-size: 23px;
       transition: .25s;
 
       +button {
-        margin-left: 12px;
+        margin-left: 10px;
       }
 
       &:hover {
         transform: scale(1.2);
+      }
+
+      &:last-child {
+        transform: none;
       }
     }
   }
