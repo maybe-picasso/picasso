@@ -6,22 +6,6 @@
   right: 10px;
   width: 300px;
 
-  .cta-reaction-panel {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 30px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: .4s ease-out;
-
-    &.show {
-      opacity: 0;
-    }
-  }
-
   ul {
     list-style: none;
     pointer-events: none;
