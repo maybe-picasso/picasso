@@ -123,17 +123,16 @@
     }
 
     button {
-      font-size: 25px;
+      font-size: 23px;
+      transition: .25s;
 
       +button {
-        margin-left: 10px;
+        margin-left: 12px;
       }
 
       &:hover {
-        animation: emojiScale .25s 2 alternate ease-out;
+        transform: scale(1.2);
       }
     }
-
-
   }
 }
