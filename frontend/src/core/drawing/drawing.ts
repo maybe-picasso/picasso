@@ -222,6 +222,9 @@ export class Drawing extends DrawingCore {
     this.mouseDownHandler = null;
     this.mouseMoveHandler = null;
     this.mouseUpHandler = null;
+    this.touchStartHandler = null;
+    this.touchMoveHandler = null;
+    this.touchEndHandler = null;
     this.keyDownHandler = null;
   }
 
