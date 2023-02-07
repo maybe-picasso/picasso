@@ -98,12 +98,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 300px;
     margin-left: auto;
+    width: 300px;
 
-    &.show {
+    &.fold {
       width: 50px;
-      opacity: 1;
 
       button:first-child {
         transform: translateX(-2px);

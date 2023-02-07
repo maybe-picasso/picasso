@@ -24,7 +24,7 @@ const ReactionContainer = () => {
   const { reactionList } = useSelector(select.reaction.state);
   const { userInfo } = useSelector(select.room.state);
   const dispatch = useDispatch<Dispatch>();
-  const [isShowPanel, setIsShowPanel] = useState(false);
+  const [isFoldPanel, setIsFoldPanel] = useState(true);
 
   // 리액션 클릭시 정보 스토어 저장 및 소켓에 정보 전달
   const sendReaction = useCallback(
@@ -71,7 +71,7 @@ const ReactionContainer = () => {
   );
 
   const handleReactionPanel = () => {
-    setIsShowPanel(isShowPanel => !isShowPanel)
+    setIsFoldPanel(isFoldPanel => !isFoldPanel)
   }
 
   useEffect(() => {
@@ -95,9 +95,9 @@ const ReactionContainer = () => {
         })}
       </ul>
 
-      <Center className={cn('reaction-panel', { show: isShowPanel })} bg="gray.200" h="50px" p={"5px 15px"} borderRadius={30}>
+      <Center className={cn('reaction-panel', { fold: isFoldPanel })} bg="gray.200" h="50px" p={"5px 15px"} borderRadius={30}>
         {REACTION_EMOJIS.map((emoji, index) => {
-          const isToggleButton = index === 0 && isShowPanel;
+          const isToggleButton = index === 0 && isFoldPanel;
           const handleClick = isToggleButton ? handleReactionPanel : () => sendReaction(emoji)
 
           return <button type="button" key={index} onClick={handleClick}>{emoji}</button>
